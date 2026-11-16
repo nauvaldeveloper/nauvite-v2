@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Aset mentah (file besar dari Canva, screenshot referensi). Yang dipakai disalin ke public/ setelah dikompres.
+/aset-mentah

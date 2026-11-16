@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     rules: {
       "*.css": {
+        // Tailwind hanya untuk CSS biasa. File *.module.css (CSS khusus tiap
+        // template) dibiarkan diproses Next.js sebagai CSS module.
+        condition: { not: { path: /\.module\.css$/ } },
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },

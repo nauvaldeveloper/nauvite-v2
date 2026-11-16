@@ -1,0 +1,203 @@
+/* Efek khusus landing page. Sisanya memakai Tailwind dan token warna di globals.css. */
+
+/* Latar bagian selang-seling: krem sedikit lebih tua, tanpa tekstur tema */
+.paper {
+  background: #ece5d8;
+}
+
+/* ---------- Mockup HP ---------- */
+.phone {
+  position: relative;
+  border-radius: 42px;
+  background: #17261f;
+  padding: 9px;
+  box-shadow:
+    0 40px 80px -30px rgb(23 38 31 / 0.55),
+    0 0 0 1px rgb(255 255 255 / 0.06) inset;
+}
+
+.phoneScreen {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 390 / 844;
+  border-radius: 34px;
+  background: #e9e2d4;
+}
+
+.phoneScreen img,
+.phoneScreen video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  z-index: 2;
+  width: 34%;
+  height: 20px;
+  border-radius: 999px;
+  background: #0b120e;
+  transform: translateX(-50%);
+}
+
+/* ---------- Hero: tiga HP seperti kipas ---------- */
+.fan {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 560px;
+}
+
+.fanCenter,
+.fanLeft,
+.fanRight {
+  position: absolute;
+  width: 250px;
+}
+
+.fanCenter {
+  z-index: 3;
+  animation: floatY 7s ease-in-out infinite;
+}
+
+.fanLeft {
+  z-index: 2;
+  width: 210px;
+  transform: translateX(-62%) rotate(-9deg);
+  opacity: 0.95;
+  animation: fanLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.fanRight {
+  z-index: 2;
+  width: 210px;
+  transform: translateX(62%) rotate(9deg);
+  opacity: 0.95;
+  animation: fanRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes fanLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20%) rotate(0deg);
+  }
+}
+
+@keyframes fanRight {
+  from {
+    opacity: 0;
+    transform: translateX(20%) rotate(0deg);
+  }
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Buket sudut di hero */
+.bouquet {
+  pointer-events: none;
+  animation: sway 9s ease-in-out infinite;
+  transform-origin: 0 0;
+}
+
+.bouquetRight {
+  pointer-events: none;
+  animation: swayAlt 10s ease-in-out infinite;
+  transform-origin: 100% 0;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 2.2deg;
+  }
+}
+
+@keyframes swayAlt {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: -2.4deg;
+  }
+}
+
+/* ---------- Kartu tema: sampul berganti ke isi saat disentuh ---------- */
+.themeShot {
+  transition: opacity 0.6s ease;
+}
+
+.themeCard:hover .themeShotCover,
+.themeCard:focus-within .themeShotCover {
+  opacity: 0;
+}
+
+/* ---------- Muncul saat di-scroll ---------- */
+.rv {
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) var(--d, 0ms),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms);
+}
+
+.rv[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+@media (max-width: 640px) {
+  .fan {
+    height: 470px;
+  }
+
+  .fanCenter {
+    width: 210px;
+  }
+
+  .fanLeft,
+  .fanRight {
+    width: 170px;
+  }
+
+  .fanLeft {
+    transform: translateX(-56%) rotate(-9deg);
+  }
+
+  .fanRight {
+    transform: translateX(56%) rotate(9deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fanCenter,
+  .fanLeft,
+  .fanRight,
+  .bouquet,
+  .bouquetRight {
+    animation: none !important;
+  }
+
+  .rv {
+    transition: none;
+  }
+
+  .rv[data-visible="false"] {
+    opacity: 1;
+    transform: none;
+  }
+}
