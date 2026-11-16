@@ -138,16 +138,6 @@
   }
 }
 
-/* ---------- Kartu tema: sampul berganti ke isi saat disentuh ---------- */
-.themeShot {
-  transition: opacity 0.6s ease;
-}
-
-.themeCard:hover .themeShotCover,
-.themeCard:focus-within .themeShotCover {
-  opacity: 0;
-}
-
 /* ---------- Muncul saat di-scroll ---------- */
 .rv {
   transition:

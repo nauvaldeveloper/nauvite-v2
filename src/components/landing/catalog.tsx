@@ -59,15 +59,9 @@ export function Catalog({
                 {t.demo ? (
                   <a href={`/${t.demo.slug}?to=Tamu+Undangan`} target="_blank" rel="noreferrer" aria-label={`Lihat demo ${t.name}`}>
                     <Phone className="transition-transform duration-500 group-hover:-translate-y-1.5">
+                      {/* Tampilan undangan setelah dibuka */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={t.demo.inside} alt="" loading="lazy" className={s.themeShot} />
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={t.demo.cover}
-                        alt={`Tema ${t.name}`}
-                        loading="lazy"
-                        className={`${s.themeShot} ${s.themeShotCover}`}
-                      />
+                      <img src={t.demo.inside} alt={`Tema ${t.name}`} loading="lazy" />
                     </Phone>
                   </a>
                 ) : (

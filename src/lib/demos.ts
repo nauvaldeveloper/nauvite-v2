@@ -29,7 +29,7 @@ export type CatalogItem = {
   region?: string;
   isNew: boolean;
   swatch: { background: string; accent: string; text: string };
-  demo: { slug: string; cover: string; inside: string } | null;
+  demo: { slug: string; inside: string } | null;
 };
 
 export function getCatalog(): CatalogItem[] {
@@ -47,7 +47,7 @@ export function getCatalog(): CatalogItem[] {
       isNew: "badges" in t && (t.badges as readonly string[] | undefined)?.includes("baru") === true,
       swatch: t.swatch,
       demo: slug
-        ? { slug, cover: `/landing/${t.id}-sampul.webp`, inside: `/landing/${t.id}-isi.webp` }
+        ? { slug, inside: `/landing/${t.id}-isi.webp` }
         : null,
     };
   });
