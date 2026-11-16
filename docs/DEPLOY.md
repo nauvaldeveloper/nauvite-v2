@@ -70,6 +70,46 @@ Vercel mengambil kode dari GitHub. Repo dibuat **Private**.
 
 Setelah ini, setiap kali kode di-push ke GitHub, Vercel otomatis memperbarui website.
 
+## Pindah data dari v1
+Skrip `scripts/pindah-v1.mjs` menyalin satu undangan v1 (isi, foto, lagu, ucapan) ke v2. v1 hanya dibaca, tidak diubah.
+
+1. Pastikan `.env.local` berisi `V1_SUPABASE_URL` dan `V1_SUPABASE_ANON_KEY` (kunci publik v1).
+2. Isi `.env.cloud` dengan `NEXT_PUBLIC_SUPABASE_URL` dan `SUPABASE_SERVICE_ROLE_KEY` project v2 cloud. File ini tidak ikut ter-commit.
+3. Uji ke lokal dulu: `node scripts/pindah-v1.mjs <slug>`, buka `http://localhost:3000/<slug>`.
+4. Ke cloud: `node scripts/pindah-v1.mjs <slug> --cloud`. Tambah `--ganti` untuk menimpa yang sudah ada.
+5. Kalau undangan dibawa mitra, buat akun mitranya di **Mitra**, lalu pilih mitranya di halaman undangan tersebut.
+
+## Pindah domain (nauvite.my.id dari v1 ke v2)
+Domain diurus di Cloudflare. v1 memakai Worker untuk link `<slug>.nauvite.my.id`. Setelah pindah, Worker itu diganti dengan Worker pengalihan, jadi link lama tetap bisa dibuka dan diarahkan ke `nauvite.my.id/<slug>`.
+
+Sebelum mulai: pastikan semua undangan v1 yang masih dipakai klien sudah dipindah (bagian di atas).
+
+### 1. Pindahkan domain di Vercel
+1. Buka project **v1** di Vercel, **Settings > Domains**. Catat domain yang terpasang, lalu hapus `nauvite.my.id` dan `www.nauvite.my.id`. Biarkan alamat `.vercel.app`-nya sebagai cadangan.
+2. Buka project **nauvite-v2**, **Settings > Domains > Add**, masukkan `nauvite.my.id`. Pilih opsi agar `www.nauvite.my.id` dialihkan ke `nauvite.my.id`.
+3. Kalau Vercel meminta mengubah DNS, ikuti nilai yang ditampilkan di Cloudflare (**DNS > Records**). Biasanya tidak perlu karena domain sudah mengarah ke Vercel. Untuk record domain utama dan www, set **Proxy status: DNS only** (awan abu-abu).
+4. Tunggu sampai Vercel menulis **Valid Configuration**.
+
+### 2. Ganti alamat website v2
+1. Vercel project **nauvite-v2 > Settings > Environment Variables**: ubah `NEXT_PUBLIC_SITE_URL` menjadi `https://nauvite.my.id`.
+2. **Deployments > ... > Redeploy**.
+3. Supabase project v2 > **Authentication > URL Configuration**: isi **Site URL** `https://nauvite.my.id`, dan tambahkan `https://nauvite.my.id/**` di **Redirect URLs**.
+
+### 3. Ganti Worker di Cloudflare
+1. Cloudflare > **Workers & Pages**, buka Worker v1 yang dipakai untuk subdomain.
+2. Klik **Edit code**, hapus semua isinya, tempel isi file `cloudflare/pengalihan-subdomain.js`, lalu **Deploy**.
+3. Cek **Settings > Domains & Routes**: route `*.nauvite.my.id/*` tetap ada. Kalau ada route untuk `nauvite.my.id/*` (domain utama), hapus supaya domain utama langsung ke Vercel.
+4. Di **DNS > Records**, record `*` (wildcard) tetap **Proxied** (awan oranye). Kalau tidak, Worker tidak berjalan.
+
+### 4. Cek
+- `https://nauvite.my.id` membuka landing v2.
+- `https://<slug>.nauvite.my.id/?to=Budi` berpindah ke `https://nauvite.my.id/<slug>?to=Budi`.
+- Login admin di `https://nauvite.my.id/masuk`.
+- Kirim link undangan ke WhatsApp sendiri, pastikan gambar preview muncul.
+
+### Kalau ada masalah (kembali ke v1)
+Di Vercel, pindahkan lagi domain ke project v1. Di Cloudflare, buka Worker, **Deployments**, lalu kembalikan ke versi sebelumnya. Data v1 tidak pernah diubah, jadi v1 langsung jalan seperti semula.
+
 ## Variabel lingkungan (.env)
 Website butuh 4 nilai ini. Di laptop disimpan di file `.env.local` (tidak ikut ter-commit). Di Vercel diisi lewat **Settings > Environment Variables**.
 

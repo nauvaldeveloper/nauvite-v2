@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Card, CardTitle, PageHeader } from "@/components/ui";
 import { shortDate } from "@/components/panel/format";
 import { countByPartner, getAccounts, listPartners } from "@/lib/admin/data";
-import { PartnerForm } from "./form";
+import { PartnerForm, PartnerResetPassword } from "./form";
 
 export const metadata: Metadata = { title: "Mitra | Admin Nauvite" };
 // Selalu butuh data login, jadi tidak disiapkan lebih dulu (lihat layout admin).
@@ -49,7 +49,14 @@ export default async function PartnersPage() {
                         </a>
                       ) : null}
                     </td>
-                    <td className="px-4 py-3">{accounts.get(p.id)?.login ?? "-"}</td>
+                    <td className="px-4 py-3">
+                      <PartnerResetPassword
+                        partnerId={p.id}
+                        login={accounts.get(p.id)?.login ?? null}
+                        whatsapp={p.whatsapp}
+                        businessName={p.business_name}
+                      />
+                    </td>
                     <td className="px-4 py-3">{p.whatsapp ?? "-"}</td>
                     <td className="px-4 py-3">{counts.get(p.id) ?? 0}</td>
                     <td className="px-4 py-3">{shortDate(p.created_at)}</td>
