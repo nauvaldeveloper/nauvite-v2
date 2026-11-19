@@ -85,8 +85,10 @@
 }
 
 .cardCrown {
-  width: 92px;
-  margin: -62px 0 2px;
+  /* Ukuran mahkota diatur lewat tinggi supaya mahkota lebar (siger) dan tinggi (gunungan) sama-sama pas */
+  height: calc(var(--crown-h, 58px) * 1.1);
+  width: auto;
+  margin: calc(var(--crown-h, 58px) * -1) 0 2px;
   filter: drop-shadow(0 6px 10px rgba(60, 35, 10, 0.35));
 }
 
@@ -206,6 +208,8 @@
   --text-top: 7%;
   --mountain-bottom: 37%;
   --mountain-height: 16%;
+  --ms: var(--mountain-scale, 1);
+  --mb: var(--mountain-shift, 0%);
   --hills-bottom: 4%;
   --hills-height: 38%;
   --photo-bottom: 27%;
@@ -307,7 +311,8 @@
 }
 
 .crown {
-  width: 78px;
+  height: var(--crown-h, 50px);
+  width: auto;
   margin-bottom: 6px;
   filter: drop-shadow(0 4px 8px rgba(120, 70, 20, 0.3));
 }
@@ -340,9 +345,13 @@
   background-position: center bottom;
 }
 
+/* Tema boleh mengubah bentuk lapisan gunung lewat --mountain-scale, --mountain-shift, --mountain-size,
+   dan --mountain-pos (mis. Monas yang tinggi dan ramping di sisi kiri). */
 .mountain {
-  bottom: var(--mountain-bottom);
-  height: var(--mountain-height);
+  bottom: calc(var(--mountain-bottom) + var(--mb, 0%));
+  height: calc(var(--mountain-height) * var(--ms, 1));
+  background-size: var(--mountain-size, cover);
+  background-position: var(--mountain-pos, center bottom);
 }
 
 .hills {

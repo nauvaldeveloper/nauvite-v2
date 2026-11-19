@@ -135,6 +135,8 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Dusty Rose | `contoh-dusty-rose` |
 | Lavender Mist | `contoh-lavender-mist` |
 | Sundanese Elegance | `contoh-sundanese-elegance` |
+| Javanese Keraton | `contoh-javanese-keraton` |
+| Betawi Heritage | `contoh-betawi-heritage` |
 | Minimalist & Clean | `dimas-laras` |
 | Royal Gold | `contoh-royal-gold` |
 | Floral Light | `contoh-floral-light` |

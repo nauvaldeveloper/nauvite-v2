@@ -735,3 +735,169 @@ values ('contoh-sundanese-elegance', 'sundanese-elegance', 'active', null, '{
     "quotesSource": "QS. Ar-Rum: 21"
 }'::jsonb, '{}'::jsonb)
 on conflict (slug) do update set template_id = excluded.template_id, status = 'active', active_until = null, content = excluded.content, template_options = excluded.template_options;
+
+insert into public.invitations (slug, template_id, status, active_until, content, template_options)
+values ('contoh-javanese-keraton', 'javanese-keraton', 'active', null, '{
+    "gifts": [
+        {
+            "bank": "BCA",
+            "accountName": "Dimas Prasetyo",
+            "accountNumber": "1234567890"
+        },
+        {
+            "bank": "Mandiri",
+            "accountName": "Larasati Putri",
+            "accountNumber": "0987654321"
+        }
+    ],
+    "couple": {
+        "bride": {
+            "name": "Sekar",
+            "image": "/demo/mempelai-wanita.webp",
+            "father": "Bapak Agus Wibowo",
+            "mother": "Ibu Dewi Lestari",
+            "fullname": "Sekar Ayu Larasati",
+            "instagram": "@larasatiputri",
+            "daughterOf": "Putri pertama dari"
+        },
+        "groom": {
+            "name": "Bima",
+            "image": "/demo/mempelai-pria.webp",
+            "sonOf": "Putra kedua dari",
+            "father": "Bapak Hendra Prasetyo",
+            "mother": "Ibu Ratna Sari",
+            "fullname": "Bima Satria Nugroho",
+            "instagram": "@dimasprasetyo"
+        }
+    },
+    "events": [
+        {
+            "date": "2027-03-20",
+            "title": "Akad Nikah",
+            "address": "Jl. Melati No. 12, Bandung",
+            "endTime": "10:00",
+            "mapsUrl": "https://maps.google.com/?q=Masjid+Al-Ikhlas+Bandung",
+            "location": "Masjid Al-Ikhlas",
+            "startTime": "08:00"
+        },
+        {
+            "date": "2027-03-20",
+            "title": "Resepsi",
+            "address": "Jl. Taman Sari No. 45, Bandung",
+            "endTime": "Selesai",
+            "mapsUrl": "https://maps.google.com/?q=Taman+Sari+Bandung",
+            "location": "Gedung Serbaguna Taman Sari",
+            "startTime": "11:00"
+        }
+    ],
+    "quotes": "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.",
+    "gallery": [
+        "/demo/galeri-1.webp",
+        "/demo/galeri-2.webp",
+        "/demo/galeri-3.webp",
+        "/demo/galeri-4.webp",
+        "/demo/galeri-5.webp",
+        "/demo/galeri-6.webp"
+    ],
+    "ogImage": "/demo/og.jpg",
+    "stories": [
+        {
+            "date": "Agustus 2021",
+            "image": "/demo/cerita-1.webp",
+            "title": "Pertama bertemu",
+            "description": "Kami bertemu di sebuah acara kampus. Obrolan singkat tentang buku berlanjut sampai larut sore."
+        },
+        {
+            "date": "Desember 2026",
+            "image": "/demo/cerita-2.webp",
+            "title": "Lamaran",
+            "description": "Di hadapan kedua keluarga, kami memutuskan untuk melangkah bersama."
+        }
+    ],
+    "coverImage": "/demo/galeri-3.webp",
+    "quotesSource": "QS. Ar-Rum: 21"
+}'::jsonb, '{}'::jsonb)
+on conflict (slug) do update set template_id = excluded.template_id, status = 'active', active_until = null, content = excluded.content, template_options = excluded.template_options;
+
+insert into public.invitations (slug, template_id, status, active_until, content, template_options)
+values ('contoh-betawi-heritage', 'betawi-heritage', 'active', null, '{
+    "gifts": [
+        {
+            "bank": "BCA",
+            "accountName": "Dimas Prasetyo",
+            "accountNumber": "1234567890"
+        },
+        {
+            "bank": "Mandiri",
+            "accountName": "Larasati Putri",
+            "accountNumber": "0987654321"
+        }
+    ],
+    "couple": {
+        "bride": {
+            "name": "Nurul",
+            "image": "/demo/mempelai-wanita.webp",
+            "father": "Bapak Agus Wibowo",
+            "mother": "Ibu Dewi Lestari",
+            "fullname": "Nurul Hidayah Azzahra",
+            "instagram": "@larasatiputri",
+            "daughterOf": "Putri pertama dari"
+        },
+        "groom": {
+            "name": "Fajar",
+            "image": "/demo/mempelai-pria.webp",
+            "sonOf": "Putra kedua dari",
+            "father": "Bapak Hendra Prasetyo",
+            "mother": "Ibu Ratna Sari",
+            "fullname": "Fajar Ramadhan Saputra",
+            "instagram": "@dimasprasetyo"
+        }
+    },
+    "events": [
+        {
+            "date": "2027-03-20",
+            "title": "Akad Nikah",
+            "address": "Jl. Melati No. 12, Jakarta Selatan",
+            "endTime": "10:00",
+            "mapsUrl": "https://maps.google.com/?q=Masjid+Al-Ikhlas+Jakarta",
+            "location": "Masjid Al-Ikhlas",
+            "startTime": "08:00"
+        },
+        {
+            "date": "2027-03-20",
+            "title": "Resepsi",
+            "address": "Jl. Taman Sari No. 45, Jakarta Selatan",
+            "endTime": "Selesai",
+            "mapsUrl": "https://maps.google.com/?q=Taman+Sari+Jakarta",
+            "location": "Gedung Serbaguna Taman Sari",
+            "startTime": "11:00"
+        }
+    ],
+    "quotes": "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.",
+    "gallery": [
+        "/demo/galeri-1.webp",
+        "/demo/galeri-2.webp",
+        "/demo/galeri-3.webp",
+        "/demo/galeri-4.webp",
+        "/demo/galeri-5.webp",
+        "/demo/galeri-6.webp"
+    ],
+    "ogImage": "/demo/og.jpg",
+    "stories": [
+        {
+            "date": "Agustus 2021",
+            "image": "/demo/cerita-1.webp",
+            "title": "Pertama bertemu",
+            "description": "Kami bertemu di sebuah acara kampus. Obrolan singkat tentang buku berlanjut sampai larut sore."
+        },
+        {
+            "date": "Desember 2026",
+            "image": "/demo/cerita-2.webp",
+            "title": "Lamaran",
+            "description": "Di hadapan kedua keluarga, kami memutuskan untuk melangkah bersama."
+        }
+    ],
+    "coverImage": "/demo/galeri-3.webp",
+    "quotesSource": "QS. Ar-Rum: 21"
+}'::jsonb, '{}'::jsonb)
+on conflict (slug) do update set template_id = excluded.template_id, status = 'active', active_until = null, content = excluded.content, template_options = excluded.template_options;

@@ -11,6 +11,10 @@ import lavenderMist from "./lavender-mist/manifest";
 import lavenderMistTheme from "./lavender-mist/theme";
 import sundaneseElegance from "./sundanese-elegance/manifest";
 import sundaneseEleganceTheme from "./sundanese-elegance/theme";
+import javaneseKeraton from "./javanese-keraton/manifest";
+import javaneseKeratonTheme from "./javanese-keraton/theme";
+import betawiHeritage from "./betawi-heritage/manifest";
+import betawiHeritageTheme from "./betawi-heritage/theme";
 
 /**
  * Memilih komponen tampilan sesuai template undangan. Dipisah dari registry.ts
@@ -30,6 +34,10 @@ export function RenderTemplate(props: TemplateProps) {
       return <Illustrated {...props} theme={lavenderMistTheme} manifest={lavenderMist} />;
     case "sundanese-elegance":
       return <Adat {...props} theme={sundaneseEleganceTheme} manifest={sundaneseElegance} />;
+    case "javanese-keraton":
+      return <Adat {...props} theme={javaneseKeratonTheme} manifest={javaneseKeraton} />;
+    case "betawi-heritage":
+      return <Adat {...props} theme={betawiHeritageTheme} manifest={betawiHeritage} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

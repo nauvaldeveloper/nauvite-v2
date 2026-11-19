@@ -13,6 +13,8 @@ const DEMO_SLUG: Record<string, string> = {
   "dusty-rose": "contoh-dusty-rose",
   "lavender-mist": "contoh-lavender-mist",
   "sundanese-elegance": "contoh-sundanese-elegance",
+  "javanese-keraton": "contoh-javanese-keraton",
+  "betawi-heritage": "contoh-betawi-heritage",
   "solid-editorial": "dimas-laras",
   "royal-gold": "contoh-royal-gold",
   "floral-light": "contoh-floral-light",

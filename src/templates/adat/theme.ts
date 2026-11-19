@@ -18,28 +18,28 @@ export const SCENE_FILES = {
   sky: "langit.webp",
   clouds: "awan.webp",
   mountain: "gunung.webp",
-  hills: "kebun-teh.webp",
+  hills: "bukit.webp",
   front: "depan.webp",
-  figureLeft: "wayang-kiri.webp",
-  figureRight: "wayang-kanan.webp",
+  figureLeft: "tokoh-kiri.webp",
+  figureRight: "tokoh-kanan.webp",
   doorLeft: "pintu-kiri.webp",
   doorRight: "pintu-kanan.webp",
 } as const;
 
-/** Ornamen vektor emas di public/templates/<id>/ornamen/. */
+/** Ornamen vektor emas di public/templates/<id>/ornamen/ (nama file sama untuk semua tema adat). */
 export const ORNAMENT_FILES = {
   /** Mahkota pengantin, di atas nama. */
-  crown: "ornamen/siger.svg",
+  crown: "ornamen/mahkota.svg",
   /** Atap rumah adat, di atas bingkai foto. */
-  roof: "ornamen/julang-ngapak.svg",
+  roof: "ornamen/atap.svg",
   /** Pembatas di bawah judul. */
-  divider: "ornamen/kujang.svg",
+  divider: "ornamen/pembatas.svg",
   /** Untaian bunga yang menjuntai di sisi bingkai foto. */
-  garland: "ornamen/ronce-melati.svg",
+  garland: "ornamen/untaian.svg",
   /** Ukiran sudut kartu. */
   corner: "ornamen/sudut.svg",
   /** Tekstur anyaman untuk bagian gelap (diulang). */
-  weave: "ornamen/bilik.svg",
+  weave: "ornamen/anyaman.svg",
 } as const;
 
 export type SceneKey = keyof typeof SCENE_FILES;

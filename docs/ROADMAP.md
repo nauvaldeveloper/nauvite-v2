@@ -84,7 +84,8 @@ Dashboard database lokal: http://localhost:54323
 - [x] Paket = level tema: Basic Rp75.000 / Premium Rp99.000, mitra Rp50.000 / Rp75.000 (diatur di Pengaturan)
 - [x] Landing: perbandingan cetak vs digital + kalkulator biaya; halaman /mitra; ulasan (klien kirim dari dasbor, admin setujui, tampil di landing kalau sudah minimal 3)
 - [x] Tema Sunda (Premium): template adat sendiri `src/templates/adat/` (pintu Buka Panto, pemandangan berlapis, foto berbingkai rumah adat, ornamen siger/kujang/julang ngapak/bilik). Prompt Canva di `docs/PROMPT-CANVA-SUNDA.md`, olah aset dengan `scripts/olah-aset.mjs` dan `scripts/olah-kertas.mjs`.
-- [ ] Tema Jawa, Betawi, Batak (pakai template adat yang sama)
+- [x] Tema Jawa (Javanese Keraton) dan Betawi (Betawi Heritage), Premium, pakai template adat yang sama. Nama file aset adat dibuat umum (gunung, bukit, tokoh, mahkota, atap, dll.); bentuk lapisan gunung bisa disetel per tema lewat `--mountain-scale`, `--mountain-shift`, `--mountain-size`, `--mountain-pos` (versi desktop: akhiran `-side`).
+- [ ] Tema Batak (pakai template adat yang sama)
 - [x] Daftar RSVP lengkap: filter, cari, hapus ucapan spam, ekspor Excel (.xlsx)
 - [x] Landing page: hero dengan video tema asli, katalog berfilter + demo, fitur, Premium, cara pesan, harga (dari Pengaturan), mitra, FAQ, tombol WhatsApp
 - [ ] Rilis dan pemindahan data v1

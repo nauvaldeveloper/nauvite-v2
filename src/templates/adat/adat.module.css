@@ -1551,7 +1551,8 @@
 
 /* ---------- Penutup: siger dan wayang mengapit ---------- */
 .closingCrown {
-  width: 96px;
+  height: calc(var(--crown-h, 58px) * 1.05);
+  width: auto;
   filter: drop-shadow(0 6px 10px rgb(120 70 20 / 0.3));
 }
 
@@ -1608,6 +1609,8 @@
   --text-top: 6%;
   --mountain-bottom: 34%;
   --mountain-height: 27%;
+  --ms: var(--mountain-scale-side, var(--mountain-scale, 1));
+  --mb: var(--mountain-shift-side, var(--mountain-shift, 0%));
   --hills-bottom: -2%;
   --hills-height: 50%;
   --figure-bottom: 12%;

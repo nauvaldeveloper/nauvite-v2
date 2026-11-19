@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48">
+<defs><linearGradient id="jg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0d896"/><stop offset="0.5" stop-color="#c9a14a"/><stop offset="1" stop-color="#8e6826"/></linearGradient>
+<g id="k">
+<path d="M116 17.1 L 113.4 18.5 L 110.8 19.4 L 108.2 19.7 L 105.6 19.3 L 103 18.3 L 100.4 17 L 97.8 16 L 95.2 15.4 L 92.6 15.5 L 90 16.2 L 87.4 17.4 L 84.8 18.7 L 82.2 19.8 L 79.6 20.4 L 77 20.4 L 74.4 19.8 L 71.8 18.9 L 69.2 18 L 66.6 17.4 L 64 17.3 L 61.4 17.8 L 58.8 18.7 L 56.2 19.9 L 53.6 21 L 51 21.8 L 48.4 22.1 L 45.8 21.9 L 43.2 21.3 L 40.6 20.6 L 38 20.1 L 35.4 19.9 L 32.8 20.2 L 30.2 20.9 L 27.6 21.9 L 25 22.9 L 22.4 23.7 L 19.8 24.2 L 17.2 24.3 L 14.6 24 L 12 23.6 L 12 24.4 L 14.6 25.4 L 17.2 26.1 L 19.8 26.6 L 22.4 26.6 L 25 26.2 L 27.6 25.7 L 30.2 25.1 L 32.8 24.9 L 35.4 25 L 38 25.6 L 40.6 26.6 L 43.2 27.7 L 45.8 28.7 L 48.4 29.4 L 51 29.5 L 53.6 29.1 L 56.2 28.4 L 58.8 27.5 L 61.4 26.9 L 64 26.8 L 66.6 27.2 L 69.2 28.2 L 71.8 29.4 L 74.4 30.6 L 77 31.5 L 79.6 31.8 L 82.2 31.5 L 84.8 30.6 L 87.4 29.6 L 90 28.6 L 92.6 28.1 L 95.2 28.2 L 97.8 29 L 100.4 30.2 L 103 31.6 L 105.6 32.7 L 108.2 33.3 L 110.8 33.1 L 113.4 32.2 L 116 30.9 Z" fill="url(#jg)" stroke="#8e6826" stroke-width=".9"/>
+<path d="M114 24 L 114 24 L 108.9 26.3 L 103.9 25.8 L 98.8 23.2 L 93.8 21.7 L 88.7 22.9 L 83.7 25.3 L 78.6 26.1 L 73.6 24.3 L 68.5 22.3 L 63.5 22.4 L 58.4 24.3 L 53.4 25.7 L 48.3 25.1 L 43.3 23.2 L 38.2 22.4 L 33.2 23.5 L 28.1 25.1 L 23.1 25.3 L 18 24" stroke="#f0d896" stroke-width=".8" fill="none" opacity=".9"/>
+<path d="M116 15 C 122 14, 126 18, 124 24 C 126 30, 122 34, 116 33 Z" fill="#8e6826" stroke="#f0d896" stroke-width=".6"/>
+<rect x="124" y="19" width="5" height="10" rx="1.5" fill="#8c2a1c" stroke="#f0d896" stroke-width=".8"/>
+<path d="M129 20 C 136 16, 142 16, 146 20 C 150 24, 148 30, 142 32 C 138 33, 134 31, 129 28 Z" fill="#5b3a1e" stroke="url(#jg)" stroke-width="1.4"/>
+<path d="M134 22 c 3 -2 7 -2 9 1" stroke="#f0d896" stroke-width=".8" fill="none"/>
+</g></defs>
+<use href="#k" x="0" y="0"/>
+<use href="#k" transform="translate(320 0) scale(-1 1)"/>
+<path d="M160 13 L 170 24 L 160 35 L 150 24 Z" fill="#8c2a1c" stroke="url(#jg)" stroke-width="1.8"/>
+<circle cx="160" cy="21.4" r="2" fill="#fffdf3"/><circle cx="162.5" cy="23.2" r="2" fill="#fffdf3"/><circle cx="161.5" cy="26.1" r="2" fill="#fffdf3"/><circle cx="158.5" cy="26.1" r="2" fill="#fffdf3"/><circle cx="157.5" cy="23.2" r="2" fill="#fffdf3"/><circle cx="160" cy="24" r="1.4" fill="#c9a14a"/>
+</svg>
