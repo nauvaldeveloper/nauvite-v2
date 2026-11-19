@@ -140,4 +140,6 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Floral Light | `contoh-floral-light` |
 | Midnight Dark | `contoh-midnight-dark` |
 
+Menambah demo tema baru tanpa menjalankan ulang seluruh file: buat demonya di database lokal, lalu jalankan `node scripts/demo-ke-cloud.mjs <slug>`. Skrip ini menyalin undangan dari lokal ke produksi memakai `.env.cloud` (alamat dan kunci service_role Supabase cloud, tidak ikut di-commit).
+
 Daftar slug ini diatur di `src/lib/demos.ts`. Isi juga **Pengaturan** di panel admin (nama usaha, nomor WhatsApp, harga Reguler/Premium/mitra), karena landing page mengambil data dari sana.
