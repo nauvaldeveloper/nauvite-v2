@@ -1,6 +1,7 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
+import { safeWebUrl } from "./url";
 import { parseContent, type InvitationContent } from "./content";
 
 export type PublicInvitation = {
@@ -46,7 +47,7 @@ export async function getPublicInvitation(slug: string): Promise<PublicInvitatio
     templateId: String(row.template_id),
     content: parseContent(row.content),
     templateOptions: (row.template_options as Record<string, unknown>) ?? {},
-    partner: partner ? { name: partner.name ?? null, url: partner.url ?? null } : null,
+    partner: partner ? { name: partner.name ?? null, url: safeWebUrl(partner.url) ?? null } : null,
   };
 }
 

@@ -82,11 +82,18 @@ export async function getInvitation(id: string) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("invitations")
-    .select("id, slug, template_id, status, active_until, created_at, updated_at, owner_id, partner_id, admin_note, content")
+    .select("id, slug, template_id, status, active_until, created_at, updated_at, owner_id, partner_id, content")
     .eq("id", id)
     .maybeSingle();
   if (!data) return null;
-  return { ...data, coupleName: coupleName(data.content) };
+  // admin_note sengaja tidak bisa dibaca lewat sesi login (supaya klien/mitra tidak
+  // bisa membacanya), jadi diambil dengan kunci server. Pemanggil sudah dicek admin.
+  const { data: note } = await createAdminClient()
+    .from("invitations")
+    .select("admin_note")
+    .eq("id", id)
+    .maybeSingle();
+  return { ...data, admin_note: note?.admin_note ?? null, coupleName: coupleName(data.content) };
 }
 
 export type AccountInfo = {

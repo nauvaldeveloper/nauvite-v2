@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { safeWebUrl } from "./url";
 
 /**
  * Bentuk data yang dikirim editor. Lebih ketat dari parser tampilan
@@ -18,6 +19,12 @@ const optional = (max: number) =>
     .max(max)
     .optional()
     .transform((v) => v || undefined);
+
+/** Link web (Maps, YouTube): hanya http(s); alamat tanpa awalan diberi https://. */
+const webUrl = (max: number) =>
+  optional(max).superRefine((v, ctx) => {
+    if (v && !safeWebUrl(v)) ctx.addIssue({ code: "custom", message: "Link tidak valid. Tempel link yang diawali https://" });
+  }).transform((v) => safeWebUrl(v));
 
 /** Path file di storage, file bawaan (/...), atau URL lama dari v1. */
 export const mediaPath = z.string().trim().max(500);
@@ -43,7 +50,7 @@ const event = z.object({
   endTime: optional(20),
   location: optional(120),
   address: optional(300),
-  mapsUrl: optional(500),
+  mapsUrl: webUrl(500),
   entertainment: optional(200),
 });
 
@@ -70,7 +77,7 @@ export const editorPayloadSchema = z.object({
   quotesSource: optional(80),
   coverImage: mediaPath.optional(),
   music: mediaPath.optional(),
-  youtubeUrl: optional(300),
+  youtubeUrl: webUrl(300),
   /** Isian khusus template yang sedang dipakai (divalidasi terhadap manifest). */
   templateOptions: z.record(z.string(), z.unknown()).default({}),
 });

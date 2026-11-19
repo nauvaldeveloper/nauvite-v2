@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { safeWebUrl } from "./url";
 
 /**
  * Bentuk data umum undangan (kolom invitations.content), dipakai semua template.
@@ -93,7 +94,7 @@ const event = z.object({
   time: optStr, // v1 lama: "08:00 - Selesai WIB"
   location: optStr,
   address: optStr,
-  mapsUrl: optStr,
+  mapsUrl: optStr.transform(safeWebUrl), // link selain http(s) dibuang
   entertainment: optStr,
 }).transform(({ time, ...e }) => {
   if (!e.startTime && time) {

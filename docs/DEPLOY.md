@@ -124,7 +124,13 @@ Untuk lokal, nilainya didapat dari perintah `npx supabase status -o env` (pakai 
 
 ## Database
 Struktur database ada di `supabase/migrations/`. File `supabase/seed.sql` berisi data contoh dan **hanya untuk lokal**, jangan dijalankan di cloud.
-Langkah mengirim skema ke Supabase cloud ditulis di sini saat tahap rilis.
+### Menambah migration baru setelah rilis
+Kalau ada file baru di `supabase/migrations/`, kirim ke cloud dengan urutan ini:
+1. Push kode dulu dan tunggu Vercel selesai deploy. Kode baru biasanya sudah siap untuk skema lama dan skema baru, tapi kode lama belum tentu cocok dengan skema baru.
+2. Baru jalankan `npx supabase db push` (lihat langkah di atas), ketik `Y`.
+3. Cek situs live.
+
+Migration `20261119000000_pengamanan.sql` (hasil uji keamanan 19 Nov 2026): tema hanya bisa diganti admin, batas laju dan anti-ganda untuk ucapan tamu, batas ukuran isi undangan, dan catatan admin tidak terbaca klien. **Catatan:** hak baca tabel `invitations` untuk user login sekarang diatur per kolom. Kalau nanti tabel itu mendapat kolom baru yang perlu dibaca klien, tambahkan kolomnya ke `grant select (...)` di migration baru.
 
 ## Undangan demo untuk landing page
 Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berikut harus dibuat di database produksi (status aktif, masa aktif tanpa batas) dengan menjalankan `supabase/demo-produksi.sql` (langkah C di atas). Kalau ada tema baru, file itu dibuat ulang dari data lokal.

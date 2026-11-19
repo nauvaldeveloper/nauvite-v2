@@ -61,6 +61,13 @@ export async function submitWish(
     });
 
   if (error) {
+    // Penolakan dari trigger database (lihat migration pengamanan)
+    if (error.hint === "duplicate") {
+      return { status: "ok", message: "Ucapan Anda sudah terkirim sebelumnya. Terima kasih!" };
+    }
+    if (error.hint === "rate_limit") {
+      return { status: "error", message: "Sedang banyak ucapan masuk. Coba kirim lagi sebentar lagi." };
+    }
     return { status: "error", message: "Ucapan gagal terkirim. Coba lagi sebentar lagi." };
   }
 

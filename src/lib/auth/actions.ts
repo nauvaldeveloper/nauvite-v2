@@ -30,9 +30,23 @@ export async function signIn(_prev: LoginState, formData: FormData): Promise<Log
     .eq("id", data.user.id)
     .single();
 
-  // Hanya izinkan tujuan di dalam situs ini.
-  const safeNext = next.startsWith("/") && !next.startsWith("//") ? next : null;
-  redirect(safeNext ?? homeFor((profile?.role as Role) ?? "client"));
+  redirect(safeNextPath(next) ?? homeFor((profile?.role as Role) ?? "client"));
+}
+
+/**
+ * Hanya izinkan tujuan di dalam situs ini. Browser membaca "/\situs-lain.com" sama
+ * dengan "//situs-lain.com" (alamat luar), jadi garis miring terbalik, spasi, dan
+ * karakter kontrol ditolak, lalu hasilnya dicek ulang dengan parser URL.
+ */
+function safeNextPath(next: string): string | null {
+  if (!next.startsWith("/") || /[\\\s\u0000-\u001f]/.test(next)) return null;
+  try {
+    const base = "https://nauvite.invalid";
+    const url = new URL(next, base);
+    return url.origin === base ? url.pathname + url.search + url.hash : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function signOut() {
