@@ -407,7 +407,7 @@ export default function Illustrated({
               </Reveal>
               <Reveal className={s.rv} style={d(150)}>
                 <p className={s.body}>
-
+                  {L.closing}
                   {islami ? " Wassalamu'alaikum Wr. Wb." : ""}
                 </p>
               </Reveal>

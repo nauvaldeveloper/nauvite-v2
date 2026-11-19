@@ -46,7 +46,7 @@ Panel editor **menampilkan isian secara otomatis** berdasarkan manifest template
      5. Undangan menampilkan "Dipersembahkan oleh [Nama mitra]".
    - Mitra bisa melihat RSVP dan ucapan semua undangan kliennya (berguna untuk hitungan tamu/katering).
    - Deposit kuota atau harga bertingkat ditambahkan nanti kalau ada mitra yang rutin order banyak.
-   - Belum diputuskan: apakah tema adat dengan ilustrasi detail harganya lebih tinggi dari 75rb.
+   - Diputuskan (19 Nov 2026): tema adat dengan ilustrasi detail masuk paket Premium (Rp99rb), dimulai dari Sunda.
    - Akun mitra dengan kuota undangan dan harga khusus mitra.
    - Nama mitra tampil di undangan, misalnya "Dipersembahkan oleh [Nama WO]".
    - Dasbor mitra untuk mengelola undangan semua klien mereka.
@@ -83,7 +83,8 @@ Dashboard database lokal: http://localhost:54323
 - [x] Identitas Nauvite (logo lama, hijau tua + emas, motif lengkung): docs/IDENTITAS.md
 - [x] Paket = level tema: Basic Rp75.000 / Premium Rp99.000, mitra Rp50.000 / Rp75.000 (diatur di Pengaturan)
 - [x] Landing: perbandingan cetak vs digital + kalkulator biaya; halaman /mitra; ulasan (klien kirim dari dasbor, admin setujui, tampil di landing kalau sudah minimal 3)
-- [ ] Tema Sunda, Jawa, Betawi, Batak
+- [x] Tema Sunda (Premium): template adat sendiri `src/templates/adat/` (pintu Buka Panto, pemandangan berlapis, foto berbingkai rumah adat, ornamen siger/kujang/julang ngapak/bilik). Prompt Canva di `docs/PROMPT-CANVA-SUNDA.md`, olah aset dengan `scripts/olah-aset.mjs` dan `scripts/olah-kertas.mjs`.
+- [ ] Tema Jawa, Betawi, Batak (pakai template adat yang sama)
 - [x] Daftar RSVP lengkap: filter, cari, hapus ucapan spam, ekspor Excel (.xlsx)
 - [x] Landing page: hero dengan video tema asli, katalog berfilter + demo, fitur, Premium, cara pesan, harga (dari Pengaturan), mitra, FAQ, tombol WhatsApp
 - [ ] Rilis dan pemindahan data v1

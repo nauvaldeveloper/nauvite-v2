@@ -1,29 +1,17 @@
 import { defineManifest } from "../manifest";
+import { adatFields } from "../adat/theme";
 
 export default defineManifest({
   id: "sundanese-elegance",
   name: "Sundanese Elegance",
   category: "adat",
-  tier: "basic",
+  tier: "premium",
   region: "Sunda",
-  description: "Pemandangan Pasundan berlapis dengan label berbahasa Sunda.",
+  description:
+    "Pemandangan Pasundan berlapis: langit fajar, Tangkuban Parahu, kebun teh, dan wayang golek, dibuka dengan pintu kayu berukir. Ornamen siger dan kujang, judul beraksara Sunda.",
+  badges: ["baru"],
   withPhoto: true,
-  swatch: { background: "#f3e6cf", accent: "#7a4a24", text: "#3a2414" },
-  version: 1,
-  fields: [
-    {
-      key: "greeting",
-      type: "text",
-      label: "Salam pembuka",
-      help: "Tampil di sampul sebelum undangan dibuka.",
-      default: "Sampurasun",
-      maxLength: 60,
-    },
-    {
-      key: "openingAnimation",
-      type: "toggle",
-      label: "Animasi pembuka (Buka Panto)",
-      default: true,
-    },
-  ],
+  swatch: { background: "#f3e6cf", accent: "#5a3d26", text: "#3b2a1c" },
+  version: 2,
+  fields: adatFields("#5a3d26", "Buka Panto"),
 });

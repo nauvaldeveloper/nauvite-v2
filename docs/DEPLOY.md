@@ -36,7 +36,7 @@ npx supabase db push
 - **Jangan** menjalankan `supabase db reset --linked` atau `seed.sql` ke cloud.
 
 ### C. Isi undangan demo
-Dashboard Supabase > **SQL Editor** > **New query** > tempel seluruh isi `supabase/demo-produksi.sql` > **Run**. Hasilnya 7 undangan demo untuk tombol "Lihat demo" di landing. File ini aman dijalankan ulang.
+Dashboard Supabase > **SQL Editor** > **New query** > tempel seluruh isi `supabase/demo-produksi.sql` > **Run**. Hasilnya 8 undangan demo untuk tombol "Lihat demo" di landing. File ini aman dijalankan ulang.
 
 ### D. Buat akun admin
 1. **Authentication > Users > Add user > Create new user**. Isi email kamu dan password yang kuat, centang **Auto Confirm User**.
@@ -134,6 +134,7 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Sage Garden | `contoh-sage-garden` |
 | Dusty Rose | `contoh-dusty-rose` |
 | Lavender Mist | `contoh-lavender-mist` |
+| Sundanese Elegance | `contoh-sundanese-elegance` |
 | Minimalist & Clean | `dimas-laras` |
 | Royal Gold | `contoh-royal-gold` |
 | Floral Light | `contoh-floral-light` |

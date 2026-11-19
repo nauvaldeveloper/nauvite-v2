@@ -100,4 +100,4 @@ Watercolor clipart of one single mauve rose petal, isolated on a plain pure whit
 | Lavender Field | `lavender sprigs, lilac sweet peas, white roses` | `soft grey-green olive leaves` | ungu tua |
 | Melati Putih | `white jasmine flowers, white tuberose, small white roses` | `deep green jasmine leaves` | hijau botol |
 
-Untuk tema adat (Sunda, Jawa, Betawi, Batak), daftar gambarnya akan sedikit berbeda (ada gapura, gunungan, atau motif kain). Prompt-nya dibuat terpisah saat temanya mulai dikerjakan.
+Untuk tema adat, daftar gambarnya berbeda (pemandangan berlapis, gapura, pintu Buka Panto, wayang). Sunda: `docs/PROMPT-CANVA-SUNDA.md`. Jawa, Betawi, Batak dibuat terpisah saat temanya mulai dikerjakan.

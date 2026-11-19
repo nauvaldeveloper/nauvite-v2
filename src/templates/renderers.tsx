@@ -2,12 +2,15 @@ import type { TemplateProps } from "./types";
 import SolidEditorial from "./solid-editorial/Template";
 import Signature from "./signature/Template";
 import Illustrated from "./illustrated/Template";
+import Adat from "./adat/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
 import dustyRose from "./dusty-rose/manifest";
 import dustyRoseTheme from "./dusty-rose/theme";
 import lavenderMist from "./lavender-mist/manifest";
 import lavenderMistTheme from "./lavender-mist/theme";
+import sundaneseElegance from "./sundanese-elegance/manifest";
+import sundaneseEleganceTheme from "./sundanese-elegance/theme";
 
 /**
  * Memilih komponen tampilan sesuai template undangan. Dipisah dari registry.ts
@@ -25,6 +28,8 @@ export function RenderTemplate(props: TemplateProps) {
       return <Illustrated {...props} theme={dustyRoseTheme} manifest={dustyRose} />;
     case "lavender-mist":
       return <Illustrated {...props} theme={lavenderMistTheme} manifest={lavenderMist} />;
+    case "sundanese-elegance":
+      return <Adat {...props} theme={sundaneseEleganceTheme} manifest={sundaneseElegance} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

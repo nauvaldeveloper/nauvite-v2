@@ -93,7 +93,7 @@ export function assetUrl(theme: IllustratedTheme, key: AssetKey) {
 }
 
 /** Isian editor yang sama untuk semua tema ilustrasi. `darkDefault` = warna bagian gelap bawaan tema. */
-export function illustratedFields(darkDefault: string): IllustratedFields {
+export function illustratedFields(darkDefault: string, text?: { coverHelp?: string }): IllustratedFields {
   return [
     {
       key: "greeting",
@@ -110,7 +110,7 @@ export function illustratedFields(darkDefault: string): IllustratedFields {
       key: "coverStyle",
       type: "select",
       label: "Gaya sampul",
-      help: "Foto: foto sampul memudar ke kertas. Ilustrasi: hanya kertas dan bunga.",
+      help: text?.coverHelp ?? "Foto: foto sampul memudar ke kertas. Ilustrasi: hanya kertas dan bunga.",
       options: [
         { value: "foto", label: "Foto pasangan" },
         { value: "ilustrasi", label: "Ilustrasi saja" },
