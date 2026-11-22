@@ -63,6 +63,20 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"print_designs": {
+                  Row: {
+                    "active": boolean,"code": string,"cost": number | null,"created_at": string,"featured": boolean,"foil": string,"format": string,"id": string,"images": (string)[],"name": string,"note": string | null,"orientation": string,"price": number,"sort": number,"tier": string,"updated_at": string,"vendor_code": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "active"?: boolean,"code": string,"cost"?: number | null,"created_at"?: string,"featured"?: boolean,"foil"?: string,"format": string,"id"?: string,"images"?: (string)[],"name": string,"note"?: string | null,"orientation"?: string,"price": number,"sort"?: number,"tier": string,"updated_at"?: string,"vendor_code"?: string | null
+                  }
+                  Update: {
+                    "active"?: boolean,"code"?: string,"cost"?: number | null,"created_at"?: string,"featured"?: boolean,"foil"?: string,"format"?: string,"id"?: string,"images"?: (string)[],"name"?: string,"note"?: string | null,"orientation"?: string,"price"?: number,"sort"?: number,"tier"?: string,"updated_at"?: string,"vendor_code"?: string | null
+                  }
+                  Relationships: [
+                    
+                  ]
                 },"profiles": {
                   Row: {
                     "business_name": string | null,"business_url": string | null,"created_at": string,"full_name": string | null,"id": string,"role": string,"updated_at": string,"whatsapp": string | null

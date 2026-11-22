@@ -11,6 +11,7 @@ export function navFor(role: Role): { title: string; items: NavItem[] } {
         { href: "/admin/undangan", label: "Undangan", icon: "list" },
         { href: "/admin/buat", label: "Buat", icon: "plus" },
         { href: "/admin/mitra", label: "Mitra", icon: "users" },
+        { href: "/admin/cetak", label: "Cetak", icon: "print" },
         { href: "/admin/ulasan", label: "Ulasan", icon: "star" },
         { href: "/admin/pengaturan", label: "Pengaturan", icon: "settings" },
       ],

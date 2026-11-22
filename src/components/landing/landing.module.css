@@ -173,6 +173,20 @@
   }
 }
 
+/* Kartu undangan cetak di hero /cetak: jatuh pelan ke meja satu per satu */
+.printHero {
+  transform: rotate(var(--r, 0deg));
+  animation: printDrop 1.1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) both;
+}
+
+@keyframes printDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-26px) rotate(calc(var(--r, 0deg) * 2));
+  }
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .fanCenter,
   .fanLeft,
@@ -184,6 +198,10 @@
 
   .rv {
     transition: none;
+  }
+
+  .printHero {
+    animation: none;
   }
 
   .rv[data-visible="false"] {

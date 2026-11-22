@@ -132,6 +132,8 @@ Kalau ada file baru di `supabase/migrations/`, kirim ke cloud dengan urutan ini:
 
 Migration `20261119000000_pengamanan.sql` (hasil uji keamanan 19 Nov 2026): tema hanya bisa diganti admin, batas laju dan anti-ganda untuk ucapan tamu, batas ukuran isi undangan, dan catatan admin tidak terbaca klien. **Catatan:** hak baca tabel `invitations` untuk user login sekarang diatur per kolom. Kalau nanti tabel itu mendapat kolom baru yang perlu dibaca klien, tambahkan kolomnya ke `grant select (...)` di migration baru.
 
+Migration `20261122000000_katalog_cetak.sql` dan `20261122000100_katalog_cetak_isi.sql` (22 Nov 2026): tabel katalog undangan cetak `print_designs`, bucket storage `print-media` (hanya admin yang unggah), pengaturan `print` (minimal pesanan, lama produksi, harga plastik dan label), dan isi awal 51 desain. Gambar isi awal ada di `public/cetak/` jadi ikut ter-deploy bersama kode. Kode vendor dan harga modal tidak terbaca publik maupun klien (izin per kolom); panel admin membacanya lewat service role.
+
 ## Undangan demo untuk landing page
 Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berikut harus dibuat di database produksi (status aktif, masa aktif tanpa batas) dengan menjalankan `supabase/demo-produksi.sql` (langkah C di atas). Kalau ada tema baru, file itu dibuat ulang dari data lokal.
 

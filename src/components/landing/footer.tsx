@@ -10,11 +10,12 @@ export function SiteFooter({ businessName, waHref }: { businessName: string; waH
         <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-6">
           <div>
             <Logo size={40} textClassName="text-[30px] text-[#f3eee5]" />
-            <p className="mt-2 text-[14px]">Undangan pernikahan digital.</p>
+            <p className="mt-2 text-[14px]">Undangan pernikahan digital dan cetak.</p>
           </div>
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[14px]">
             <Link href="/#tema" className="hover:text-white">Tema</Link>
             <Link href="/#harga" className="hover:text-white">Harga</Link>
+            <Link href="/cetak" className="hover:text-white">Undangan cetak</Link>
             <Link href="/mitra" className="hover:text-white">Program mitra</Link>
             <Link href="/masuk" className="hover:text-white">Masuk</Link>
             <a href={waHref} target="_blank" rel="noreferrer" className="hover:text-white">WhatsApp</a>

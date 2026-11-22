@@ -12,6 +12,8 @@ import { LandingNav } from "@/components/landing/nav";
 import { Phone } from "@/components/landing/phone";
 import s from "@/components/landing/landing.module.css";
 import { getCatalog } from "@/lib/demos";
+import { getPrintDesigns, getPrintSettings } from "@/lib/print/public";
+import { printImageUrl } from "@/lib/print/shared";
 import { getPublicReviews, MIN_REVIEWS_SHOWN } from "@/lib/reviews/public";
 import { getSiteSettings, rupiah, waLink } from "@/lib/site";
 import { Stars } from "@/components/reviews/review-form";
@@ -30,7 +32,13 @@ export const metadata: Metadata = {
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 export default async function LandingPage() {
-  const [site, reviews] = await Promise.all([getSiteSettings(), getPublicReviews()]);
+  const [site, reviews, prints, print] = await Promise.all([
+    getSiteSettings(),
+    getPublicReviews(),
+    getPrintDesigns(),
+    getPrintSettings(),
+  ]);
+  const printShots = [...prints.filter((p) => p.featured && p.orientation === "landscape"), ...prints].slice(0, 3);
   const catalog = getCatalog();
   const ready = catalog.filter((t) => t.demo).length;
   const wa = (msg: string) => waLink(site.whatsapp, msg);
@@ -459,6 +467,50 @@ export default async function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* ---------------- Undangan cetak ---------------- */}
+        {prints.length ? (
+          <section id="cetak" className="scroll-mt-20 px-5 py-20 sm:py-28">
+            <Reveal className={`${s.rv} mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.1fr]`}>
+              <div className="text-center lg:text-left">
+                <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-brass">Undangan cetak</p>
+                <h2 className="mt-3 font-display text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+                  Butuh versi kertasnya juga?
+                </h2>
+                <p className="mx-auto mt-5 max-w-lg text-[16px] leading-relaxed text-muted lg:mx-0">
+                  Untuk keluarga besar dan tamu yang lebih nyaman menerima undangan langsung. Ada {prints.length} desain,
+                  dari yang hemat sampai foil emas dengan amplop, mulai {rupiah(Math.min(...prints.map((p) => p.price)))}/pcs (belum
+                  termasuk plastik) dan minimal {print.minOrder} pcs. Bisa diberi QR code ke undangan digital kalian.
+                </p>
+                <Link
+                  href="/cetak"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[15px] font-semibold text-[#f6f1e7] hover:bg-ink-2"
+                >
+                  Lihat katalog cetak
+                </Link>
+              </div>
+              <Link href="/cetak" aria-label="Lihat katalog undangan cetak" className="relative mx-auto block h-[300px] w-full max-w-[520px] sm:h-[380px]">
+                {printShots.map((p, i) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={p.id}
+                    src={printImageUrl(p.images[0])}
+                    alt=""
+                    loading="lazy"
+                    className="absolute w-[62%] shadow-[0_24px_40px_-22px_rgb(23_38_31/0.6)] transition-transform duration-500 hover:-translate-y-1"
+                    style={
+                      [
+                        { left: "0%", top: "4%", rotate: "-6deg" },
+                        { right: "0%", top: "12%", rotate: "5deg" },
+                        { left: "19%", bottom: "2%", rotate: "-1deg" },
+                      ][i]
+                    }
+                  />
+                ))}
+              </Link>
+            </Reveal>
+          </section>
+        ) : null}
 
         {/* ---------------- Ulasan (tampil kalau sudah cukup ulasan sungguhan) ---------------- */}
         {reviews.length >= MIN_REVIEWS_SHOWN ? (

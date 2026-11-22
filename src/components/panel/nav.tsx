@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   IconCalendar,
+  IconEnvelope,
   IconHome,
   IconPlus,
   IconSettings,
@@ -18,6 +19,7 @@ const ICONS = {
   users: IconUsers,
   settings: IconSettings,
   star: IconStar,
+  print: IconEnvelope,
 };
 
 export type NavIcon = keyof typeof ICONS;

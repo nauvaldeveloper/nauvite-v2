@@ -23,7 +23,7 @@ export const ACCEPT: Record<UploadKind, string> = {
 };
 
 /** Perkecil foto (sisi terpanjang maks 1600px) dan ubah ke WebP supaya ringan. */
-async function compressImage(file: File, maxSide = 1600, quality = 0.82): Promise<Blob> {
+export async function compressImage(file: File, maxSide = 1600, quality = 0.82): Promise<Blob> {
   const bitmap = await createImageBitmap(file);
   const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
   const w = Math.round(bitmap.width * scale);

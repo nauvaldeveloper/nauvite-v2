@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/#tema", label: "Tema" },
   { href: "/#fitur", label: "Fitur" },
   { href: "/#harga", label: "Harga" },
+  { href: "/cetak", label: "Cetak" },
   { href: "/mitra", label: "Mitra" },
   { href: "/#tanya", label: "Tanya jawab" },
 ];
