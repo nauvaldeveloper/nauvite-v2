@@ -11,7 +11,7 @@ import { deleteInvitation, setInvitationStatus } from "@/lib/admin/actions";
 import { getAccounts, getInvitation, getWishStats, listPartners } from "@/lib/admin/data";
 import { parseContent } from "@/lib/invitation/content";
 import { mainEventDate } from "@/lib/invitation/format";
-import { CATEGORY_LABELS } from "@/templates/manifest";
+import { CATEGORY_LABELS, TIER_LABELS } from "@/templates/manifest";
 import { TEMPLATES } from "@/templates/registry";
 import { AccountPanel, MetaForm } from "./forms";
 
@@ -224,7 +224,7 @@ export default async function InvitationDetail({ params, searchParams }: PagePro
                 partnerId: inv.partner_id ?? "",
                 adminNote: inv.admin_note ?? "",
               }}
-              templates={TEMPLATES.map((t) => ({ id: t.id, name: t.name, category: `${CATEGORY_LABELS[t.category]}${t.tier === "premium" ? ", Premium" : ""}` }))}
+              templates={TEMPLATES.map((t) => ({ id: t.id, name: t.name, category: `${CATEGORY_LABELS[t.category]}${t.tier === "basic" ? "" : `, ${TIER_LABELS[t.tier]}`}` }))}
               partners={partners.map((p) => ({ id: p.id, name: p.business_name ?? "Mitra" }))}
             />
           </Card>

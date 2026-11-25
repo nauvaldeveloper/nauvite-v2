@@ -533,3 +533,29 @@ insert into public.invitations (id, slug, template_id, status, active_until, con
 select 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee2', 'contoh-surat-cinta-zaitun', 'surat-cinta', 'active', now() + interval '365 days',
   content, '{"surat-cinta": {"palette": "zaitun"}}'::jsonb
 from public.invitations where slug = 'contoh-surat-cinta';
+
+-- Undangan demo tema Koran Pagi (tanpa foto), tiga warna
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'ffffffff-ffff-ffff-ffff-fffffffffff1', 'contoh-koran-pagi', 'koran-pagi', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Satria"'), '{couple,groom,fullname}', '"Satria Wibisono"'),
+    '{couple,bride,name}', '"Anindya"'), '{couple,bride,fullname}', '"Anindya Prameswari"'), '{"koran-pagi": {"palette": "klasik"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('ffffffff-ffff-ffff-ffff-fffffffffff1', 'Pak Darmo', 'Baru kali ini saya baca koran sambil senyum. Selamat untuk Satria dan Anindya!', 'hadir', 2),
+  ('ffffffff-ffff-ffff-ffff-fffffffffff1', 'Tim futsal Satria', 'TTS-nya sudah kami isi. Sampai ketemu di resepsi.', 'hadir', 5);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'ffffffff-ffff-ffff-ffff-fffffffffff2', 'contoh-koran-pagi-salem', 'koran-pagi', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Satria"'), '{couple,groom,fullname}', '"Satria Wibisono"'),
+    '{couple,bride,name}', '"Anindya"'), '{couple,bride,fullname}', '"Anindya Prameswari"'), '{"koran-pagi": {"palette": "salem"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('ffffffff-ffff-ffff-ffff-fffffffffff2', 'Pak Darmo', 'Baru kali ini saya baca koran sambil senyum. Selamat untuk Satria dan Anindya!', 'hadir', 2),
+  ('ffffffff-ffff-ffff-ffff-fffffffffff2', 'Tim futsal Satria', 'TTS-nya sudah kami isi. Sampai ketemu di resepsi.', 'hadir', 5);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'ffffffff-ffff-ffff-ffff-fffffffffff3', 'contoh-koran-pagi-melati', 'koran-pagi', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Satria"'), '{couple,groom,fullname}', '"Satria Wibisono"'),
+    '{couple,bride,name}', '"Anindya"'), '{couple,bride,fullname}', '"Anindya Prameswari"'), '{"koran-pagi": {"palette": "melati"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('ffffffff-ffff-ffff-ffff-fffffffffff3', 'Pak Darmo', 'Baru kali ini saya baca koran sambil senyum. Selamat untuk Satria dan Anindya!', 'hadir', 2),
+  ('ffffffff-ffff-ffff-ffff-fffffffffff3', 'Tim futsal Satria', 'TTS-nya sudah kami isi. Sampai ketemu di resepsi.', 'hadir', 5);

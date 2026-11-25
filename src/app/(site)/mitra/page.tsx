@@ -116,7 +116,7 @@ export default async function PartnerPage() {
 
         {/* ---------------- Harga mitra ---------------- */}
         <section className="px-5 py-20 sm:py-28">
-          <div className="mx-auto max-w-4xl">
+          <div className="mx-auto max-w-6xl">
             <Reveal className={`${s.rv} mx-auto mb-12 max-w-2xl text-center`}>
               <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-brass">Harga mitra</p>
               <h2 className="mt-3 font-display text-4xl font-medium tracking-tight sm:text-5xl">Lebih murah dari harga biasa</h2>
@@ -124,8 +124,9 @@ export default async function PartnerPage() {
                 Bayar per undangan, tanpa deposit. Silakan masukkan ke harga paket kalian.
               </p>
             </Reveal>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-3">
               {[
+                ["Hemat", "Tema tanpa foto", site.priceHemat, site.partnerHemat, false],
                 ["Basic", "Tema Signature, Clean, dan lainnya", site.priceBasic, site.partnerBasic, false],
                 ["Premium", "Tema ilustrasi dengan animasi berlapis", site.pricePremium, site.partnerPremium, true],
               ].map(([name, note, normal, partner, dark], i) => (
@@ -141,7 +142,7 @@ export default async function PartnerPage() {
                     undangan.
                   </p>
                   <p className={`mt-6 border-t pt-5 text-[14px] ${dark ? "border-white/10 text-[#c9d2cc]" : "border-line text-muted"}`}>
-                    {note as string}. Semua fitur undangan sudah termasuk.
+                    {note as string}. RSVP, ucapan, amplop digital, dan musik sudah termasuk.
                   </p>
                 </Reveal>
               ))}

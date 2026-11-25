@@ -407,6 +407,10 @@ export async function saveSettings(_prev: SimpleState, formData: FormData): Prom
         .pipe(z.string().min(9, "Nomor WhatsApp terlalu pendek")),
       priceDefault: z.coerce.number().int().min(0),
       pricePremium: z.coerce.number().int().min(0),
+      priceHemat: z.coerce.number().int().min(0),
+      priceHematPromo: z.coerce.number().int().min(0),
+      hematPromoUntil: z.string().regex(/^(\d{4}-\d{2}-\d{2})?$/, "Tanggal akhir promo tidak valid"),
+      pricePartnerHemat: z.coerce.number().int().min(0),
       pricePartner: z.coerce.number().int().min(0),
       pricePartnerPremium: z.coerce.number().int().min(0),
     })
@@ -415,6 +419,10 @@ export async function saveSettings(_prev: SimpleState, formData: FormData): Prom
       ownerWhatsapp: formData.get("ownerWhatsapp") ?? "",
       priceDefault: formData.get("priceDefault") ?? 0,
       pricePremium: formData.get("pricePremium") ?? 0,
+      priceHemat: formData.get("priceHemat") ?? 0,
+      priceHematPromo: formData.get("priceHematPromo") ?? 0,
+      hematPromoUntil: formData.get("hematPromoUntil") ?? "",
+      pricePartnerHemat: formData.get("pricePartnerHemat") ?? 0,
       pricePartner: formData.get("pricePartner") ?? 0,
       pricePartnerPremium: formData.get("pricePartnerPremium") ?? 0,
     });
@@ -425,7 +433,16 @@ export async function saveSettings(_prev: SimpleState, formData: FormData): Prom
   const { error } = await supabase.from("app_settings").upsert([
     { key: "business_name", value: d.businessName, is_public: true },
     { key: "owner_whatsapp", value: d.ownerWhatsapp, is_public: true },
-    { key: "pricing", value: { default: d.priceDefault, premium: d.pricePremium, partner: d.pricePartner, partnerPremium: d.pricePartnerPremium }, is_public: true },
+    { key: "pricing", value: {
+        default: d.priceDefault,
+        premium: d.pricePremium,
+        partner: d.pricePartner,
+        partnerPremium: d.pricePartnerPremium,
+        hemat: d.priceHemat,
+        hematPromo: d.priceHematPromo,
+        hematPromoUntil: d.hematPromoUntil,
+        partnerHemat: d.pricePartnerHemat,
+      }, is_public: true },
   ]);
   if (error) return { error: `Gagal menyimpan: ${error.message}` };
   updateTag(SITE_SETTINGS_TAG);

@@ -1,4 +1,4 @@
-import { CATEGORY_LABELS, TIER_LABELS, type TemplateManifest } from "@/templates/manifest";
+import { CATEGORY_LABELS, TIER_LABELS, type TemplateManifest, type TemplateTier } from "@/templates/manifest";
 import { TEMPLATES } from "@/templates/registry";
 
 /**
@@ -15,6 +15,7 @@ const DEMO_SLUG: Record<string, string> = {
   "sundanese-elegance": "contoh-sundanese-elegance",
   "javanese-keraton": "contoh-javanese-keraton",
   "betawi-heritage": "contoh-betawi-heritage",
+  "koran-pagi": "contoh-koran-pagi",
   "surat-cinta": "contoh-surat-cinta",
   "solid-editorial": "dimas-laras",
   "royal-gold": "contoh-royal-gold",
@@ -26,10 +27,10 @@ const DEMO_SLUG: Record<string, string> = {
  * Tema dengan beberapa demo warna. Demo pertama memakai slug di DEMO_SLUG, sisanya
  * `<slug>-<warna>`. Nama warna diambil dari isian `palette` dan `paletteSwatches` manifest.
  */
-const COLOR_DEMOS = new Set(["surat-cinta"]);
+const COLOR_DEMOS = new Set(["surat-cinta", "koran-pagi"]);
 
 /** Tema yang gambar kartunya memakai sampul (bukan isi), beserta titik potongnya. */
-const CARD_COVER: Record<string, string> = { "surat-cinta": "50% 50%" };
+const CARD_COVER: Record<string, string> = { "surat-cinta": "50% 50%", "koran-pagi": "50% 50%" };
 
 export type CatalogDemo = {
   slug: string;
@@ -47,7 +48,7 @@ export type CatalogItem = {
   description: string;
   category: string;
   categoryLabel: string;
-  tier: "basic" | "premium";
+  tier: TemplateTier;
   tierLabel: string;
   region?: string;
   isNew: boolean;

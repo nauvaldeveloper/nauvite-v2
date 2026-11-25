@@ -30,8 +30,19 @@ export function SettingsForm({ initial }: { initial: BusinessSettings }) {
         </div>
       </div>
       <div>
+        <p className="mb-3 text-[13px] font-semibold text-ink/80">Paket Hemat (tema tanpa foto)</p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {price("s-hemat", "priceHemat", "Harga normal (Rp)")}
+          {price("s-hemat-promo", "priceHematPromo", "Harga promo (Rp)")}
+          <Field label="Promo sampai tanggal" htmlFor="s-hemat-until" hint="Setelah lewat, harga kembali normal sendiri. Kosongkan untuk mematikan promo.">
+            <Input id="s-hemat-until" name="hematPromoUntil" type="date" defaultValue={initial.hematPromoUntil} />
+          </Field>
+        </div>
+      </div>
+      <div>
         <p className="mb-3 text-[13px] font-semibold text-ink/80">Harga mitra (WO, MUA, vendor)</p>
         <div className="grid gap-4 sm:grid-cols-2">
+          {price("s-phemat", "pricePartnerHemat", "Mitra Hemat (Rp)")}
           {price("s-pbasic", "pricePartner", "Mitra Basic (Rp)")}
           {price("s-ppremium", "pricePartnerPremium", "Mitra Premium (Rp)")}
         </div>

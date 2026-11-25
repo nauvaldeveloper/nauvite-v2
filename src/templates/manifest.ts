@@ -21,12 +21,13 @@ export const CATEGORY_LABELS: Record<TemplateCategory, string> = {
 };
 
 /**
- * Paket = level tema. Basic: tema Signature/Clean dan sejenisnya. Premium: tema ilustrasi
+ * Paket = level tema. Hemat: tema tanpa foto. Basic: tema Signature/Clean dan sejenisnya. Premium: tema ilustrasi
  * berlapis dengan animasi kaya. Fitur undangan sama di kedua paket.
  */
-export type TemplateTier = "basic" | "premium";
+export type TemplateTier = "hemat" | "basic" | "premium";
 
 export const TIER_LABELS: Record<TemplateTier, string> = {
+  hemat: "Hemat",
   basic: "Basic",
   premium: "Premium",
 };

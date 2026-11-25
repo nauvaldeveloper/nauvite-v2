@@ -78,6 +78,9 @@ Folder: `public/templates/lavender-mist/`. Ilustrasi dibuat pemilik dengan **Can
 Semua latar putih dihapus lewat skrip. `buket-kanan` = cermin dari `03` (aslinya buket sudut kiri). Belum ada gambar kertas dan kelopak ke-3 dari Canva: `kertas.webp` dibuat dari kertas Sage Garden yang warnanya digeser ke lilac, `kelopak-3.webp` dari kelopak 1 yang dicerminkan dan diberi warna lebih merah muda. Total 438 KB.
 Demo `contoh-lavender-mist` memakai foto Pexels `galeri-5` dari set yang sama.
 
+## Tema Koran Pagi (`koran-pagi`)
+Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/koran-pagi/art.tsx`. Font Grenze Gotisch, Frank Ruhl Libre, Source Serif 4, Archivo Narrow dari Google Fonts (OFL).
+
 ## Tema Surat Cinta (`surat-cinta`)
 Tanpa file gambar: semua ilustrasi SVG buatan sendiri di `src/templates/surat-cinta/art.tsx`. Semua font dari Google Fonts (lisensi OFL). `assets/fonts/PetitFormalScript-Regular.ttf` (OFL, lisensinya di folder yang sama) dipakai untuk gambar preview WhatsApp.
 

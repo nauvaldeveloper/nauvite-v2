@@ -10,10 +10,13 @@ const MOBILE_FIRST = 6;
 export function Catalog({
   items,
   prices,
+  hematNormal,
   whatsapp,
 }: {
   items: CatalogItem[];
-  prices: { basic: string; premium: string };
+  prices: Record<CatalogItem["tier"], string>;
+  /** Harga normal paket Hemat saat promo, tampil dicoret. */
+  hematNormal: string | null;
   whatsapp: string;
 }) {
   const ready = items.filter((i) => i.demos.length > 0);
@@ -41,7 +44,8 @@ export function Catalog({
       (filter === "tanpa-foto" && !i.withPhoto),
   );
   const opened = ready.find((i) => i.id === openId) ?? null;
-  const priceOf = (t: CatalogItem) => (t.tier === "premium" ? prices.premium : prices.basic);
+  const priceOf = (t: CatalogItem) => prices[t.tier];
+  const normalOf = (t: CatalogItem) => (t.tier === "hemat" ? hematNormal : null);
   const pick = (id: string, i: number) => setVariant((v) => ({ ...v, [id]: i }));
 
   return (
@@ -94,7 +98,10 @@ export function Catalog({
                 <span className="mt-2.5 block font-display text-[17px] font-medium leading-tight">{t.name}</span>
                 <span className="mt-1 flex flex-wrap justify-between gap-x-2 text-[13px]">
                   <span className="text-muted">{t.region ?? t.categoryLabel}</span>
-                  <span className="font-semibold text-brass">{priceOf(t)}</span>
+                  <span className="font-semibold text-brass">
+                    {normalOf(t) ? <s className="mr-1.5 font-normal text-muted">{normalOf(t)}</s> : null}
+                    {priceOf(t)}
+                  </span>
                 </span>
               </button>
               {t.demos.length > 1 ? (
@@ -128,6 +135,7 @@ export function Catalog({
           at={variant[opened.id] ?? 0}
           onPick={(n) => pick(opened.id, n)}
           price={priceOf(opened)}
+          normal={normalOf(opened)}
           whatsapp={whatsapp}
           onClose={() => setOpenId(null)}
         />
@@ -175,6 +183,7 @@ function Detail({
   at,
   onPick,
   price,
+  normal,
   whatsapp,
   onClose,
 }: {
@@ -182,6 +191,7 @@ function Detail({
   at: number;
   onPick: (n: number) => void;
   price: string;
+  normal: string | null;
   whatsapp: string;
   onClose: () => void;
 }) {
@@ -232,11 +242,14 @@ function Detail({
           <p className="pr-10 text-[13px] font-semibold text-muted">
             {item.categoryLabel}
             {item.region ? `, ${item.region}` : ""}
-            {item.tier === "premium" ? ", Premium" : ""}
+            {item.tier === "basic" ? "" : `, paket ${item.tierLabel}`}
             {item.withPhoto ? "" : ", tanpa foto"}
           </p>
           <h3 className="mt-1 font-display text-[28px] font-medium leading-tight">{item.name}</h3>
-          <p className="mt-1 text-[17px] font-semibold text-brass">{price}</p>
+          <p className="mt-1 text-[17px] font-semibold text-brass">
+            {price}
+            {normal ? <s className="ml-2 text-[14px] font-normal text-muted">{normal}</s> : null}
+          </p>
           <p className="mt-3 text-[15px] leading-relaxed text-ink/80">{item.description}</p>
           {item.demos.length > 1 ? (
             <div className="mt-4">

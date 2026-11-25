@@ -10,6 +10,7 @@ import batakUlos from "./batak-ulos/manifest";
 import sageGarden from "./sage-garden/manifest";
 import dustyRose from "./dusty-rose/manifest";
 import lavenderMist from "./lavender-mist/manifest";
+import koranPagi from "./koran-pagi/manifest";
 import suratCinta from "./surat-cinta/manifest";
 
 /**
@@ -31,6 +32,7 @@ export const TEMPLATES = [
   dustyRose,
   lavenderMist,
   suratCinta,
+  koranPagi,
 ] as const satisfies readonly TemplateManifest[];
 
 export type TemplateId = (typeof TEMPLATES)[number]["id"];

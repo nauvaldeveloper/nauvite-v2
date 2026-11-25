@@ -1,4 +1,5 @@
 import "server-only";
+import { HEMAT_DEFAULTS, type Pricing } from "@/lib/site";
 import { requireAdmin } from "@/lib/auth/dal";
 import { displayLogin } from "@/lib/auth/login-id";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -182,6 +183,10 @@ export type BusinessSettings = {
   ownerWhatsapp: string;
   priceDefault: number;
   pricePremium: number;
+  priceHemat: number;
+  priceHematPromo: number;
+  hematPromoUntil: string;
+  pricePartnerHemat: number;
   pricePartner: number;
   pricePartnerPremium: number;
 };
@@ -191,12 +196,16 @@ export async function getSettings(): Promise<BusinessSettings> {
   const supabase = await createClient();
   const { data } = await supabase.from("app_settings").select("key, value");
   const get = (k: string) => data?.find((r) => r.key === k)?.value;
-  const pricing = (get("pricing") as { default?: number; premium?: number; partner?: number; partnerPremium?: number } | undefined) ?? {};
+  const pricing = (get("pricing") as Pricing | undefined) ?? {};
   return {
     businessName: (get("business_name") as string) ?? "Nauvite",
     ownerWhatsapp: (get("owner_whatsapp") as string) ?? "",
     priceDefault: pricing.default ?? 75000,
     pricePremium: pricing.premium ?? 99000,
+    priceHemat: pricing.hemat ?? HEMAT_DEFAULTS.hemat,
+    priceHematPromo: pricing.hematPromo ?? HEMAT_DEFAULTS.hematPromo,
+    hematPromoUntil: pricing.hematPromoUntil ?? HEMAT_DEFAULTS.hematPromoUntil,
+    pricePartnerHemat: pricing.partnerHemat ?? HEMAT_DEFAULTS.partnerHemat,
     pricePartner: pricing.partner ?? 50000,
     pricePartnerPremium: pricing.partnerPremium ?? 75000,
   };

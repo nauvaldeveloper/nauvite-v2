@@ -15,7 +15,7 @@ import { getCatalog } from "@/lib/demos";
 import { getPrintDesigns, getPrintSettings } from "@/lib/print/public";
 import { printImageUrl } from "@/lib/print/shared";
 import { getPublicReviews, MIN_REVIEWS_SHOWN } from "@/lib/reviews/public";
-import { getSiteSettings, rupiah, waLink } from "@/lib/site";
+import { getSiteSettings, HEMAT_FILL_FEE, rupiah, waLink } from "@/lib/site";
 import { Stars } from "@/components/reviews/review-form";
 
 export const metadata: Metadata = {
@@ -55,8 +55,12 @@ export default async function LandingPage() {
       "Dari dasbor, kalian ketik nama tamu dan link khusus untuknya jadi otomatis. Begitu dibuka, sampul menyapa tamu dengan namanya. Link bisa langsung dikirim lewat WhatsApp.",
     ],
     [
-      "Apa beda paket Basic dan Premium?",
-      "Fiturnya sama persis. Yang membedakan temanya: Premium memakai tema ilustrasi dengan animasi berlapis, seperti bunga yang bergoyang dan kelopak berjatuhan.",
+      "Apa beda paket Hemat, Basic, dan Premium?",
+      "RSVP, ucapan, amplop digital, musik, dan nama tamu ada di semua paket. Hemat memakai tema tanpa foto, jadi tidak ada foto mempelai dan galeri. Basic memakai tema dengan foto. Premium memakai foto dan tema ilustrasi dengan animasi berlapis, seperti bunga yang bergoyang dan kelopak berjatuhan.",
+    ],
+    [
+      "Bisa minta diisikan?",
+      `Bisa. Kirim datanya lewat WhatsApp, kami yang mengisi. Gratis untuk paket Basic dan Premium. Untuk paket Hemat, tambah ${rupiah(HEMAT_FILL_FEE)}.`,
     ],
     ["Berapa banyak tamu yang bisa diundang?", "Tanpa batas. Bagikan link ke sebanyak mungkin keluarga dan kerabat tanpa biaya tambahan."],
     [
@@ -69,7 +73,7 @@ export default async function LandingPage() {
     ],
     [
       "Saya tidak punya foto prewedding. Masih bisa?",
-      "Bisa. Tema Surat Cinta memang dibuat tanpa foto sama sekali: amplop, perangko, dan kartu pos jadi pengganti fotonya. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
+      "Bisa. Pilih paket Hemat. Tema Surat Cinta dan Koran Pagi memang dibuat tanpa foto sama sekali, jadi tidak ada tempat yang terasa kosong. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
     ],
     ["Bisa pakai lagu sendiri?", "Bisa. Unggah file MP3 dari dasbor, lagu diputar saat tamu membuka undangan."],
     [
@@ -110,7 +114,7 @@ export default async function LandingPage() {
                 </a>
               </div>
               <p className="mt-6 text-[14px] text-muted">
-                Mulai <strong className="text-ink">{rupiah(site.priceBasic)}</strong>, bayar sekali. Tamu tanpa batas.
+                Mulai <strong className="text-ink">{rupiah(site.priceHemat)}</strong>, bayar sekali. Tamu tanpa batas.
               </p>
             </div>
 
@@ -166,12 +170,17 @@ export default async function LandingPage() {
               <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-brass">Katalog</p>
               <h2 className="mt-3 font-display text-4xl font-medium tracking-tight sm:text-5xl">Pilih tema undangan</h2>
               <p className="mt-4 text-[16px] leading-relaxed text-muted">
-                Ketuk tema untuk melihat contoh dan membuka demonya. Fitur semua tema sama, yang berbeda tampilan dan animasinya.
+                Ketuk tema untuk melihat contoh dan membuka demonya. Ada yang dengan foto, ada yang tanpa foto.
               </p>
             </Reveal>
             <Catalog
               items={catalog}
-              prices={{ basic: rupiah(site.priceBasic), premium: rupiah(site.pricePremium) }}
+              prices={{
+                hemat: rupiah(site.priceHemat),
+                basic: rupiah(site.priceBasic),
+                premium: rupiah(site.pricePremium),
+              }}
+              hematNormal={site.hematNormal ? rupiah(site.hematNormal) : null}
               whatsapp={site.whatsapp}
             />
           </div>
@@ -219,7 +228,7 @@ export default async function LandingPage() {
                 </div>
                 <ul className="mt-6 grid gap-5">
                   {[
-                    ["Bayar sekali", `Mulai ${rupiah(site.priceBasic)}, kirim ke ratusan tamu tanpa biaya tambahan.`],
+                    ["Bayar sekali", `Mulai ${rupiah(site.priceHemat)}, kirim ke ratusan tamu tanpa biaya tambahan.`],
                     ["Siap disebar hari ini", "Pilih tema, isi data dari HP, lalu langsung kirim lewat WhatsApp."],
                     ["Salah ketik? Tinggal edit", "Perubahan langsung tampil di link yang sama, tamu tidak perlu dikirimi ulang."],
                     ["Nama tamu dan RSVP otomatis", "Setiap tamu disapa dengan namanya, konfirmasi hadir terkumpul di dasbor."],
@@ -436,18 +445,27 @@ export default async function LandingPage() {
 
         {/* ---------------- Harga ---------------- */}
         <section id="harga" className={`${s.paper} scroll-mt-20 px-5 py-20 sm:py-28`}>
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-6xl">
             <Reveal className={`${s.rv} mx-auto mb-12 max-w-2xl text-center`}>
               <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-brass">Harga</p>
               <h2 className="mt-3 font-display text-4xl font-medium tracking-tight sm:text-5xl">Sekali bayar, tanpa biaya bulanan</h2>
-              <p className="mt-4 text-[16px] text-muted">Fiturnya sama. Yang membedakan tampilan dan animasi temanya.</p>
+              <p className="mt-4 text-[16px] text-muted">Pilih sesuai kebutuhan. Semuanya bayar sekali, tamu tanpa batas.</p>
             </Reveal>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-5 lg:grid-cols-3">
+              <PriceCard
+                name="Hemat"
+                price={rupiah(site.priceHemat)}
+                normal={site.hematNormal ? rupiah(site.hematNormal) : null}
+                promoUntil={site.hematPromoUntil}
+                note="Tema tanpa foto"
+                points={["RSVP, ucapan, amplop digital, musik", "Tamu tanpa batas", "Ubah isi kapan saja", "Tidak perlu foto prewedding", `Isi sendiri, atau kami isikan +${rupiah(HEMAT_FILL_FEE)}`]}
+                cta={wa("Halo, saya mau pesan undangan paket Hemat.")}
+              />
               <PriceCard
                 name="Basic"
                 price={rupiah(site.priceBasic)}
                 note="Tema Signature, Clean, dan lainnya"
-                points={["Semua fitur undangan", "Tamu tanpa batas", "Ubah isi kapan saja", "Bantuan admin lewat WhatsApp"]}
+                points={["Semua fitur Hemat", "Foto mempelai, sampul, dan galeri", "Gratis diisikan admin", "Tamu tanpa batas", "Ubah isi kapan saja", "Bantuan admin lewat WhatsApp"]}
                 cta={wa("Halo, saya mau pesan undangan paket Basic.")}
               />
               <PriceCard
@@ -456,7 +474,7 @@ export default async function LandingPage() {
                 price={rupiah(site.pricePremium)}
                 note="Tema ilustrasi dengan animasi berlapis"
                 points={[
-                  "Semua fitur undangan",
+                  "Semua fitur Basic",
                   "Ilustrasi bunga dan ornamen bergerak",
                   "Bingkai foto berhias",
                   "Pengaturan warna dan salam",
@@ -556,7 +574,7 @@ export default async function LandingPage() {
               {[
                 [
                   "Harga khusus mitra",
-                  `Basic ${rupiah(site.partnerBasic)}, Premium ${rupiah(site.partnerPremium)} per undangan.`,
+                  `Hemat ${rupiah(site.partnerHemat)}, Basic ${rupiah(site.partnerBasic)}, Premium ${rupiah(site.partnerPremium)} per undangan.`,
                 ],
                 ["Tanpa repot bikin sendiri", "Kalian fokus mengurus acara, undangan digitalnya kami yang siapkan."],
                 ["Nama usaha di undangan", "Tulisan \"Dipersembahkan oleh\" dengan link ke Instagram kalian."],
@@ -647,6 +665,8 @@ function FeatureCard({ title, text, delay, children }: { title: string; text: st
 function PriceCard({
   name,
   price,
+  normal,
+  promoUntil,
   note,
   points,
   cta,
@@ -654,6 +674,9 @@ function PriceCard({
 }: {
   name: string;
   price: string;
+  /** Harga normal saat promo, tampil dicoret. */
+  normal?: string | null;
+  promoUntil?: string | null;
   note: string;
   points: string[];
   cta: string;
@@ -669,7 +692,18 @@ function PriceCard({
         <span className="absolute right-6 top-6 rounded-full bg-brass px-3 py-1 text-[12px] font-bold text-white">Baru</span>
       ) : null}
       <p className={`text-[14px] font-semibold ${highlight ? "text-[#e9dcc3]" : "text-brass"}`}>{name}</p>
-      <p className="mt-3 font-display text-5xl font-medium tracking-tight">{price}</p>
+      <p className="mt-3 flex flex-wrap items-baseline gap-x-3 font-display text-5xl font-medium tracking-tight">
+        {price}
+        {normal ? <s className="text-2xl text-muted">{normal}</s> : null}
+      </p>
+      {promoUntil ? (
+        <p className="mt-2 text-[14px] font-semibold text-brass">
+          Promo sampai{" "}
+          {new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
+            new Date(`${promoUntil}T00:00:00Z`),
+          )}
+        </p>
+      ) : null}
       <p className={`mt-2 text-[14px] ${highlight ? "text-[#c9d2cc]" : "text-muted"}`}>{note}</p>
       <ul className="mt-7 grid gap-3 text-[15px]">
         {points.map((p) => (

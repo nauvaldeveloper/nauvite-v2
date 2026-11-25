@@ -4,7 +4,7 @@ export default defineManifest({
   id: "surat-cinta",
   name: "Surat Cinta",
   category: "signature",
-  tier: "basic",
+  tier: "hemat",
   description:
     "Undangan tanpa foto berbentuk surat pos: amplop bernama tamu yang terbuka sendiri, perangko bunga, cap pos bertanggal, dan kartu pos acara dengan bunga yang tumbuh.",
   badges: ["baru"],

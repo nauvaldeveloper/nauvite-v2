@@ -147,6 +147,7 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Sundanese Elegance | `contoh-sundanese-elegance` |
 | Javanese Keraton | `contoh-javanese-keraton` |
 | Betawi Heritage | `contoh-betawi-heritage` |
+| Koran Pagi (tiga warna) | `contoh-koran-pagi`, `contoh-koran-pagi-salem`, `contoh-koran-pagi-melati` |
 | Surat Cinta (merah anggur, biru laut, hijau zaitun) | `contoh-surat-cinta`, `contoh-surat-cinta-laut`, `contoh-surat-cinta-zaitun` |
 | Minimalist & Clean | `dimas-laras` |
 | Royal Gold | `contoh-royal-gold` |
