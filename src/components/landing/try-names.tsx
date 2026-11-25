@@ -18,17 +18,26 @@ export function TryNames({ items, whatsapp, siteUrl }: { items: CatalogItem[]; w
   const [bride, setBride] = useState("");
   const [date, setDate] = useState("");
   const [shown, setShown] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState<string | null>(null);
 
   const item = items.find((t) => t.id === themeId) ?? items[0];
   const demo = item.demos[color] ?? item.demos[0];
 
-  const names = { pria: groom.trim(), wanita: bride.trim(), ...(date ? { tgl: date } : {}) };
-  const pathFor = (slug: string) => `/coba/${slug}?${new URLSearchParams(names)}`;
+  const query = (g: string, b: string, d: string) => ({ pria: g.trim(), wanita: b.trim(), ...(d ? { tgl: d } : {}) });
+  const names = query(groom, bride, date);
+  const pathFor = (slug: string, n = names) => `/coba/${slug}?${new URLSearchParams(n)}`;
   const path = pathFor(demo.slug);
 
-  function submit(e: FormEvent) {
+  function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setShown(path);
+    // Dibaca dari kolomnya langsung: yang diketik sebelum halaman selesai dimuat belum masuk state.
+    const form = new FormData(e.currentTarget);
+    const [g, b, d] = ["pria", "wanita", "tgl"].map((k) => String(form.get(k) ?? ""));
+    if (!g.trim() || !b.trim()) return;
+    setGroom(g);
+    setBride(b);
+    setDate(d);
+    setShown(pathFor(demo.slug, query(g, b, d)));
     if (window.innerWidth < 1024) {
       requestAnimationFrame(() =>
         document.getElementById("hasil-coba")?.scrollIntoView({ behavior: "smooth", block: "start" }),
@@ -62,7 +71,8 @@ export function TryNames({ items, whatsapp, siteUrl }: { items: CatalogItem[]; w
 
   return (
     <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-      <form onSubmit={submit} className="grid gap-4">
+      {/* action: kalau ditekan sebelum skrip siap, contohnya terbuka satu layar penuh */}
+      <form action={`/coba/${demo.slug}`} method="get" onSubmit={submit} className="grid gap-4">
         <div className="mb-4">
           <h2 className="font-display text-4xl font-medium tracking-tight sm:text-5xl">Lihat undangan dengan nama kalian</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-muted">
@@ -72,15 +82,15 @@ export function TryNames({ items, whatsapp, siteUrl }: { items: CatalogItem[]; w
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="grid gap-1.5 text-[14px] font-semibold">
             Mempelai pria
-            <input className={field} value={groom} onChange={(e) => setGroom(e.target.value)} maxLength={40} required placeholder="Nama panggilan" />
+            <input name="pria" className={field} value={groom} onChange={(e) => setGroom(e.target.value)} maxLength={40} required placeholder="Nama panggilan" />
           </label>
           <label className="grid gap-1.5 text-[14px] font-semibold">
             Mempelai wanita
-            <input className={field} value={bride} onChange={(e) => setBride(e.target.value)} maxLength={40} required placeholder="Nama panggilan" />
+            <input name="wanita" className={field} value={bride} onChange={(e) => setBride(e.target.value)} maxLength={40} required placeholder="Nama panggilan" />
           </label>
           <label className="grid gap-1.5 text-[14px] font-semibold">
             Tanggal acara
-            <input className={field} type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <input name="tgl" className={field} type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </label>
           <label className="grid gap-1.5 text-[14px] font-semibold">
             Tema
@@ -128,18 +138,25 @@ export function TryNames({ items, whatsapp, siteUrl }: { items: CatalogItem[]; w
       <div id="hasil-coba" className="grid scroll-mt-20 justify-items-center gap-5">
         <div className="w-[272px]">
           <Phone>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={demo.cover} alt={`Sampul tema ${item.name}`} />
             {shown ? (
-              <iframe
-                key={shown}
-                src={`${shown}&bingkai=1`}
-                title="Contoh undangan dengan nama kalian"
-                className="absolute left-0 top-0 origin-top-left border-0"
-                style={{ width: 390, height: 844, transform: "scale(0.6513)" }}
-              />
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={demo.cover} alt={`Sampul tema ${item.name}`} />
-            )}
+              <>
+                {loaded === shown ? null : (
+                  <p className="absolute inset-x-0 bottom-0 bg-ink/90 py-4 text-center text-[14px] font-semibold text-[#f6f1e7]" role="status">
+                    Menyiapkan undangan...
+                  </p>
+                )}
+                <iframe
+                  key={shown}
+                  src={`${shown}&bingkai=1`}
+                  onLoad={() => setLoaded(shown)}
+                  title="Contoh undangan dengan nama kalian"
+                  className="absolute left-0 top-0 origin-top-left border-0"
+                  style={{ width: 390, height: 844, transform: "scale(0.6513)", visibility: loaded === shown ? "visible" : "hidden" }}
+                />
+              </>
+            ) : null}
           </Phone>
         </div>
         {shown ? (
