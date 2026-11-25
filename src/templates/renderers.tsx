@@ -4,6 +4,7 @@ import Signature from "./signature/Template";
 import Illustrated from "./illustrated/Template";
 import Adat from "./adat/Template";
 import KoranPagi from "./koran-pagi/Template";
+import PiringanHitam from "./piringan-hitam/Template";
 import SuratCinta from "./surat-cinta/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
@@ -42,6 +43,8 @@ export function RenderTemplate(props: TemplateProps) {
       return <Adat {...props} theme={betawiHeritageTheme} manifest={betawiHeritage} />;
     case "koran-pagi":
       return <KoranPagi {...props} />;
+    case "piringan-hitam":
+      return <PiringanHitam {...props} />;
     case "surat-cinta":
       return <SuratCinta {...props} />;
     case "royal-gold":

@@ -73,7 +73,7 @@ export default async function LandingPage() {
     ],
     [
       "Saya tidak punya foto prewedding. Masih bisa?",
-      "Bisa. Pilih paket Hemat. Tema Surat Cinta dan Koran Pagi memang dibuat tanpa foto sama sekali, jadi tidak ada tempat yang terasa kosong. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
+      "Bisa. Pilih paket Hemat. Tema Surat Cinta, Koran Pagi, dan Piringan Hitam memang dibuat tanpa foto sama sekali, jadi tidak ada tempat yang terasa kosong. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
     ],
     ["Bisa pakai lagu sendiri?", "Bisa. Unggah file MP3 dari dasbor, lagu diputar saat tamu membuka undangan."],
     [

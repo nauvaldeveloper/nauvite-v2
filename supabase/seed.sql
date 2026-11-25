@@ -559,3 +559,29 @@ from public.invitations where slug = 'contoh-surat-cinta';
 insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
   ('ffffffff-ffff-ffff-ffff-fffffffffff3', 'Pak Darmo', 'Baru kali ini saya baca koran sambil senyum. Selamat untuk Satria dan Anindya!', 'hadir', 2),
   ('ffffffff-ffff-ffff-ffff-fffffffffff3', 'Tim futsal Satria', 'TTS-nya sudah kami isi. Sampai ketemu di resepsi.', 'hadir', 5);
+
+-- Undangan demo tema Piringan Hitam (tanpa foto), tiga warna
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababa1', 'contoh-piringan-hitam', 'piringan-hitam', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Gilang"'), '{couple,groom,fullname}', '"Gilang Mahardika"'),
+    '{couple,bride,name}', '"Melati"'), '{couple,bride,fullname}', '"Melati Kusumawardani"'), '{"piringan-hitam": {"palette": "senja"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababa1', 'Om Yanto', 'Titip salam untuk Gilang dan Melati, semoga lagunya awet sampai tua.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababa1', 'Anak kos lantai dua', 'Kami siap request lagu di resepsi!', 'hadir', 4);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababa2', 'contoh-piringan-hitam-laguna', 'piringan-hitam', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Gilang"'), '{couple,groom,fullname}', '"Gilang Mahardika"'),
+    '{couple,bride,name}', '"Melati"'), '{couple,bride,fullname}', '"Melati Kusumawardani"'), '{"piringan-hitam": {"palette": "laguna"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababa2', 'Om Yanto', 'Titip salam untuk Gilang dan Melati, semoga lagunya awet sampai tua.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababa2', 'Anak kos lantai dua', 'Kami siap request lagu di resepsi!', 'hadir', 4);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababa3', 'contoh-piringan-hitam-anggrek', 'piringan-hitam', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Gilang"'), '{couple,groom,fullname}', '"Gilang Mahardika"'),
+    '{couple,bride,name}', '"Melati"'), '{couple,bride,fullname}', '"Melati Kusumawardani"'), '{"piringan-hitam": {"palette": "anggrek"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababa3', 'Om Yanto', 'Titip salam untuk Gilang dan Melati, semoga lagunya awet sampai tua.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababa3', 'Anak kos lantai dua', 'Kami siap request lagu di resepsi!', 'hadir', 4);

@@ -1,0 +1,1075 @@
+/* Tema Piringan Hitam. Palet: .senja / .laguna / .anggrek */
+
+.senja {
+  --bg: #d2502c;
+  --bg-2: #b23f20;
+  --paper: #fdeed2;
+  --paper-2: #f9dca8;
+  --ink: #34160f;
+  --soft: #7a4a36;
+  --line: #e2bd8b;
+  --label: #f0b23e;
+  --on-label: #34160f;
+  --f1: #f0b23e;
+  --f2: #f7d488;
+  --f3: #e2713f;
+  --core: #6e2413;
+  --leaf: #7f8f35;
+  --leaf-2: #9aa748;
+  --vinyl: #22130f;
+  --on-bg: #fff3dc;
+}
+
+.laguna {
+  --bg: #0f6466;
+  --bg-2: #0a4a4d;
+  --paper: #f4f1de;
+  --paper-2: #dfe9d3;
+  --ink: #0d2e33;
+  --soft: #45686a;
+  --line: #b5ccba;
+  --label: #f2cc8f;
+  --on-label: #0d2e33;
+  --f1: #ef8354;
+  --f2: #f2cc8f;
+  --f3: #e2613d;
+  --core: #7b2f1f;
+  --leaf: #3d8f78;
+  --leaf-2: #6bb192;
+  --vinyl: #0c1c20;
+  --on-bg: #f6f4e2;
+}
+
+.anggrek {
+  --bg: #6a2c70;
+  --bg-2: #4c1c54;
+  --paper: #fdeaf0;
+  --paper-2: #f8d3dd;
+  --ink: #341337;
+  --soft: #78507a;
+  --line: #e2b5ca;
+  --label: #f9c74f;
+  --on-label: #341337;
+  --f1: #f08a5d;
+  --f2: #f9c74f;
+  --f3: #d64573;
+  --core: #7d1f4f;
+  --leaf: #8a7cc0;
+  --leaf-2: #ab9fd8;
+  --vinyl: #1c0c20;
+  --on-bg: #ffeef4;
+}
+
+.root {
+  --ease: cubic-bezier(0.25, 0.6, 0.3, 1);
+  --dock-bg: var(--paper);
+  --dock-ink: var(--ink);
+  --dock-line: var(--line);
+  --dock-accent: var(--bg);
+  --dock-radius: 18px;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ph-body), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.root p,
+.root h1,
+.root h2,
+.root h3 {
+  margin: 0;
+}
+
+.root h1,
+.root h2,
+.root h3 {
+  font-family: var(--ph-head), serif;
+  font-weight: 400;
+}
+
+.root a {
+  color: inherit;
+}
+
+/* ---------- Gambar ---------- */
+.petal {
+  transform-origin: 0 0;
+  animation: bloom 0.9s var(--ease) var(--d, 0s) both;
+}
+
+.stem {
+  stroke-dasharray: 1;
+  animation: draw 1.4s var(--ease) var(--d, 0s) both;
+}
+
+@keyframes bloom {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+[data-visible="false"] .petal {
+  animation: none;
+  transform: scale(0);
+}
+
+.spin {
+  animation: spin 9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.disc {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.discRing {
+  font-family: var(--ph-body), sans-serif;
+  font-weight: 600;
+  font-size: 5.6px;
+  letter-spacing: 0.8px;
+}
+
+.discCenter {
+  font-family: var(--ph-head), serif;
+  font-size: 17px;
+}
+
+.hole {
+  pointer-events: none;
+}
+
+.cover[data-opened="true"] .recordSvg .hole {
+  animation: inkOut 0.4s ease 2.1s both;
+}
+
+.discSmall {
+  font-size: 6px;
+}
+
+.reveal {
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
+}
+
+.reveal[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+/* ---------- Sampul ---------- */
+.cover {
+  --s: min(316px, 80vw, 52svh);
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.garden {
+  position: absolute;
+  width: 250px;
+  pointer-events: none;
+}
+
+.cover .garden {
+  --f1: color-mix(in srgb, var(--bg) 78%, white);
+  --f2: color-mix(in srgb, var(--bg) 60%, white);
+  --f3: color-mix(in srgb, var(--bg) 70%, black);
+  --core: var(--bg-2);
+  --leaf: color-mix(in srgb, var(--bg) 88%, black);
+  --leaf-2: color-mix(in srgb, var(--bg) 92%, white);
+}
+
+.gardenLeft {
+  bottom: -60px;
+  left: -40px;
+}
+
+.gardenRight {
+  top: -60px;
+  right: -40px;
+  rotate: 180deg;
+}
+
+.stage {
+  position: relative;
+  z-index: 2;
+  width: var(--s);
+  height: var(--s);
+  animation: arrive 1.2s var(--ease) both;
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(70px) rotate(-5deg);
+  }
+}
+
+.record,
+.sleeve {
+  position: absolute;
+  inset: 0;
+}
+
+.record {
+  inset: 3%;
+}
+
+.recordSvg {
+  display: block;
+  width: 100%;
+}
+
+.sleeve {
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--paper);
+  box-shadow:
+    0 22px 40px rgb(0 0 0 / 0.36),
+    inset 5px 0 8px -5px rgb(0 0 0 / 0.28);
+}
+
+.sleeveArt {
+  position: absolute;
+  right: -36%;
+  bottom: -38%;
+  width: 112%;
+}
+
+.sleeveTitle {
+  position: absolute;
+  top: 6%;
+  left: 7%;
+  font-size: calc(var(--s) * 0.162);
+  line-height: 1.02;
+  color: var(--bg);
+  overflow-wrap: anywhere;
+}
+
+.sleeveTitle[data-long="true"] {
+  right: 5%;
+  font-size: calc(var(--s) * 0.118);
+}
+
+.sleeveTitle span {
+  display: block;
+}
+
+.sleeveDate {
+  position: absolute;
+  top: calc(6% + var(--s) * 0.36);
+  left: 7%;
+  max-width: 34%;
+  font-size: calc(var(--s) * 0.044);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.sleeveTitle[data-long="true"] + .sleeveDate {
+  top: calc(6% + var(--s) * 0.27);
+}
+
+.sticker {
+  position: absolute;
+  bottom: 6%;
+  left: 6%;
+  max-width: 66%;
+  padding: 8px 16px 9px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  line-height: 1.2;
+  rotate: -3deg;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.25);
+}
+
+.sticker small {
+  display: block;
+  font-size: 13px;
+  color: var(--soft);
+}
+
+.sticker span {
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.sticker span[data-long="true"] {
+  font-size: 16px;
+}
+
+.button,
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 8px 22px;
+  border: 2px solid var(--bg);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--on-bg) !important;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--bg) !important;
+}
+
+.button:hover,
+.ghost:hover {
+  opacity: 0.88;
+}
+
+.button:focus-visible,
+.ghost:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.cover .coverButton {
+  position: relative;
+  z-index: 2;
+  border-color: var(--label);
+  background: var(--label);
+  color: var(--on-label) !important;
+}
+
+/* Urutan buka */
+.cover[data-opened="true"] {
+  pointer-events: none;
+  animation: coverOut 0.5s ease 3.4s both;
+}
+
+.cover[data-opened="true"] .coverButton {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cover[data-opened="true"] .sleeve {
+  animation: sleeveDown 1.1s var(--ease) 0.15s both;
+}
+
+.cover[data-opened="true"] .record {
+  animation: recordOut 3.1s ease-in-out 0.15s both;
+}
+
+.cover[data-opened="true"] .recordSvg {
+  animation: spin 2.4s linear 0.9s infinite;
+}
+
+.cover[data-opened="true"] .recordSvg text {
+  animation: inkOut 0.4s ease 2.1s both;
+}
+
+@keyframes sleeveDown {
+  to {
+    transform: translateY(46%);
+  }
+}
+
+@keyframes recordOut {
+  0% {
+    z-index: 0;
+    transform: none;
+  }
+  34% {
+    z-index: 0;
+    transform: translateY(-60%);
+  }
+  35% {
+    z-index: 3;
+  }
+  56% {
+    transform: translateY(-60%);
+  }
+  100% {
+    z-index: 3;
+    transform: translateY(0) scale(16);
+  }
+}
+
+@keyframes inkOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes coverOut {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ---------- Halaman ---------- */
+.main {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 0 60px rgb(0 0 0 / 0.3);
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100svh;
+  padding: 56px 26px 0;
+  overflow: hidden;
+  background: var(--label);
+  color: var(--on-label);
+  --f1: var(--bg);
+  --f2: color-mix(in srgb, var(--bg) 62%, white);
+  --f3: color-mix(in srgb, var(--bg) 78%, black);
+}
+
+.hero .spin {
+  --label: var(--paper);
+}
+
+.heroText {
+  position: relative;
+  z-index: 2;
+}
+
+.heroText > p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.names {
+  margin: 6px 0 12px !important;
+  font-size: clamp(54px, 17vw, 92px);
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+}
+
+.names[data-long="true"] {
+  font-size: clamp(38px, 11.5vw, 64px);
+}
+
+.names span {
+  display: block;
+}
+
+.heroDisc {
+  position: relative;
+  width: min(122%, 640px);
+  margin: -10px -20% -9% auto;
+}
+
+.turntable {
+  position: relative;
+}
+
+.platter {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.platter:active {
+  cursor: grabbing;
+}
+
+.turntable[data-playing="false"] .spin {
+  animation-play-state: paused;
+}
+
+.tonearm {
+  position: absolute;
+  top: 2%;
+  right: 27%;
+  width: 24%;
+  transform-origin: 75% 14%;
+  transform: rotate(-30deg);
+  transition: transform 1.4s var(--ease) 0.4s;
+  pointer-events: none;
+}
+
+.turntable[data-playing="true"] .tonearm {
+  transform: rotate(4deg);
+}
+
+.playButton {
+  position: absolute;
+  bottom: 24%;
+  left: 2%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.section {
+  position: relative;
+  padding: 72px 26px;
+}
+
+.section > * {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.heading {
+  margin-bottom: 30px !important;
+  font-size: clamp(40px, 12vw, 54px);
+  line-height: 1.05;
+  color: var(--bg);
+}
+
+.lead {
+  margin: -14px auto 26px !important;
+  color: var(--soft);
+}
+
+.notes {
+  font-size: 19px;
+}
+
+.notes p + p {
+  margin-top: 16px;
+}
+
+.dear {
+  font-family: var(--ph-head), serif;
+  font-size: 25px;
+  line-height: 1.25;
+  color: var(--bg);
+}
+
+.quote {
+  background: var(--bg);
+  color: var(--on-bg);
+}
+
+.quote blockquote {
+  margin: 0 0 14px;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.quote p {
+  font-weight: 700;
+}
+
+/* ---------- Mempelai ---------- */
+.couple {
+  text-align: center;
+}
+
+.person svg.disc {
+  width: min(310px, 82%);
+  margin: 0 auto -6px;
+}
+
+.person .discCenter {
+  font-size: 42px;
+  transform: translateY(13px);
+}
+
+.person + .person {
+  margin-top: 44px;
+}
+
+.person + .person {
+  --f1: var(--bg);
+  --f2: var(--f3);
+}
+
+.person:nth-of-type(1) {
+  --label: var(--bg);
+  --on-label: var(--on-bg);
+}
+
+.person h3 {
+  margin-bottom: 8px;
+  font-size: 32px;
+  line-height: 1.12;
+}
+
+.person a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* ---------- Daftar lagu ---------- */
+.tracks {
+  background: var(--paper-2);
+}
+
+.tracks ol {
+  display: grid;
+  gap: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.trackRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px !important;
+}
+
+.trackRow b {
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.trackRow i {
+  flex: 1;
+  min-width: 18px;
+  border-bottom: 2px dotted var(--soft);
+}
+
+.trackRow span {
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--bg);
+}
+
+/* ---------- Hitung mundur ---------- */
+.count {
+  padding-top: 130px;
+  background: var(--bg);
+  color: var(--on-bg);
+}
+
+.count .heading {
+  color: var(--on-bg);
+}
+
+.bandWrap {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 100%;
+  max-width: none !important;
+}
+
+.band {
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Tiap angka jadi piringan kecil */
+.countItem {
+  display: grid;
+  place-content: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, var(--vinyl) 0 3px, color-mix(in srgb, var(--vinyl) 88%, white) 3px 4px);
+  text-align: center;
+}
+
+.countItem span {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--label);
+  color: var(--on-label);
+  font-weight: 800;
+  font-size: 23px;
+  line-height: 1;
+  padding-bottom: 12px;
+  box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
+}
+
+.countItem small {
+  margin-top: -24px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--on-label);
+}
+
+/* ---------- Acara ---------- */
+.list {
+  display: grid;
+  gap: 26px;
+}
+
+.side {
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fffaf0;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.14);
+}
+
+.sideTop {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  background: var(--label);
+}
+
+.side[data-kind="1"] .sideTop {
+  background: var(--bg);
+}
+
+.sideSleeve {
+  position: absolute;
+  top: 18px;
+  bottom: -20px;
+  left: 18px;
+  width: 52%;
+  padding: 14px 16px;
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--on-bg);
+  box-shadow: 4px 2px 10px rgb(0 0 0 / 0.28);
+  font-weight: 600;
+}
+
+.side[data-kind="1"] .sideSleeve {
+  background: var(--label);
+  color: var(--on-label);
+}
+
+.sideDate {
+  margin-top: 10px !important;
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.sideDate b {
+  display: block;
+  font-family: var(--ph-head), serif;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 1;
+}
+
+.sideDisc {
+  position: absolute;
+  top: 26px;
+  left: 34%;
+  width: 218px;
+  transition: transform 1.2s var(--ease) 0.3s;
+}
+
+.side[data-visible="false"] .sideDisc {
+  transform: translateX(-34%);
+}
+
+.sideSvg {
+  display: block;
+  width: 100%;
+  animation: spin 9s linear infinite;
+}
+
+.side[data-kind="0"] .sideSvg {
+  --label: var(--paper);
+  --on-label: var(--ink);
+}
+
+.sideSvg .discCenter {
+  font-size: 40px;
+  transform: translateY(13px);
+}
+
+.sideBody {
+  padding: 22px 22px 24px;
+}
+
+.sideBody h3 {
+  margin-bottom: 6px;
+  font-size: 34px;
+  line-height: 1.1;
+  color: var(--bg);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* ---------- Kaset ---------- */
+.gifts {
+  background: var(--paper-2);
+}
+
+.cassette {
+  padding: 14px 14px 18px;
+  border-radius: 18px;
+  background: var(--bg);
+  color: var(--on-bg);
+  text-align: center;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 0.18);
+}
+
+.cassette:nth-child(even) {
+  background: var(--ink);
+}
+
+.cassetteLabel {
+  padding: 14px 16px 12px;
+  border-radius: 10px;
+  background: #fffaf0;
+  color: var(--ink);
+}
+
+.cassetteLabel img {
+  display: block;
+  height: 24px;
+  max-width: 120px;
+  margin: 0 auto 6px;
+  object-fit: contain;
+}
+
+.account {
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.reels {
+  display: block;
+  width: 210px;
+  margin: 16px auto;
+}
+
+.cassetteButton {
+  min-height: 44px;
+  padding: 8px 22px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Titip salam ---------- */
+.formBox,
+.wish {
+  padding: 22px;
+  border-radius: 20px;
+  background: #fffaf0;
+  box-shadow: 0 5px 14px rgb(0 0 0 / 0.1);
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.label {
+  padding: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 11px 13px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.input:focus {
+  outline: 2px solid var(--bg);
+  outline-offset: -1px;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.choice {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 4px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.choice[data-checked="true"] {
+  border-color: var(--bg);
+  background: var(--bg);
+  color: var(--on-bg);
+}
+
+.choice:focus-within {
+  outline: 2px solid var(--ink);
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.error {
+  margin-top: 6px !important;
+  font-size: 15px;
+  color: #a3271f;
+}
+
+.notice {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.wishes {
+  display: grid;
+  gap: 14px;
+  max-height: 580px;
+  margin-top: 26px;
+  padding: 2px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.wish {
+  padding: 16px 20px;
+}
+
+.wishName {
+  font-family: var(--ph-head), serif;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--bg);
+}
+
+.wishMessage {
+  overflow-wrap: anywhere;
+}
+
+.wishDate {
+  font-size: 14px;
+  color: var(--soft);
+}
+
+/* ---------- Penutup ---------- */
+.footer {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: 130px 26px 130px;
+  background: var(--bg-2);
+  color: var(--on-bg);
+  text-align: center;
+}
+
+.footerNames {
+  font-family: var(--ph-head), serif;
+  font-size: 44px;
+  line-height: 1.1;
+}
+
+@media (min-width: 600px) {
+  .heroDisc {
+    width: 600px;
+    margin: -60px -150px -150px auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .cover {
+    --s: min(400px, 56svh);
+  }
+
+  .garden {
+    width: 380px;
+  }
+
+  .section {
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root *,
+  .root *::before {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cover[data-opened="true"] {
+    opacity: 0;
+  }
+}
