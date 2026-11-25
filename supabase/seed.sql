@@ -585,3 +585,29 @@ from public.invitations where slug = 'contoh-surat-cinta';
 insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
   ('abababab-abab-abab-abab-abababababa3', 'Om Yanto', 'Titip salam untuk Gilang dan Melati, semoga lagunya awet sampai tua.', 'hadir', 2),
   ('abababab-abab-abab-abab-abababababa3', 'Anak kos lantai dua', 'Kami siap request lagu di resepsi!', 'hadir', 4);
+
+-- Undangan demo tema Herbarium (tanpa foto), tiga warna
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababb1', 'contoh-herbarium', 'herbarium', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Damar"'), '{couple,groom,fullname}', '"Damar Prakoso"'),
+    '{couple,bride,name}', '"Laksmi"'), '{couple,bride,fullname}', '"Laksmi Pertiwi"'), '{"herbarium": {"palette": "lumut"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababb1', 'Bu Endah', 'Bunga dari nama saya cantik sekali. Selamat untuk Damar dan Laksmi.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababb1', 'Sahabat Laksmi', 'Semoga mekar terus sampai tua.', 'hadir', 3);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababb2', 'contoh-herbarium-bata', 'herbarium', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Damar"'), '{couple,groom,fullname}', '"Damar Prakoso"'),
+    '{couple,bride,name}', '"Laksmi"'), '{couple,bride,fullname}', '"Laksmi Pertiwi"'), '{"herbarium": {"palette": "bata"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababb2', 'Bu Endah', 'Bunga dari nama saya cantik sekali. Selamat untuk Damar dan Laksmi.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababb2', 'Sahabat Laksmi', 'Semoga mekar terus sampai tua.', 'hadir', 3);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababb3', 'contoh-herbarium-nila', 'herbarium', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Damar"'), '{couple,groom,fullname}', '"Damar Prakoso"'),
+    '{couple,bride,name}', '"Laksmi"'), '{couple,bride,fullname}', '"Laksmi Pertiwi"'), '{"herbarium": {"palette": "nila"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababb3', 'Bu Endah', 'Bunga dari nama saya cantik sekali. Selamat untuk Damar dan Laksmi.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababb3', 'Sahabat Laksmi', 'Semoga mekar terus sampai tua.', 'hadir', 3);
