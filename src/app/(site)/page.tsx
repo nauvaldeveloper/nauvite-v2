@@ -40,7 +40,7 @@ export default async function LandingPage() {
   ]);
   const printShots = [...prints.filter((p) => p.featured && p.orientation === "landscape"), ...prints].slice(0, 3);
   const catalog = getCatalog();
-  const ready = catalog.filter((t) => t.demo).length;
+  const ready = catalog.filter((t) => t.demos.length > 0).length;
   const wa = (msg: string) => waLink(site.whatsapp, msg);
   const siteHost = (process.env.NEXT_PUBLIC_SITE_URL ?? "nauvite.id").replace(/^https?:\/\//, "");
   const waHello = wa(`Halo ${site.businessName}, saya mau tanya soal undangan digital.`);
@@ -166,8 +166,7 @@ export default async function LandingPage() {
               <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-brass">Katalog</p>
               <h2 className="mt-3 font-display text-4xl font-medium tracking-tight sm:text-5xl">Pilih tema undangan</h2>
               <p className="mt-4 text-[16px] leading-relaxed text-muted">
-                Ketuk HP-nya untuk membuka undangan demo. Semua tema punya fitur yang sama, yang berbeda tampilan dan
-                animasinya.
+                Ketuk tema untuk melihat contoh dan membuka demonya. Fitur semua tema sama, yang berbeda tampilan dan animasinya.
               </p>
             </Reveal>
             <Catalog

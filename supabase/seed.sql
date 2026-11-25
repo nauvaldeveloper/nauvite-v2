@@ -523,3 +523,13 @@ insert into public.wishes (invitation_id, name, message, attendance, guest_count
 values
   ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'Mbak Retno', 'Suratnya sudah sampai, kami pasti datang. Selamat ya Bagas dan Kinanti!', 'hadir', 2),
   ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'Keluarga Pak Surya', 'Semoga menjadi rumah tangga yang tenang dan penuh kasih.', 'hadir', 4);
+
+-- Undangan demo warna lain tema Surat Cinta
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee1', 'contoh-surat-cinta-laut', 'surat-cinta', 'active', now() + interval '365 days',
+  content, '{"surat-cinta": {"palette": "laut"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeee2', 'contoh-surat-cinta-zaitun', 'surat-cinta', 'active', now() + interval '365 days',
+  content, '{"surat-cinta": {"palette": "zaitun"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
