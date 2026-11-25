@@ -20,13 +20,20 @@ export function Catalog({
   const filters = [
     { value: "semua", label: "Semua" },
     { value: "premium", label: "Premium" },
+    ...(ready.some((i) => !i.withPhoto) ? [{ value: "tanpa-foto", label: "Tanpa foto" }] : []),
     ...[...new Set(ready.map((i) => i.category))].map((c) => ({
       value: c,
       label: ready.find((i) => i.category === c)!.categoryLabel,
     })),
   ];
   const [filter, setFilter] = useState("semua");
-  const shown = ready.filter((i) => filter === "semua" || i.category === filter || (filter === "premium" && i.tier === "premium"));
+  const shown = ready.filter(
+    (i) =>
+      filter === "semua" ||
+      i.category === filter ||
+      (filter === "premium" && i.tier === "premium") ||
+      (filter === "tanpa-foto" && !i.withPhoto),
+  );
 
   return (
     <>
@@ -90,6 +97,7 @@ export function Catalog({
                 <p className="text-[12px] font-semibold text-muted">
                   {t.categoryLabel}
                   {t.region ? `, ${t.region}` : ""}
+                  {t.withPhoto ? "" : ", tanpa foto"}
                 </p>
                 <h3 className="font-display text-xl font-medium leading-tight sm:text-2xl">{t.name}</h3>
                 <p className="mt-1 text-[14px] font-semibold text-brass">{t.demo ? price : "Segera hadir"}</p>

@@ -98,6 +98,8 @@ export type TemplateManifest = {
   thumbnail?: string;
   /** Warna khas tema untuk kartu di panel dan katalog: latar, aksen, teks. */
   swatch: { background: string; accent: string; text: string };
+  /** Warna untuk tiap nilai isian `palette`, dipakai gambar preview WhatsApp. */
+  paletteSwatches?: Record<string, { background: string; accent: string; text: string }>;
   /** Naikkan kalau isian berubah besar, supaya data lama bisa disesuaikan. */
   version: number;
   fields: readonly TemplateField[];

@@ -3,6 +3,7 @@ import SolidEditorial from "./solid-editorial/Template";
 import Signature from "./signature/Template";
 import Illustrated from "./illustrated/Template";
 import Adat from "./adat/Template";
+import SuratCinta from "./surat-cinta/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
 import dustyRose from "./dusty-rose/manifest";
@@ -38,6 +39,8 @@ export function RenderTemplate(props: TemplateProps) {
       return <Adat {...props} theme={javaneseKeratonTheme} manifest={javaneseKeraton} />;
     case "betawi-heritage":
       return <Adat {...props} theme={betawiHeritageTheme} manifest={betawiHeritage} />;
+    case "surat-cinta":
+      return <SuratCinta {...props} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

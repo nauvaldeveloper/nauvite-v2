@@ -506,3 +506,20 @@ insert into public.wishes (invitation_id, name, message, attendance, guest_count
 values
   ('88888888-8888-8888-8888-888888888888', 'Rizky', 'Barakallahu lakuma, semoga menjadi keluarga sakinah mawaddah warahmah.', 'hadir', 2),
   ('88888888-8888-8888-8888-888888888888', 'Tante Wulan', 'Selamat Fajar dan Alya, bahagia selalu ya!', 'hadir', 3);
+
+-- Undangan demo tema Surat Cinta (tanpa foto)
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'cccccccc-cccc-cccc-cccc-cccccccccccc', 'contoh-surat-cinta', 'surat-cinta', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(
+    (content - 'coverImage' - 'ogImage' - 'youtubeUrl')
+      #- '{couple,groom,image}' #- '{couple,bride,image}' #- '{couple,groom,instagram}' #- '{couple,bride,instagram}',
+    '{couple,groom,name}', '"Bagas"'), '{couple,groom,fullname}', '"Bagas Wicaksono"'),
+    '{couple,bride,name}', '"Kinanti"'), '{couple,bride,fullname}', '"Kinanti Ayu Lestari"')
+    || '{"gallery": []}'::jsonb,
+  '{"surat-cinta": {"palette": "anggur"}}'::jsonb
+from public.invitations where slug = 'dimas-laras';
+
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+values
+  ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'Mbak Retno', 'Suratnya sudah sampai, kami pasti datang. Selamat ya Bagas dan Kinanti!', 'hadir', 2),
+  ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'Keluarga Pak Surya', 'Semoga menjadi rumah tangga yang tenang dan penuh kasih.', 'hadir', 4);

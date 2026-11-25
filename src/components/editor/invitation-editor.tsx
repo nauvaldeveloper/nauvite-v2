@@ -68,11 +68,13 @@ export function InvitationEditor({
   const setPerson = (role: "groom" | "bride", p: EditorPerson) =>
     update({ couple: { ...data.couple, [role]: p } as EditorPayload["couple"] });
 
+  const withPhoto = manifest.withPhoto;
+
   return (
     <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
       {/* Menu bagian */}
       <nav className="sticky top-[57px] z-20 -mx-4 flex gap-1 overflow-x-auto border-b border-line bg-[#f3eee5]/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6 lg:top-0 xl:col-span-2 xl:mx-0 xl:rounded-full xl:border xl:bg-card xl:px-2">
-        {SECTIONS.map((s) => (
+        {SECTIONS.filter((s) => withPhoto || s.id !== "galeri").map((s) => (
           <a
             key={s.id}
             href={`#${s.id}`}
@@ -84,10 +86,14 @@ export function InvitationEditor({
       </nav>
 
       <div className="grid min-w-0 content-start gap-5">
-        <Section id="mempelai" title="Mempelai" hint="Nama, orang tua, foto, dan akun media sosial.">
+        <Section id="mempelai" title="Mempelai" hint={
+            withPhoto
+              ? "Nama, orang tua, foto, dan akun media sosial."
+              : "Nama, orang tua, dan akun media sosial. Tema ini tampil tanpa foto."
+          }>
           <div className="grid gap-8 lg:grid-cols-2">
-            <PersonForm role="groom" invitationId={invitationId} value={data.couple.groom} onChange={(p) => setPerson("groom", p)} />
-            <PersonForm role="bride" invitationId={invitationId} value={data.couple.bride} onChange={(p) => setPerson("bride", p)} />
+            <PersonForm role="groom" withPhoto={withPhoto} invitationId={invitationId} value={data.couple.groom} onChange={(p) => setPerson("groom", p)} />
+            <PersonForm role="bride" withPhoto={withPhoto} invitationId={invitationId} value={data.couple.bride} onChange={(p) => setPerson("bride", p)} />
           </div>
         </Section>
 
@@ -133,14 +139,25 @@ export function InvitationEditor({
           />
         </Section>
 
-        <Section id="sampul" title="Sampul dan musik" hint="Foto utama, lagu latar, video, dan kutipan pembuka.">
+        <Section
+          id="sampul"
+          title="Sampul dan musik"
+          hint={withPhoto ? "Foto utama, lagu latar, video, dan kutipan pembuka." : "Lagu latar, video, dan kutipan pembuka."}
+        >
           <div className="grid gap-6 sm:grid-cols-[200px_1fr]">
-            <Field label="Foto sampul" hint="Juga dipakai sebagai gambar saat link dibagikan di WhatsApp.">
+            <Field
+              label={withPhoto ? "Foto sampul" : "Gambar link WhatsApp"}
+              hint={
+                withPhoto
+                  ? "Juga dipakai sebagai gambar saat link dibagikan di WhatsApp."
+                  : "Opsional. Kalau kosong, gambarnya dibuat otomatis dari nama dan tanggal kalian."
+              }
+            >
               <MediaInput
                 invitationId={invitationId}
                 value={data.coverImage}
                 onChange={(p) => update({ coverImage: p })}
-                label="Foto sampul"
+                label={withPhoto ? "Foto sampul" : "Gambar link"}
               />
             </Field>
             <div className="grid content-start gap-5">
@@ -168,8 +185,10 @@ export function InvitationEditor({
             addLabel="Tambah cerita"
             max={10}
             render={(st, set) => (
-              <div className="grid gap-4 sm:grid-cols-[140px_1fr]">
-                <MediaInput invitationId={invitationId} value={st.image} onChange={(p) => set({ ...st, image: p })} aspect="aspect-[4/3]" label="Foto" />
+              <div className={withPhoto ? "grid gap-4 sm:grid-cols-[140px_1fr]" : "grid gap-4"}>
+                {withPhoto ? (
+                  <MediaInput invitationId={invitationId} value={st.image} onChange={(p) => set({ ...st, image: p })} aspect="aspect-[4/3]" label="Foto" />
+                ) : null}
                 <div className="grid gap-4">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field label="Judul">
@@ -188,9 +207,11 @@ export function InvitationEditor({
           />
         </Section>
 
-        <Section id="galeri" title="Galeri" hint="Foto prewedding atau momen kalian.">
-          <GalleryInput invitationId={invitationId} value={data.gallery ?? []} onChange={(gallery) => update({ gallery })} />
-        </Section>
+        {withPhoto ? (
+          <Section id="galeri" title="Galeri" hint="Foto prewedding atau momen kalian.">
+            <GalleryInput invitationId={invitationId} value={data.gallery ?? []} onChange={(gallery) => update({ gallery })} />
+          </Section>
+        ) : null}
 
         <Section id="amplop" title="Amplop digital" hint="Rekening atau dompet digital. Logo BCA, Mandiri, BNI, BRI, BSI, DANA, OVO, dan GoPay muncul otomatis.">
           <ListEditor
@@ -277,10 +298,12 @@ function Section({ id, title, hint, children }: { id: string; title: string; hin
 function PersonForm({
   role,
   invitationId,
+  withPhoto,
   value,
   onChange,
 }: {
   role: "groom" | "bride";
+  withPhoto: boolean;
   invitationId: string;
   value: EditorPerson;
   onChange: (p: EditorPerson) => void;
@@ -292,8 +315,10 @@ function PersonForm({
       <p className="text-[13px] font-semibold uppercase tracking-wider text-brass">
         {isGroom ? "Mempelai pria" : "Mempelai wanita"}
       </p>
-      <div className="grid grid-cols-[110px_1fr] gap-4">
-        <MediaInput invitationId={invitationId} value={value.image} onChange={(p) => set({ image: p })} label="Foto" />
+      <div className={withPhoto ? "grid grid-cols-[110px_1fr] gap-4" : "grid gap-4"}>
+        {withPhoto ? (
+          <MediaInput invitationId={invitationId} value={value.image} onChange={(p) => set({ image: p })} label="Foto" />
+        ) : null}
         <div className="grid content-start gap-4">
           <Field label="Nama panggilan">
             <Input value={value.name ?? ""} onChange={(e) => set({ name: e.target.value })} placeholder={isGroom ? "Dimas" : "Laras"} />

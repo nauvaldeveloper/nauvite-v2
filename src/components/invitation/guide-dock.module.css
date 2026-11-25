@@ -1,0 +1,104 @@
+.dock {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  width: min(440px, 100% - 20px);
+  margin: 0 auto;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  color: var(--dock-ink);
+  animation: in 0.7s ease var(--dock-wait, 0s) both;
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+.bar,
+.menu {
+  border: 1px solid var(--dock-line);
+  background: var(--dock-bg);
+  box-shadow: 0 6px 22px rgb(0 0 0 / 0.18);
+}
+
+.bar {
+  display: flex;
+  border-radius: var(--dock-radius, 14px);
+  overflow: hidden;
+}
+
+.bar button {
+  flex: 1 1 0;
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 3px;
+  min-height: 56px;
+  padding: 6px 2px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.bar button span {
+  font-size: 12.5px;
+}
+
+.bar button b {
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.bar .play[data-running="true"] {
+  background: var(--dock-accent);
+  color: var(--dock-bg);
+}
+
+.bar button:focus-visible,
+.menu button:focus-visible {
+  outline: 2px solid var(--dock-accent);
+  outline-offset: -3px;
+}
+
+.menu {
+  margin: 0 0 8px;
+  padding: 6px;
+  border-radius: var(--dock-radius, 14px);
+  list-style: none;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.menu button {
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 17px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: color-mix(in srgb, var(--dock-accent) 12%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock {
+    animation: none;
+  }
+}

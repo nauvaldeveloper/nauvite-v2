@@ -69,7 +69,7 @@ export default async function LandingPage() {
     ],
     [
       "Saya tidak punya foto prewedding. Masih bisa?",
-      "Bisa. Beberapa tema punya pilihan sampul ilustrasi atau video bawaan, jadi undangan tetap cantik tanpa foto.",
+      "Bisa. Tema Surat Cinta memang dibuat tanpa foto sama sekali: amplop, perangko, dan kartu pos jadi pengganti fotonya. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
     ],
     ["Bisa pakai lagu sendiri?", "Bisa. Unggah file MP3 dari dasbor, lagu diputar saat tamu membuka undangan."],
     [

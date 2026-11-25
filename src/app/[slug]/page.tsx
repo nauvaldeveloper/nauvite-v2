@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { cleanGuestName, coupleTitle, formatLongDate, mainEventDate, mediaUrl } from "@/lib/invitation/format";
 import { getPublicInvitation } from "@/lib/invitation/public";
+import { getManifest } from "@/templates/registry";
 import { RenderTemplate } from "@/templates/renderers";
 
 /**
@@ -20,7 +21,9 @@ export async function generateMetadata({ params }: PageProps<"/[slug]">): Promis
   const description = date
     ? `${formatLongDate(date)}. Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.`
     : "Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.";
-  const image = mediaUrl(content.ogImage || content.coverImage);
+  // Tema tanpa foto yang belum punya gambar: dibuat otomatis dari nama dan tanggal.
+  const withPhoto = getManifest(invitation.templateId)?.withPhoto ?? true;
+  const image = mediaUrl(content.ogImage || content.coverImage) ?? (withPhoto ? undefined : `/og/${slug}`);
 
   return {
     title,

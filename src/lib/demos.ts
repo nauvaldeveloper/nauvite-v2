@@ -15,6 +15,7 @@ const DEMO_SLUG: Record<string, string> = {
   "sundanese-elegance": "contoh-sundanese-elegance",
   "javanese-keraton": "contoh-javanese-keraton",
   "betawi-heritage": "contoh-betawi-heritage",
+  "surat-cinta": "contoh-surat-cinta",
   "solid-editorial": "dimas-laras",
   "royal-gold": "contoh-royal-gold",
   "floral-light": "contoh-floral-light",
@@ -31,6 +32,7 @@ export type CatalogItem = {
   tierLabel: string;
   region?: string;
   isNew: boolean;
+  withPhoto: boolean;
   swatch: { background: string; accent: string; text: string };
   demo: { slug: string; inside: string } | null;
 };
@@ -48,6 +50,7 @@ export function getCatalog(): CatalogItem[] {
       tierLabel: TIER_LABELS[t.tier],
       region: "region" in t ? (t.region as string) : undefined,
       isNew: "badges" in t && (t.badges as readonly string[] | undefined)?.includes("baru") === true,
+      withPhoto: t.withPhoto,
       swatch: t.swatch,
       demo: slug
         ? { slug, inside: `/landing/${t.id}-isi.webp` }

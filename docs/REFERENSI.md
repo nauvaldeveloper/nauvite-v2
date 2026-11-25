@@ -112,3 +112,11 @@ https://satuundangan.id/ (dilihat 12 Nov 2026). Platform undangan swalayan + wed
 - Perbandingan cetak vs digital: ambil idenya, tapi pakai hitungan yang jujur dan bisa dicek, bukan persen penghematan tanpa dasar.
 - Harga coret hanya kalau memang pernah jadi harga normal.
 - Ulasan hanya dari klien sungguhan dengan izin mereka. Jangan tampilkan angka "dipercaya ribuan" sebelum benar-benar ada.
+
+---
+
+## digitalundangan.com
+Demo: https://digitalundangan.com/preview/d2-marmer-rose (tanpa foto, Rp25.000)
+
+- Yang disukai pemilik: setelah dibuka, halaman bergulir sendiri; bilah bawah berisi Daftar Isi, RSVP, Mulai/Stop, dan kecepatan.
+- Versi Nauvite: berhenti saat layar disentuh atau form diisi, berhenti di RSVP, dan klien bisa mematikannya.

@@ -134,6 +134,8 @@ Migration `20261119000000_pengamanan.sql` (hasil uji keamanan 19 Nov 2026): tema
 
 Migration `20261122000000_katalog_cetak.sql` dan `20261122000100_katalog_cetak_isi.sql` (22 Nov 2026): tabel katalog undangan cetak `print_designs`, bucket storage `print-media` (hanya admin yang unggah), pengaturan `print` (minimal pesanan, lama produksi, harga plastik dan label), dan isi awal 51 desain. Gambar isi awal ada di `public/cetak/` jadi ikut ter-deploy bersama kode. Kode vendor dan harga modal tidak terbaca publik maupun klien (izin per kolom); panel admin membacanya lewat service role.
 
+**Status:** migration pengamanan dan undangan cetak di atas sudah masuk database produksi (dikonfirmasi pemilik 25 Nov 2026).
+
 ## Undangan demo untuk landing page
 Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berikut harus dibuat di database produksi (status aktif, masa aktif tanpa batas) dengan menjalankan `supabase/demo-produksi.sql` (langkah C di atas). Kalau ada tema baru, file itu dibuat ulang dari data lokal.
 
@@ -145,6 +147,7 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Sundanese Elegance | `contoh-sundanese-elegance` |
 | Javanese Keraton | `contoh-javanese-keraton` |
 | Betawi Heritage | `contoh-betawi-heritage` |
+| Surat Cinta | `contoh-surat-cinta` |
 | Minimalist & Clean | `dimas-laras` |
 | Royal Gold | `contoh-royal-gold` |
 | Floral Light | `contoh-floral-light` |
