@@ -6,6 +6,7 @@ import Adat from "./adat/Template";
 import KoranPagi from "./koran-pagi/Template";
 import PiringanHitam from "./piringan-hitam/Template";
 import Herbarium from "./herbarium/Template";
+import TiketKereta from "./tiket-kereta/Template";
 import SuratCinta from "./surat-cinta/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
@@ -48,6 +49,8 @@ export function RenderTemplate(props: TemplateProps) {
       return <PiringanHitam {...props} />;
     case "herbarium":
       return <Herbarium {...props} />;
+    case "tiket-kereta":
+      return <TiketKereta {...props} />;
     case "surat-cinta":
       return <SuratCinta {...props} />;
     case "royal-gold":

@@ -611,3 +611,29 @@ from public.invitations where slug = 'contoh-surat-cinta';
 insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
   ('abababab-abab-abab-abab-abababababb3', 'Bu Endah', 'Bunga dari nama saya cantik sekali. Selamat untuk Damar dan Laksmi.', 'hadir', 2),
   ('abababab-abab-abab-abab-abababababb3', 'Sahabat Laksmi', 'Semoga mekar terus sampai tua.', 'hadir', 3);
+
+-- Undangan demo tema Tiket Kereta (tanpa foto), tiga warna
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababc1', 'contoh-tiket-kereta', 'tiket-kereta', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Bayu"'), '{couple,groom,fullname}', '"Bayu Wicaksono"'),
+    '{couple,bride,name}', '"Kinanti"'), '{couple,bride,fullname}', '"Kinanti Ayu"'), '{"tiket-kereta": {"palette": "jingga"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababc1', 'Pakde Harto', 'Selamat jalan, Bayu dan Kinanti. Semoga perjalanannya lancar dan bahagia.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababc1', 'Teman satu gerbong', 'Kami antar sampai peron, oleh-olehnya jangan lupa.', 'hadir', 4);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababc2', 'contoh-tiket-kereta-biru', 'tiket-kereta', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Bayu"'), '{couple,groom,fullname}', '"Bayu Wicaksono"'),
+    '{couple,bride,name}', '"Kinanti"'), '{couple,bride,fullname}', '"Kinanti Ayu"'), '{"tiket-kereta": {"palette": "biru"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababc2', 'Pakde Harto', 'Selamat jalan, Bayu dan Kinanti. Semoga perjalanannya lancar dan bahagia.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababc2', 'Teman satu gerbong', 'Kami antar sampai peron, oleh-olehnya jangan lupa.', 'hadir', 4);
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababc3', 'contoh-tiket-kereta-jambu', 'tiket-kereta', 'active', now() + interval '365 days',
+  jsonb_set(jsonb_set(jsonb_set(jsonb_set(content, '{couple,groom,name}', '"Bayu"'), '{couple,groom,fullname}', '"Bayu Wicaksono"'),
+    '{couple,bride,name}', '"Kinanti"'), '{couple,bride,fullname}', '"Kinanti Ayu"'), '{"tiket-kereta": {"palette": "jambu"}}'::jsonb
+from public.invitations where slug = 'contoh-surat-cinta';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
+  ('abababab-abab-abab-abab-abababababc3', 'Pakde Harto', 'Selamat jalan, Bayu dan Kinanti. Semoga perjalanannya lancar dan bahagia.', 'hadir', 2),
+  ('abababab-abab-abab-abab-abababababc3', 'Teman satu gerbong', 'Kami antar sampai peron, oleh-olehnya jangan lupa.', 'hadir', 4);

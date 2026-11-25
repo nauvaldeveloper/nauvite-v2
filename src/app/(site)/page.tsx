@@ -73,7 +73,7 @@ export default async function LandingPage() {
     ],
     [
       "Saya tidak punya foto prewedding. Masih bisa?",
-      "Bisa. Pilih paket Hemat. Tema Surat Cinta, Koran Pagi, Piringan Hitam, dan Herbarium memang dibuat tanpa foto sama sekali, jadi tidak ada tempat yang terasa kosong. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
+      "Bisa. Pilih paket Hemat. Tema Surat Cinta, Koran Pagi, Piringan Hitam, Herbarium, dan Tiket Kereta memang dibuat tanpa foto sama sekali, jadi tidak ada tempat yang terasa kosong. Beberapa tema lain juga punya pilihan sampul ilustrasi atau video bawaan.",
     ],
     ["Bisa pakai lagu sendiri?", "Bisa. Unggah file MP3 dari dasbor, lagu diputar saat tamu membuka undangan."],
     [
