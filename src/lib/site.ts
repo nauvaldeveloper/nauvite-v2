@@ -37,7 +37,7 @@ export type Pricing = {
 export const HEMAT_DEFAULTS = { hemat: 50000, hematPromo: 39000, hematPromoUntil: "2026-12-31", partnerHemat: 25000 };
 
 /** Biaya opsional kalau klien paket Hemat minta isinya diisikan admin. Basic dan Premium gratis. */
-export const HEMAT_FILL_FEE = 15000;
+export const HEMAT_FILL_FEE = 10000;
 
 /** Promo berlaku kalau tanggalnya belum lewat (WIB) dan harganya memang di bawah harga normal. */
 function hematPrice(pricing: Pricing) {
