@@ -5,6 +5,7 @@ import { refresh, updateTag } from "next/cache";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/dal";
 import { generatePassword, toAuthEmail } from "@/lib/auth/login-id";
+import { DEFAULT_MUSIC } from "@/lib/invitation/music";
 import { invitationTag } from "@/lib/invitation/public";
 import { SITE_SETTINGS_TAG } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -163,6 +164,7 @@ export async function createInvitation(
 
   const content: Record<string, unknown> = {
     couple: { groom: { name: d.groomName ?? "", fullname: "" }, bride: { name: d.brideName ?? "", fullname: "" } },
+    music: DEFAULT_MUSIC,
   };
   if (d.weddingDate) content.weddingDate = d.weddingDate;
 

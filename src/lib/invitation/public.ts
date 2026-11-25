@@ -2,6 +2,7 @@ import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { safeWebUrl } from "./url";
+import { withMusic } from "./music";
 import { parseContent, type InvitationContent } from "./content";
 
 export type PublicInvitation = {
@@ -45,7 +46,7 @@ export async function getPublicInvitation(slug: string): Promise<PublicInvitatio
     id: String(row.id),
     slug: String(row.slug),
     templateId: String(row.template_id),
-    content: parseContent(row.content),
+    content: withMusic(parseContent(row.content), String(row.template_id)),
     templateOptions: (row.template_options as Record<string, unknown>) ?? {},
     partner: partner ? { name: partner.name ?? null, url: safeWebUrl(partner.url) ?? null } : null,
   };

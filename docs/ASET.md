@@ -106,3 +106,8 @@ Hiasan bunga di landing memakai aset tema Sage Garden (`public/templates/sage-ga
 
 ## Logo dan identitas (`public/brand/`)
 Logo asli Nauvite dari v1 (`nauvite/assets/images/logo-nauvite.png`, milik Nauvite), dipisahkan dari latar hitam menjadi versi emas/gelap/terang transparan, plus ikon dan gambar preview link. Rincian di `docs/IDENTITAS.md`.
+
+## Lagu demo
+`demo/lagu-demo-1.mp3` di storage Supabase (bucket `invitation-media`), dipakai 22 demo non-adat sejak 25 Nov 2026. Judul belum diketahui; file diunduh pemilik dari `our-wedding.link`. **Lisensi belum dipastikan**, dipakai atas keputusan pemilik. Cara mengganti: `node scripts/lagu-demo.mjs <file.mp3> <nama-baru.mp3> <slug ...>`.
+
+Lagu adat di storage yang sama: `demo/lagu-sunda-1.mp3`, `demo/lagu-jawa-1.mp3`, `demo/lagu-betawi-1.mp3`, masing-masing di demo adatnya. Diunduh pemilik dari `undanganadat.com` (musik bawaan tema mereka). **Lisensi belum dipastikan** dan sumbernya situs pesaing, jadi sebaiknya diganti rekaman yang izinnya jelas.

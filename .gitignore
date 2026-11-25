@@ -42,3 +42,7 @@ next-env.d.ts
 
 # Aset mentah (file besar dari Canva, screenshot referensi). Yang dipakai disalin ke public/ setelah dikompres.
 /aset-mentah
+
+# Lagu kiriman pemilik (belum pasti lisensinya, jangan ikut commit)
+/tempat saya kirim lagu/
+/public/demo/lagu-demo.mp3

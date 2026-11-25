@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { requireUser } from "@/lib/auth/dal";
+import { withMusic } from "@/lib/invitation/music";
 import { parseContent } from "@/lib/invitation/content";
 import { cleanGuestName } from "@/lib/invitation/format";
 import { createClient } from "@/lib/supabase/server";
@@ -52,7 +53,7 @@ async function Preview({ params, searchParams }: PageProps<"/pratinjau/[id]">) {
         id: data.id,
         slug: data.slug,
         templateId: data.template_id,
-        content: parseContent(data.content),
+        content: withMusic(parseContent(data.content), data.template_id),
         templateOptions: (data.template_options as Record<string, unknown>) ?? {},
         partner,
       }}

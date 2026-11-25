@@ -8,6 +8,7 @@ import type { EditorEvent, EditorGift, EditorPayload, EditorPerson, EditorStory 
 import type { TemplateManifest } from "@/templates/manifest";
 import { GalleryInput } from "./gallery-input";
 import { MediaInput } from "./media-input";
+import { MusicInput } from "./music-input";
 import { TemplateFields } from "./template-fields";
 
 const SECTIONS = [
@@ -144,7 +145,7 @@ export function InvitationEditor({
           title="Sampul dan musik"
           hint={withPhoto ? "Foto utama, lagu latar, video, dan kutipan pembuka." : "Lagu latar, video, dan kutipan pembuka."}
         >
-          <div className="grid gap-6 sm:grid-cols-[200px_1fr]">
+          <div className="grid items-start gap-6 sm:grid-cols-[200px_1fr]">
             <Field
               label={withPhoto ? "Foto sampul" : "Gambar link WhatsApp"}
               hint={
@@ -161,9 +162,7 @@ export function InvitationEditor({
               />
             </Field>
             <div className="grid content-start gap-5">
-              <Field label="Lagu latar" hint="MP3, maksimal 10 MB. Diputar saat tamu membuka undangan.">
-                <MediaInput invitationId={invitationId} value={data.music} kind="audio" label="Unggah lagu" onChange={(p) => update({ music: p })} />
-              </Field>
+              <MusicInput invitationId={invitationId} templateId={manifest.id} value={data.music} onChange={(music) => update({ music })} />
               <Field label="Link video YouTube" hint="Opsional, mis. video prewedding.">
                 <Input value={data.youtubeUrl ?? ""} onChange={(e) => update({ youtubeUrl: e.target.value })} placeholder="https://youtu.be/..." />
               </Field>

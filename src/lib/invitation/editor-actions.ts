@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 import { cleanTemplateOptions, mergeTemplateOptions } from "@/templates/options";
 import { getManifest } from "@/templates/registry";
 import { editorPayloadSchema } from "./editor-schema";
+import { DEFAULT_MUSIC } from "./music";
 import { invitationTag } from "./public";
 
 export type SaveState =
@@ -56,7 +57,7 @@ export async function saveInvitationContent(invitationId: string, payload: unkno
     d.couple.groom.image,
     d.couple.bride.image,
     d.coverImage,
-    d.music,
+    d.music === DEFAULT_MUSIC ? undefined : d.music,
     ...d.gallery,
     ...d.stories.map((s) => s.image),
   ];
