@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { SampleBar } from "@/components/invitation/sample-bar";
 import { cleanGuestName, coupleTitle, formatLongDate, mainEventDate, mediaUrl } from "@/lib/invitation/format";
 import { getPublicInvitation } from "@/lib/invitation/public";
 import { getManifest } from "@/templates/registry";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[slug]">): Promis
   if (!invitation) return { title: "Undangan tidak ditemukan" };
 
   const { content } = invitation;
-  const title = `Undangan Pernikahan ${coupleTitle(content)}`;
+  const title = `${invitation.trial ? "Contoh undangan" : "Undangan"} Pernikahan ${coupleTitle(content)}`;
   const date = mainEventDate(content);
   const description = date
     ? `${formatLongDate(date)}. Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.`
@@ -53,5 +54,10 @@ async function Invitation({ params, searchParams }: PageProps<"/[slug]">) {
   if (!invitation) notFound();
 
   const { to } = await searchParams;
-  return <RenderTemplate invitation={invitation} guestName={cleanGuestName(to)} />;
+  return (
+    <>
+      {invitation.trial ? <SampleBar text="Contoh, undangan ini belum terbit" href="/daftar" action="Buat juga" /> : null}
+      <RenderTemplate invitation={invitation} guestName={cleanGuestName(to)} />
+    </>
+  );
 }

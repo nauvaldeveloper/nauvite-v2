@@ -7,6 +7,7 @@ import { Reveal } from "@/components/invitation/reveal";
 import { IconCalendar, IconChat, IconEnvelope, IconImage, IconPin, IconWhatsapp } from "@/components/invitation/icons";
 import { Catalog } from "@/components/landing/catalog";
 import { CostCalculator } from "@/components/landing/cost-calculator";
+import { TryNames } from "@/components/landing/try-names";
 import { SiteFooter } from "@/components/landing/footer";
 import { LandingNav } from "@/components/landing/nav";
 import { Phone } from "@/components/landing/phone";
@@ -62,6 +63,13 @@ export default async function LandingPage() {
       "Bisa minta diisikan?",
       `Bisa. Kirim datanya lewat WhatsApp, kami yang mengisi. Gratis untuk paket Basic dan Premium. Untuk paket Hemat, tambah ${rupiah(HEMAT_FILL_FEE)}.`,
     ],
+    [
+      "Bisa dicoba dulu sebelum bayar?",
+      <>
+        Bisa. <Link href="/daftar" className="font-semibold text-brass underline">Buat akun uji coba</Link>, isi undangannya, dan lihat hasilnya
+        selama 24 jam. Kalau cocok, chat admin untuk menerbitkan. Isinya tidak perlu diulang.
+      </>,
+    ],
     ["Berapa banyak tamu yang bisa diundang?", "Tanpa batas. Bagikan link ke sebanyak mungkin keluarga dan kerabat tanpa biaya tambahan."],
     [
       "Bagaimana cara pesan dan bayar?",
@@ -101,8 +109,8 @@ export default async function LandingPage() {
                 sudah termasuk.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-                <a href="#tema" className="rounded-full bg-ink px-6 py-3.5 text-[15px] font-semibold text-[#f6f1e7] hover:bg-ink-2">
-                  Lihat tema
+                <a href="#coba" className="rounded-full bg-ink px-6 py-3.5 text-[15px] font-semibold text-[#f6f1e7] hover:bg-ink-2">
+                  Coba dengan nama kalian
                 </a>
                 <a
                   href={waHello}
@@ -182,6 +190,17 @@ export default async function LandingPage() {
               }}
               hematNormal={site.hematNormal ? rupiah(site.hematNormal) : null}
               whatsapp={site.whatsapp}
+            />
+          </div>
+        </section>
+
+        {/* ---------------- Coba dengan nama sendiri ---------------- */}
+        <section id="coba" className="scroll-mt-20 border-t border-line px-5 py-20 sm:py-28">
+          <div className="mx-auto max-w-6xl">
+            <TryNames
+              items={[...catalog].filter((t) => t.demos.length > 0).sort((a, b) => Number(a.withPhoto) - Number(b.withPhoto))}
+              whatsapp={site.whatsapp}
+              siteUrl={process.env.NEXT_PUBLIC_SITE_URL ?? ""}
             />
           </div>
         </section>

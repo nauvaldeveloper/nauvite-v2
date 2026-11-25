@@ -272,7 +272,7 @@
 
 .plate h1 {
   margin: 2px 0 6px;
-  font-size: calc(var(--w) * 0.094);
+  font-size: calc(var(--w) * 0.094 * min(1, 11 / var(--word-len, 1)));
   overflow-wrap: anywhere;
 }
 
@@ -477,7 +477,7 @@
 
 .names {
   margin: 4px 0 10px !important;
-  font-size: clamp(42px, 12.5vw, 62px);
+  font-size: calc(clamp(42px, 12.5vw, 62px) * min(1, 13 / var(--word-len, 1)));
   color: var(--accent);
   overflow-wrap: anywhere;
 }

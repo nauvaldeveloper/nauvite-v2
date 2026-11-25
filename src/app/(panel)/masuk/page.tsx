@@ -38,6 +38,12 @@ export default function LoginPage({ searchParams }: PageProps<"/masuk">) {
           <Suspense fallback={<div className="mt-8 h-72" />}>
             <FormWithNext searchParams={searchParams} />
           </Suspense>
+          <p className="mt-5 text-center text-[14px] text-muted">
+            Belum punya akun?{" "}
+            <Link href="/daftar" className="font-semibold text-brass hover:underline">
+              Coba gratis 1 hari
+            </Link>
+          </p>
         </div>
       </section>
     </main>

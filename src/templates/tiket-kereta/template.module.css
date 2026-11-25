@@ -328,7 +328,7 @@
 
 .coverMain h1[data-long="true"] {
   margin: calc(var(--w) * 0.06) 0 calc(var(--w) * 0.09);
-  font-size: calc(var(--w) * 0.09);
+  font-size: calc(var(--w) * 0.09 * min(1, 13 / var(--word-len, 1)));
 }
 
 .relation {

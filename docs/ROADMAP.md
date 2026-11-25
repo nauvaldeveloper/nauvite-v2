@@ -92,6 +92,9 @@ Dashboard database lokal: http://localhost:54323
 - [x] Tema Herbarium (Hemat, tanpa foto): buku bunga kering; buket disusun dari huruf nama pasangan, tiap tamu dapat rangkaian dari namanya sendiri. 3 warna.
 - [x] Tema Tiket Kereta (Hemat, tanpa foto): karcis dilubangi, papan keberangkatan berputar, rute cerita mengikuti gulungan, nomor kursi dari nama tamu. 3 warna.
 - [x] Pilihan lagu di editor: lagu bawaan tema, lagu sendiri, atau tanpa lagu. Undangan baru memakai lagu bawaan; daftar lagunya di `src/lib/invitation/music.ts`.
+- [x] Coba dengan nama sendiri (`/coba/<slug demo>`, bagian di landing): demo tampil dengan nama dan tanggal calon klien, tidak ada yang disimpan.
+- [x] Daftar tamu (`/tamu/<id>`): tempel banyak nama, kirim lewat WA satu per satu, tanda terkirim, pesan Formal/Islami/Santai yang bisa diubah.
+- [x] Uji coba gratis 1 hari (`/daftar`): akun dibuat sendiri, undangan draf bisa dibuka 24 jam dengan bilah contoh, terbit setelah admin mengaktifkan. Pembatas di `src/lib/trial/actions.ts`.
 - [ ] Tema Batak (pakai template adat yang sama)
 - [x] Undangan cetak (22 Nov 2026): halaman `/cetak` (katalog 3 kelas Hemat/Foil/Eksklusif, tampilan besar per desain, pesan lewat WA dengan kode desain), bagian di landing, menu admin **Cetak** (tambah/ubah desain, unggah foto, harga jual, modal dan kode vendor khusus admin, minimal pesanan, lama produksi). Blangko dibeli dari vendor lalu dicetak nama dan isinya; kode vendor tidak ditampilkan ke klien (pakai kode NC-xx). Harga jual dari daftar harga pemilik 22 Nov 2026 (margin 30%, mulai Rp700/pcs), belum termasuk plastik (+Rp500) dan label stiker nama (+Rp200) yang bisa diatur di admin. Gambar awal dari katalog vendor, nanti diganti foto sampel asli.
 - [ ] Desain cetak khusus Nauvite yang senada dengan tema digital: dicetak di percetakan digital (art carton A3+), jangan printer sendiri (boros tinta). Jadikan paket premium, kerjakan kalau sudah ada permintaan.

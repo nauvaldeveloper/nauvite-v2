@@ -37,16 +37,36 @@ export type Database = {
                   Relationships: [
                     
                   ]
-                },"invitations": {
+                },"guests": {
                   Row: {
-                    "active_until": string | null,"admin_note": string | null,"content": NonNullable<Json>,"created_at": string,"id": string,"owner_id": string | null,"partner_id": string | null,"slug": string,"status": string,"template_id": string,"template_options": NonNullable<Json>,"updated_at": string,"updated_by": string | null
+                    "created_at": string,"id": string,"invitation_id": string,"name": string,"phone": string | null,"sent_at": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "active_until"?: string | null,"admin_note"?: string | null,"content"?: NonNullable<Json>,"created_at"?: string,"id"?: string,"owner_id"?: string | null,"partner_id"?: string | null,"slug": string,"status"?: string,"template_id": string,"template_options"?: NonNullable<Json>,"updated_at"?: string,"updated_by"?: string | null
+                    "created_at"?: string,"id"?: string,"invitation_id": string,"name": string,"phone"?: string | null,"sent_at"?: string | null
                   }
                   Update: {
-                    "active_until"?: string | null,"admin_note"?: string | null,"content"?: NonNullable<Json>,"created_at"?: string,"id"?: string,"owner_id"?: string | null,"partner_id"?: string | null,"slug"?: string,"status"?: string,"template_id"?: string,"template_options"?: NonNullable<Json>,"updated_at"?: string,"updated_by"?: string | null
+                    "created_at"?: string,"id"?: string,"invitation_id"?: string,"name"?: string,"phone"?: string | null,"sent_at"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "guests_invitation_id_fkey"
+      columns: ["invitation_id"]
+isOneToOne: false
+      referencedRelation: "invitations"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"invitations": {
+                  Row: {
+                    "active_until": string | null,"admin_note": string | null,"content": NonNullable<Json>,"created_at": string,"guest_message": string | null,"id": string,"owner_id": string | null,"partner_id": string | null,"slug": string,"status": string,"template_id": string,"template_options": NonNullable<Json>,"trial_until": string | null,"updated_at": string,"updated_by": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "active_until"?: string | null,"admin_note"?: string | null,"content"?: NonNullable<Json>,"created_at"?: string,"guest_message"?: string | null,"id"?: string,"owner_id"?: string | null,"partner_id"?: string | null,"slug": string,"status"?: string,"template_id": string,"template_options"?: NonNullable<Json>,"trial_until"?: string | null,"updated_at"?: string,"updated_by"?: string | null
+                  }
+                  Update: {
+                    "active_until"?: string | null,"admin_note"?: string | null,"content"?: NonNullable<Json>,"created_at"?: string,"guest_message"?: string | null,"id"?: string,"owner_id"?: string | null,"partner_id"?: string | null,"slug"?: string,"status"?: string,"template_id"?: string,"template_options"?: NonNullable<Json>,"trial_until"?: string | null,"updated_at"?: string,"updated_by"?: string | null
                   }
                   Relationships: [
                     {
@@ -116,6 +136,20 @@ isOneToOne: false
       referencedRelation: "invitations"
       referencedColumns: ["id"]
     }
+                  ]
+                },"trial_signups": {
+                  Row: {
+                    "created_at": string,"id": string,"ip_hash": string,"whatsapp": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"id"?: string,"ip_hash": string,"whatsapp": string
+                  }
+                  Update: {
+                    "created_at"?: string,"id"?: string,"ip_hash"?: string,"whatsapp"?: string
+                  }
+                  Relationships: [
+                    
                   ]
                 },"wishes": {
                   Row: {

@@ -157,7 +157,7 @@
   font-family: var(--se-heading);
   font-style: italic;
   font-weight: 600;
-  font-size: clamp(64px, 19vw, 92px);
+  font-size: calc(clamp(64px, 19vw, 92px) * min(1, 9 / var(--name-len, 1)));
   line-height: 0.98;
   letter-spacing: -0.01em;
   text-shadow: 0 2px 24px rgb(0 0 0 / 0.25);

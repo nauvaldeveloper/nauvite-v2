@@ -56,7 +56,7 @@
   margin: 14px 0 8px;
   font-family: var(--il-script);
   font-weight: 400;
-  font-size: clamp(50px, 15vw, 66px);
+  font-size: calc(clamp(50px, 15vw, 66px) * min(1, 11 / var(--name-len, 1)));
   line-height: 1.05;
   color: var(--dark);
 }

@@ -3,6 +3,7 @@
 import { updateTag } from "next/cache";
 import { z } from "zod";
 import { createPublicClient } from "@/lib/supabase/public";
+import { SAMPLE_SLUG } from "./sample";
 import { getPublicInvitation, wishesTag } from "./public";
 
 export type WishFormState = {
@@ -44,7 +45,10 @@ export async function submitWish(
     return { status: "error", errors };
   }
 
+  const notSaved = { status: "ok" as const, message: "Ini masih contoh, jadi ucapannya belum disimpan." };
+  if (slug === SAMPLE_SLUG) return notSaved;
   const invitation = await getPublicInvitation(slug);
+  if (invitation?.trial) return notSaved;
   if (!invitation) {
     return { status: "error", message: "Undangan ini sudah tidak aktif." };
   }

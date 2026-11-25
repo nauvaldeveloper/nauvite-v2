@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { TRY_THEME_EVENT } from "./try-names";
 import type { CatalogItem } from "@/lib/demos";
 
 /** Jumlah kartu di HP sebelum tombol "Lihat semua". */
@@ -257,7 +258,19 @@ function Detail({
               <Colors item={item} value={at} onChange={onPick} className="-ml-2" />
             </div>
           ) : null}
-          <div className="sticky bottom-0 -mx-5 mt-auto flex gap-2.5 bg-paper px-5 pb-1 pt-5 sm:static sm:mx-0 sm:px-0">
+          <div className="sticky bottom-0 -mx-5 mt-auto grid grid-cols-2 gap-2.5 bg-paper px-5 pb-1 pt-5 sm:static sm:mx-0 sm:px-0">
+            <button
+              type="button"
+              onClick={() => {
+                // Tutup dulu supaya halaman bisa di-scroll lagi, baru pindah ke bagian Coba.
+                ref.current?.close();
+                window.dispatchEvent(new CustomEvent(TRY_THEME_EVENT, { detail: { id: item.id, color: at } }));
+                setTimeout(() => document.getElementById("coba")?.scrollIntoView({ behavior: "smooth" }), 60);
+              }}
+              className="col-span-2 rounded-full bg-brass px-4 py-3 text-center text-[15px] font-semibold text-white hover:bg-[#946f35]"
+            >
+              Coba dengan nama kalian
+            </button>
             <a
               href={`/${demo.slug}?to=Tamu+Undangan`}
               target="_blank"

@@ -31,7 +31,7 @@ export default async function InvitationDetail({ params, searchParams }: PagePro
     getWishStats(inv.id),
   ]);
   const owner = inv.owner_id ? (accounts.get(inv.owner_id) ?? null) : null;
-  const st = effectiveStatus(inv.status, inv.active_until);
+  const st = effectiveStatus(inv.status, inv.active_until, inv.trial_until);
   const content = parseContent(inv.content);
   const event = mainEventDate(content);
   const countdown = dayCountdown(event?.toISOString() ?? null);
@@ -102,6 +102,12 @@ export default async function InvitationDetail({ params, searchParams }: PagePro
             <IconExternal /> Buka link tamu
           </a>
           <Link
+            href={`/tamu/${inv.id}`}
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-4 py-2 text-sm font-semibold hover:border-ink/25"
+          >
+            Daftar tamu
+          </Link>
+          <Link
             href={`/editor/${inv.id}`}
             className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-[#f6f1e7] hover:bg-ink-2"
           >
@@ -150,6 +156,14 @@ export default async function InvitationDetail({ params, searchParams }: PagePro
                     <input type="hidden" name="kind" value="deactivate" />
                     <Button variant="danger" className="w-full">
                       Nonaktifkan
+                    </Button>
+                  </form>
+                ) : null}
+                {inv.status === "draft" ? (
+                  <form action={setStatus}>
+                    <input type="hidden" name="kind" value="trial" />
+                    <Button variant="secondary" className="w-full">
+                      Uji coba 24 jam
                     </Button>
                   </form>
                 ) : null}

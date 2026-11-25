@@ -17,6 +17,7 @@ export type AdminInvitationRow = {
   templateId: string;
   status: InvitationStatus;
   activeUntil: string | null;
+  trialUntil: string | null;
   createdAt: string;
   ownerId: string | null;
   partnerId: string | null;
@@ -50,7 +51,7 @@ export async function listInvitations(filter: { q?: string; status?: string } = 
   const supabase = await createClient();
   let query = supabase
     .from("invitations")
-    .select("id, slug, template_id, status, active_until, created_at, owner_id, partner_id, content")
+    .select("id, slug, template_id, status, active_until, trial_until, created_at, owner_id, partner_id, content")
     .order("created_at", { ascending: false })
     .limit(500);
   if (filter.status && ["draft", "active", "inactive"].includes(filter.status)) {
@@ -65,6 +66,7 @@ export async function listInvitations(filter: { q?: string; status?: string } = 
     templateId: r.template_id,
     status: r.status as InvitationStatus,
     activeUntil: r.active_until,
+    trialUntil: r.trial_until,
     createdAt: r.created_at,
     ownerId: r.owner_id,
     partnerId: r.partner_id,
@@ -83,7 +85,7 @@ export async function getInvitation(id: string) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("invitations")
-    .select("id, slug, template_id, status, active_until, created_at, updated_at, owner_id, partner_id, content")
+    .select("id, slug, template_id, status, active_until, trial_until, created_at, updated_at, owner_id, partner_id, content")
     .eq("id", id)
     .maybeSingle();
   if (!data) return null;

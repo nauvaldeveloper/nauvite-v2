@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { TemplateProps } from "./types";
 import SolidEditorial from "./solid-editorial/Template";
 import Signature from "./signature/Template";
@@ -22,12 +23,35 @@ import betawiHeritage from "./betawi-heritage/manifest";
 import betawiHeritageTheme from "./betawi-heritage/theme";
 
 /**
+ * Panjang nama terpanjang (utuh dan per kata), dipakai CSS tema untuk mengecilkan
+ * nama panjang supaya tidak keluar layar atau terpotong di tengah kata.
+ */
+function nameLengths({ invitation }: TemplateProps) {
+  const { groom, bride } = invitation.content.couple;
+  const names = [groom.name || "Mempelai Pria", bride.name || "Mempelai Wanita"];
+  const longest = (list: string[]) => Math.max(1, ...list.map((s) => s.length));
+  return {
+    display: "contents",
+    "--name-len": longest(names),
+    "--word-len": longest(names.flatMap((n) => n.split(/\s+/))),
+  } as CSSProperties;
+}
+
+export function RenderTemplate(props: TemplateProps) {
+  return (
+    <div style={nameLengths(props)}>
+      <Template {...props} />
+    </div>
+  );
+}
+
+/**
  * Memilih komponen tampilan sesuai template undangan. Dipisah dari registry.ts
  * supaya katalog dan editor cukup memuat manifest tanpa ikut memuat tampilan.
  *
  * Menambah template: tambahkan satu `case` di sini.
  */
-export function RenderTemplate(props: TemplateProps) {
+function Template(props: TemplateProps) {
   switch (props.invitation.templateId) {
     case "solid-editorial":
       return <SolidEditorial {...props} />;

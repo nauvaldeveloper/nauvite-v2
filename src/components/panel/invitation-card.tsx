@@ -25,6 +25,11 @@ export function daysLeft(activeUntil: string | null): number | null {
   return Math.ceil((new Date(activeUntil).getTime() - Date.now()) / 86400_000);
 }
 
+/** Sisa uji coba dalam jam (nol atau negatif kalau habis). */
+export function hoursLeft(until: string): number {
+  return Math.ceil((new Date(until).getTime() - Date.now()) / 3600_000);
+}
+
 /**
  * Potongan visual undangan: foto sampul kalau ada, kalau tidak warna khas tema.
  * Nama pasangan ditulis di atasnya dengan huruf serif.
@@ -88,6 +93,7 @@ export type CardInvitation = {
   templateId: string;
   status: string;
   activeUntil: string | null;
+  trialUntil?: string | null;
   coupleName: string;
   coverImage: string | null;
   eventAt: string | null;
@@ -103,7 +109,7 @@ export function InvitationCard({
   href: string;
   meta?: string | null;
 }) {
-  const st = effectiveStatus(inv.status, inv.activeUntil);
+  const st = effectiveStatus(inv.status, inv.activeUntil, inv.trialUntil);
   const countdown = dayCountdown(inv.eventAt);
   const left = inv.status === "active" ? daysLeft(inv.activeUntil) : null;
 

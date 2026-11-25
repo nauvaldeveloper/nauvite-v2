@@ -12,6 +12,8 @@ export type PublicInvitation = {
   content: InvitationContent;
   templateOptions: Record<string, unknown>;
   partner: { name: string | null; url: string | null } | null;
+  /** Draf uji coba: bisa dilihat, tapi belum terbit. */
+  trial?: boolean;
 };
 
 export type PublicWish = { id: string; name: string; message: string; createdAt: string };
@@ -48,6 +50,7 @@ export async function getPublicInvitation(slug: string): Promise<PublicInvitatio
     templateId: String(row.template_id),
     content: withMusic(parseContent(row.content), String(row.template_id)),
     templateOptions: (row.template_options as Record<string, unknown>) ?? {},
+    trial: row.trial === true,
     partner: partner ? { name: partner.name ?? null, url: safeWebUrl(partner.url) ?? null } : null,
   };
 }

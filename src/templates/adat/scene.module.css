@@ -120,7 +120,7 @@
 
 .cardNames h1 {
   margin: 2px 0 4px;
-  font-size: clamp(40px, 12vw, 50px);
+  font-size: calc(clamp(40px, 12vw, 50px) * min(1, 11 / var(--name-len, 1)));
 }
 
 .guest {

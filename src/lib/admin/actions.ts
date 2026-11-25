@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 import { refresh, updateTag } from "next/cache";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/dal";
-import { generatePassword, toAuthEmail } from "@/lib/auth/login-id";
+import { createLoginAccount } from "@/lib/auth/accounts";
+import { generatePassword } from "@/lib/auth/login-id";
 import { DEFAULT_MUSIC } from "@/lib/invitation/music";
 import { invitationTag } from "@/lib/invitation/public";
 import { SITE_SETTINGS_TAG } from "@/lib/site";
@@ -40,53 +41,6 @@ function friendlyDbError(message: string, code?: string) {
   if (code === "23505") return "Slug ini sudah dipakai undangan lain.";
   if (code === "23514") return "Slug tidak boleh dipakai (kata khusus sistem) atau formatnya salah.";
   return `Gagal menyimpan: ${message}`;
-}
-
-// ---------------------------------------------------------------------------
-// Membuat akun login (klien / mitra)
-// ---------------------------------------------------------------------------
-
-async function createLoginAccount(input: {
-  login: string;
-  fullName?: string;
-  whatsapp?: string;
-  role?: "client" | "partner";
-  businessName?: string;
-  businessUrl?: string;
-}): Promise<{ ok: true; userId: string; password: string } | { ok: false; error: string }> {
-  const email = toAuthEmail(input.login);
-  if (!email) return { ok: false, error: "Username/email login tidak valid." };
-
-  const password = generatePassword();
-  const admin = createAdminClient();
-  const { data, error } = await admin.auth.admin.createUser({
-    email,
-    password,
-    email_confirm: true,
-    user_metadata: { full_name: input.fullName ?? "" },
-  });
-  if (error || !data.user) {
-    const taken = /already|registered|exists/i.test(error?.message ?? "");
-    return { ok: false, error: taken ? "Username/email ini sudah dipakai akun lain." : `Gagal membuat akun: ${error?.message}` };
-  }
-
-  // Profil dibuat otomatis oleh database (role client). Lengkapi datanya.
-  const { error: profileError } = await admin
-    .from("profiles")
-    .update({
-      role: input.role ?? "client",
-      full_name: input.fullName || null,
-      whatsapp: input.whatsapp || null,
-      business_name: input.businessName || null,
-      business_url: input.businessUrl || null,
-    })
-    .eq("id", data.user.id);
-  if (profileError) {
-    await admin.auth.admin.deleteUser(data.user.id);
-    return { ok: false, error: `Gagal menyimpan profil akun: ${profileError.message}` };
-  }
-
-  return { ok: true, userId: data.user.id, password };
 }
 
 export type Credentials = { login: string; password: string; whatsapp?: string | null };
@@ -214,7 +168,7 @@ export async function setInvitationStatus(id: string, formData: FormData) {
   if (!inv) return;
 
   const kind = String(formData.get("kind"));
-  let patch: { status: "draft" | "active" | "inactive"; active_until?: string | null };
+  let patch: { status: "draft" | "active" | "inactive"; active_until?: string | null; trial_until?: string };
 
   if (kind === "extend") {
     const days = z.coerce.number().int().min(1).max(3650).parse(formData.get("days"));
@@ -231,6 +185,8 @@ export async function setInvitationStatus(id: string, formData: FormData) {
     patch = { status: "inactive" };
   } else if (kind === "draft") {
     patch = { status: "draft" };
+  } else if (kind === "trial") {
+    patch = { status: "draft", trial_until: addDays(new Date(), 1).toISOString() };
   } else {
     return;
   }
