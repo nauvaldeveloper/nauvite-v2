@@ -657,3 +657,23 @@ from public.invitations,
   (values ('Tante Rina', 'Sudah pesan kursi paling depan. Selamat untuk Ozy dan Zelda!', 2),
           ('Geng nonton Jumat malam', 'Akhirnya film yang kita tunggu tayang juga. Semoga bahagia sampai sekuelnya.', 5)) as w(name, message, n)
 where slug in ('contoh-bioskop', 'contoh-bioskop-malam', 'contoh-bioskop-sepia');
+
+-- Undangan demo tema Album Polaroid (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababe1', 'contoh-album-polaroid', 'album-polaroid', 'active', now() + interval '365 days',
+  content, '{"album-polaroid": {"palette": "krem"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababe2', 'contoh-album-polaroid-kraft', 'album-polaroid', 'active', now() + interval '365 days',
+  content, '{"album-polaroid": {"palette": "kraft"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababe3', 'contoh-album-polaroid-hitam', 'album-polaroid', 'active', now() + interval '365 days',
+  content, '{"album-polaroid": {"palette": "hitam"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Bude Sri', 'Fotonya cantik-cantik. Semoga albumnya terus bertambah sampai tua.', 2),
+          ('Teman kuliah Zelda', 'Kami datang bawa kamera, siap mengisi halaman berikutnya!', 4)) as w(name, message, n)
+where slug in ('contoh-album-polaroid', 'contoh-album-polaroid-kraft', 'contoh-album-polaroid-hitam');

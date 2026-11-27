@@ -17,6 +17,7 @@ const DEMO_SLUG: Record<string, string> = {
   "betawi-heritage": "contoh-betawi-heritage",
   "tiket-kereta": "contoh-tiket-kereta",
   bioskop: "contoh-bioskop",
+  "album-polaroid": "contoh-album-polaroid",
   herbarium: "contoh-herbarium",
   "piringan-hitam": "contoh-piringan-hitam",
   "koran-pagi": "contoh-koran-pagi",
@@ -31,10 +32,10 @@ const DEMO_SLUG: Record<string, string> = {
  * Tema dengan beberapa demo warna. Demo pertama memakai slug di DEMO_SLUG, sisanya
  * `<slug>-<warna>`. Nama warna diambil dari isian `palette` dan `paletteSwatches` manifest.
  */
-const COLOR_DEMOS = new Set(["surat-cinta", "koran-pagi", "piringan-hitam", "herbarium", "tiket-kereta", "bioskop"]);
+const COLOR_DEMOS = new Set(["surat-cinta", "koran-pagi", "piringan-hitam", "herbarium", "tiket-kereta", "bioskop", "album-polaroid"]);
 
 /** Tema yang gambar kartunya memakai sampul (bukan isi), beserta titik potongnya. */
-const CARD_COVER: Record<string, string> = { "surat-cinta": "50% 50%", "koran-pagi": "50% 50%", "piringan-hitam": "50% 50%", herbarium: "50% 45%", "tiket-kereta": "50% 45%", bioskop: "50% 40%" };
+const CARD_COVER: Record<string, string> = { "surat-cinta": "50% 50%", "koran-pagi": "50% 50%", "piringan-hitam": "50% 50%", herbarium: "50% 45%", "tiket-kereta": "50% 45%", bioskop: "50% 40%", "album-polaroid": "50% 40%" };
 
 export type CatalogDemo = {
   slug: string;

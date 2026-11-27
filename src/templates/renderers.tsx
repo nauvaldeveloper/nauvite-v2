@@ -10,6 +10,7 @@ import Herbarium from "./herbarium/Template";
 import TiketKereta from "./tiket-kereta/Template";
 import SuratCinta from "./surat-cinta/Template";
 import Bioskop from "./bioskop/Template";
+import AlbumPolaroid from "./album-polaroid/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
 import dustyRose from "./dusty-rose/manifest";
@@ -80,6 +81,8 @@ function Template(props: TemplateProps) {
       return <SuratCinta {...props} />;
     case "bioskop":
       return <Bioskop {...props} />;
+    case "album-polaroid":
+      return <AlbumPolaroid {...props} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

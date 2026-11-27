@@ -16,6 +16,7 @@ import herbarium from "./herbarium/manifest";
 import tiketKereta from "./tiket-kereta/manifest";
 import suratCinta from "./surat-cinta/manifest";
 import bioskop from "./bioskop/manifest";
+import albumPolaroid from "./album-polaroid/manifest";
 
 /**
  * Daftar semua template. Menambah template baru:
@@ -41,6 +42,7 @@ export const TEMPLATES = [
   herbarium,
   tiketKereta,
   bioskop,
+  albumPolaroid,
 ] as const satisfies readonly TemplateManifest[];
 
 export type TemplateId = (typeof TEMPLATES)[number]["id"];
