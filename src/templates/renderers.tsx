@@ -9,6 +9,7 @@ import PiringanHitam from "./piringan-hitam/Template";
 import Herbarium from "./herbarium/Template";
 import TiketKereta from "./tiket-kereta/Template";
 import SuratCinta from "./surat-cinta/Template";
+import Bioskop from "./bioskop/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
 import dustyRose from "./dusty-rose/manifest";
@@ -77,6 +78,8 @@ function Template(props: TemplateProps) {
       return <TiketKereta {...props} />;
     case "surat-cinta":
       return <SuratCinta {...props} />;
+    case "bioskop":
+      return <Bioskop {...props} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

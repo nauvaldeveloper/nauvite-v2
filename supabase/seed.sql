@@ -637,3 +637,23 @@ from public.invitations where slug = 'contoh-surat-cinta';
 insert into public.wishes (invitation_id, name, message, attendance, guest_count) values
   ('abababab-abab-abab-abab-abababababc3', 'Pakde Harto', 'Selamat jalan, Bayu dan Kinanti. Semoga perjalanannya lancar dan bahagia.', 'hadir', 2),
   ('abababab-abab-abab-abab-abababababc3', 'Teman satu gerbong', 'Kami antar sampai peron, oleh-olehnya jangan lupa.', 'hadir', 4);
+
+-- Undangan demo tema Bioskop (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababd1', 'contoh-bioskop', 'bioskop', 'active', now() + interval '365 days',
+  content, '{"bioskop": {"palette": "beludru"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababd2', 'contoh-bioskop-malam', 'bioskop', 'active', now() + interval '365 days',
+  content, '{"bioskop": {"palette": "malam"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababd3', 'contoh-bioskop-sepia', 'bioskop', 'active', now() + interval '365 days',
+  content, '{"bioskop": {"palette": "sepia"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Tante Rina', 'Sudah pesan kursi paling depan. Selamat untuk Ozy dan Zelda!', 2),
+          ('Geng nonton Jumat malam', 'Akhirnya film yang kita tunggu tayang juga. Semoga bahagia sampai sekuelnya.', 5)) as w(name, message, n)
+where slug in ('contoh-bioskop', 'contoh-bioskop-malam', 'contoh-bioskop-sepia');

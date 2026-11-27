@@ -147,6 +147,7 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Sundanese Elegance | `contoh-sundanese-elegance` |
 | Javanese Keraton | `contoh-javanese-keraton` |
 | Betawi Heritage | `contoh-betawi-heritage` |
+| Bioskop (beludru, malam, sepia) | `contoh-bioskop`, `contoh-bioskop-malam`, `contoh-bioskop-sepia` |
 | Tiket Kereta (tiga warna) | `contoh-tiket-kereta`, `contoh-tiket-kereta-biru`, `contoh-tiket-kereta-jambu` |
 | Herbarium (tiga warna) | `contoh-herbarium`, `contoh-herbarium-bata`, `contoh-herbarium-nila` |
 | Piringan Hitam (tiga warna) | `contoh-piringan-hitam`, `contoh-piringan-hitam-laguna`, `contoh-piringan-hitam-anggrek` |

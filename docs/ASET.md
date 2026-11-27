@@ -81,6 +81,9 @@ Demo `contoh-lavender-mist` memakai foto Pexels `galeri-5` dari set yang sama.
 ## Tema Tiket Kereta (`tiket-kereta`)
 Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/tiket-kereta/art.tsx`. Font Besley, Barlow, Barlow Condensed dari Google Fonts (OFL).
 
+## Tema Bioskop (`bioskop`)
+Tanpa file gambar baru: tirai, papan lampu, roll film, dan butiran film dibuat dengan CSS di `src/templates/bioskop/template.module.css`. Demo `contoh-bioskop` memakai foto demo Signature (`public/demo/signature/`). Font DM Serif Display, Oswald, Figtree dari Google Fonts (OFL).
+
 ## Tema Herbarium (`herbarium`)
 Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/herbarium/art.tsx`. Font IM Fell English, Alegreya, Delicious Handrawn dari Google Fonts (OFL).
 
