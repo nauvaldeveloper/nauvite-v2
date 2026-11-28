@@ -677,3 +677,23 @@ from public.invitations,
   (values ('Bude Sri', 'Fotonya cantik-cantik. Semoga albumnya terus bertambah sampai tua.', 2),
           ('Teman kuliah Zelda', 'Kami datang bawa kamera, siap mengisi halaman berikutnya!', 4)) as w(name, message, n)
 where slug in ('contoh-album-polaroid', 'contoh-album-polaroid-kraft', 'contoh-album-polaroid-hitam');
+
+-- Undangan demo tema Lengkung Boho (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababf1', 'contoh-lengkung-boho', 'lengkung-boho', 'active', now() + interval '365 days',
+  content, '{"lengkung-boho": {"palette": "terakota"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababf2', 'contoh-lengkung-boho-zaitun', 'lengkung-boho', 'active', now() + interval '365 days',
+  content, '{"lengkung-boho": {"palette": "zaitun"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-abababababf3', 'contoh-lengkung-boho-mawar', 'lengkung-boho', 'active', now() + interval '365 days',
+  content, '{"lengkung-boho": {"palette": "mawar"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Mbak Ayu', 'Cantik sekali undangannya, sehangat kalian berdua. Selamat ya!', 2),
+          ('Keluarga Om Rudi', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.', 4)) as w(name, message, n)
+where slug in ('contoh-lengkung-boho', 'contoh-lengkung-boho-zaitun', 'contoh-lengkung-boho-mawar');
