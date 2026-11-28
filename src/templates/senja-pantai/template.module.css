@@ -1,0 +1,1446 @@
+/* Tema Senja Pantai. Palet: .jingga / .lembayung / .toska */
+
+.jingga {
+  --bg: #f8f1e7;
+  --bg-2: #f0e3d2;
+  --surface: #fffaf3;
+  --ink: #2a2f3a;
+  --soft: #6b6460;
+  --line: #e3d3bf;
+  --accent: #c8613f;
+  --on-accent: #fff8f0;
+  --sky1: #fbe3c4;
+  --sky2: #f4b48a;
+  --sky3: #d9786a;
+  --sun-core: #fff1d6;
+  --sun: #ffc98a;
+  --sea-far: #b9727a;
+  --sea: #4d5b78;
+  --sea-deep: #2f3c58;
+}
+
+.lembayung {
+  --bg: #f6f1f2;
+  --bg-2: #ece2e7;
+  --surface: #fdf9fa;
+  --ink: #2e2a3a;
+  --soft: #6d6474;
+  --line: #e0d2da;
+  --accent: #85578a;
+  --on-accent: #fdf6fc;
+  --sky1: #f7e1dc;
+  --sky2: #e3a9b4;
+  --sky3: #a77ba6;
+  --sun-core: #fff3e6;
+  --sun: #ffd2b0;
+  --sea-far: #8f6f9a;
+  --sea: #4b4670;
+  --sea-deep: #2f2c4f;
+}
+
+.toska {
+  --bg: #f6f3ea;
+  --bg-2: #e9e7d9;
+  --surface: #fdfcf6;
+  --ink: #1f3435;
+  --soft: #5a6a68;
+  --line: #d8d8c4;
+  --accent: #2b7479;
+  --on-accent: #f4fbfa;
+  --sky1: #fdf0cf;
+  --sky2: #f8cf98;
+  --sky3: #e8a27c;
+  --sun-core: #fffbe8;
+  --sun: #ffe1a0;
+  --sea-far: #7fb5ae;
+  --sea: #2f8a8a;
+  --sea-deep: #1f5f63;
+}
+
+.root {
+  --ease: cubic-bezier(0.25, 0.6, 0.3, 1);
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20Q50 0 100 20T200 20T300 20T400 20V40H0Z'/%3E%3C/svg%3E");
+  --sky: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 52%, var(--sky3) 100%);
+  --dock-bg: var(--surface);
+  --dock-ink: var(--ink);
+  --dock-line: var(--line);
+  --dock-accent: var(--accent);
+  --dock-radius: 18px;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--bg-2);
+  color: var(--ink);
+  font-family: var(--sp-sans), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root ol {
+  margin: 0;
+}
+
+.root h1,
+.root h2,
+.root h3 {
+  font-family: var(--sp-serif), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.root h1 i,
+.root h2 i,
+.root p i {
+  font-family: var(--sp-serif), Georgia, serif;
+  font-style: italic;
+  color: var(--accent);
+}
+
+.root a {
+  color: inherit;
+}
+
+.reveal {
+  transition:
+    opacity 1s var(--ease),
+    transform 1s var(--ease);
+}
+
+.reveal[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.kicker {
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+/* ---------- Tombol ---------- */
+.button,
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 8px 22px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.button {
+  background: var(--accent);
+  color: var(--on-accent) !important;
+}
+
+.button:hover {
+  background: color-mix(in srgb, var(--accent) 86%, black);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--accent) !important;
+}
+
+.ghost:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.button svg,
+.ghost svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Ombak ---------- */
+.sea {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave {
+  --ww: 240px;
+  --wh: 22px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% + var(--ww));
+  -webkit-mask:
+    var(--wave) 0 0 / var(--ww) var(--wh) repeat-x,
+    linear-gradient(#000 0 0) 0 calc(var(--wh) - 1px) / 100% 100% no-repeat;
+  mask:
+    var(--wave) 0 0 / var(--ww) var(--wh) repeat-x,
+    linear-gradient(#000 0 0) 0 calc(var(--wh) - 1px) / 100% 100% no-repeat;
+  animation: drift 11s linear infinite;
+}
+
+.wave1 {
+  --ww: 160px;
+  --wh: 10px;
+  top: 0;
+  background: var(--sea-far);
+  animation-duration: 16s;
+}
+
+.wave2 {
+  --ww: 260px;
+  --wh: 20px;
+  top: 30%;
+  background: var(--sea);
+  animation-direction: reverse;
+  animation-duration: 12s;
+}
+
+.wave3 {
+  --ww: 340px;
+  --wh: 28px;
+  top: 60%;
+  background: var(--sea-deep);
+  animation-duration: 9s;
+}
+
+@keyframes drift {
+  to {
+    transform: translateX(calc(var(--ww) * -1));
+  }
+}
+
+.root[data-waves="false"] .wave,
+.root[data-waves="false"] .tide span,
+.root[data-waves="false"] .heroTide span {
+  animation: none;
+}
+
+/* ---------- Sampul ---------- */
+.cover {
+  --horizon: 33%;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--sky3);
+}
+
+.coverSky {
+  position: absolute;
+  inset: 0 0 calc(var(--horizon) - 4px);
+  background: var(--sky);
+}
+
+.coverSky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--sea-deep), var(--sky3));
+  opacity: 0;
+  transition: opacity 1.4s ease 0.1s;
+}
+
+/* Awan tipis yang bergeser sangat pelan. */
+.cloud {
+  position: absolute;
+  height: 30px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--sky1) 55%, white);
+  filter: blur(9px);
+  opacity: 0.7;
+  animation: cloudDrift 44s ease-in-out infinite alternate;
+}
+
+.cloud1 {
+  top: 14%;
+  left: -14%;
+  width: 60%;
+}
+
+.cloud2 {
+  top: 40%;
+  right: -16%;
+  width: 54%;
+  height: 22px;
+  opacity: 0.55;
+  animation-duration: 58s;
+  animation-direction: alternate-reverse;
+}
+
+.cloud3 {
+  top: 74%;
+  left: 4%;
+  width: 40%;
+  height: 14px;
+  background: color-mix(in srgb, var(--sun) 60%, white);
+  opacity: 0.55;
+  animation-duration: 36s;
+}
+
+@keyframes cloudDrift {
+  to {
+    transform: translateX(16cqw);
+  }
+}
+
+.coverSun {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: min(52vw, 240px, 30svh);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sun-core) 0%, var(--sun) 72%);
+  box-shadow: 0 0 70px 10px color-mix(in srgb, var(--sun) 70%, transparent);
+  transform: translate(-50%, 50%);
+  transition: transform 1.4s cubic-bezier(0.5, 0, 0.3, 1) 0.1s;
+}
+
+/* Lingkar cahaya di sekitar matahari yang bernapas pelan. */
+.coverSun::after {
+  content: "";
+  position: absolute;
+  inset: -32%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle closest-side,
+    transparent 58%,
+    color-mix(in srgb, var(--sun) 45%, transparent) 63%,
+    transparent 100%
+  );
+  animation: glow 5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.5;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* Burung kecil melintas. */
+.birds {
+  position: absolute;
+  left: 0;
+  width: 70px;
+  pointer-events: none;
+  animation: fly 32s linear infinite;
+}
+
+.birds svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.bird {
+  fill: none;
+  stroke: var(--sea-deep);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: flap 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes flap {
+  to {
+    transform: scaleY(0.5);
+  }
+}
+
+@keyframes fly {
+  from {
+    transform: translate(-90px, 0);
+  }
+  50% {
+    transform: translate(50cqw, -16px);
+  }
+  to {
+    transform: translate(calc(100cqw + 20px), 6px);
+  }
+}
+
+.coverBirds {
+  top: 47%;
+  z-index: 1;
+  animation-delay: -9s;
+  transition: opacity 0.5s ease;
+}
+
+.coverSea {
+  z-index: 1;
+  height: var(--horizon);
+}
+
+/* Kilau matahari di permukaan laut. */
+.glint {
+  position: absolute;
+  top: calc(100% - var(--horizon) + 16px);
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: min(40vw, 190px, 24svh);
+  transform: translateX(-50%);
+  transition: opacity 0.7s ease;
+}
+
+.glint span {
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--sun-core);
+  animation: shimmer 2.2s ease-in-out infinite alternate;
+}
+
+.glint span:nth-child(1) {
+  width: 92%;
+}
+
+.glint span:nth-child(2) {
+  width: 66%;
+  animation-delay: -0.7s;
+}
+
+.glint span:nth-child(3) {
+  width: 78%;
+  animation-delay: -1.3s;
+}
+
+.glint span:nth-child(4) {
+  width: 46%;
+  animation-delay: -0.4s;
+}
+
+.glint span:nth-child(5) {
+  width: 34%;
+  animation-delay: -1.7s;
+}
+
+.glint span:nth-child(6) {
+  width: 18%;
+  animation-delay: -1s;
+}
+
+@keyframes shimmer {
+  from {
+    opacity: 0.3;
+    transform: scaleX(0.7);
+  }
+  to {
+    opacity: 0.85;
+    transform: scaleX(1.05);
+  }
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.18;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.coverText {
+  position: absolute;
+  top: max(8svh, 44px);
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 0 24px;
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+
+.coverKicker {
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+
+.coverNames {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.26em;
+  font-size: clamp(46px, 13.5vw, 78px) !important;
+  line-height: 1.04 !important;
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--sky1) 80%, transparent);
+}
+
+.coverNames i {
+  font-size: 0.72em;
+}
+
+.coverDate {
+  font-weight: 500;
+  font-size: 15.5px;
+  letter-spacing: 0.06em;
+}
+
+.guestCard {
+  display: grid;
+  gap: 2px;
+  min-width: min(74vw, 300px);
+  max-width: 100%;
+  margin-top: 16px;
+  padding: 12px 26px 14px;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 20px;
+  background: rgb(255 255 255 / 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+.coverTo {
+  font-size: 13.5px;
+  color: var(--soft);
+}
+
+.coverGuest {
+  font-family: var(--sp-serif), serif;
+  font-size: 26px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.coverButton {
+  margin-top: 10px;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--sea-deep) 28%, transparent);
+}
+
+/* Ombak warna kertas yang naik menutup layar saat dibuka. */
+.tide {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  transform: translateY(calc(100% + 80px));
+  transition: transform 1.15s cubic-bezier(0.55, 0, 0.25, 1) 0.45s;
+  pointer-events: none;
+}
+
+.tide span,
+.heroTide span {
+  --ww: 300px;
+  position: absolute;
+  top: -40px;
+  bottom: 0;
+  left: 0;
+  width: calc(100% + var(--ww));
+  background: var(--bg);
+  -webkit-mask:
+    var(--wave) 0 0 / var(--ww) 40px repeat-x,
+    linear-gradient(#000 0 0) 0 39px / 100% 100% no-repeat;
+  mask:
+    var(--wave) 0 0 / var(--ww) 40px repeat-x,
+    linear-gradient(#000 0 0) 0 39px / 100% 100% no-repeat;
+  animation: drift 3s linear infinite;
+}
+
+.cover[data-opened="true"] {
+  pointer-events: none;
+}
+
+.cover[data-opened="true"] .coverText,
+.cover[data-opened="true"] .coverBirds,
+.cover[data-opened="true"] .glint {
+  opacity: 0;
+}
+
+.cover[data-opened="true"] .coverSun {
+  transform: translate(-50%, 115%);
+}
+
+.cover[data-opened="true"] .coverSky::after {
+  opacity: 0.35;
+}
+
+.cover[data-opened="true"] .tide {
+  transform: translateY(0);
+}
+
+/* ---------- Halaman ---------- */
+.main {
+  max-width: 540px;
+  margin: 0 auto;
+  background: var(--bg);
+  box-shadow: 0 0 60px rgb(0 0 0 / 0.08);
+}
+
+.section {
+  position: relative;
+  padding: 76px 24px;
+}
+
+.alt {
+  background: var(--bg-2);
+}
+
+/* Tepi bergelombang di atas dan bawah bagian berwarna. */
+.alt::before,
+.alt::after,
+.band::before,
+.band::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: 18px;
+  background: inherit;
+  -webkit-mask: var(--wave) 0 0 / 180px 100% repeat-x;
+  mask: var(--wave) 0 0 / 180px 100% repeat-x;
+  pointer-events: none;
+}
+
+.alt::before,
+.band::before {
+  top: -17px;
+}
+
+.alt::after,
+.band::after {
+  bottom: -17px;
+  transform: scaleY(-1);
+}
+
+.band::before {
+  background: var(--band-top);
+}
+
+.band::after {
+  background: var(--sea-deep);
+}
+
+.heading {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin-bottom: 38px;
+  text-align: center;
+}
+
+.heading h2 {
+  font-size: 40px;
+}
+
+.lead {
+  margin-bottom: 30px !important;
+  text-align: center;
+  color: var(--soft);
+}
+
+/* ---------- Ikon matahari di garis laut ---------- */
+.horizon {
+  width: 62px;
+  height: auto;
+  overflow: visible;
+}
+
+.horizonSun {
+  fill: var(--sun);
+  stroke: var(--accent);
+  stroke-width: 2;
+  transition:
+    transform 1.4s var(--ease) 0.2s,
+    opacity 1.4s var(--ease) 0.2s;
+}
+
+.horizonLine {
+  fill: none;
+  stroke: var(--sea);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 90;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.4s var(--ease);
+}
+
+.reveal[data-visible="false"] .horizonSun {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.reveal[data-visible="false"] .horizonLine {
+  stroke-dashoffset: 90;
+}
+
+/* ---------- Halaman pertama ---------- */
+.hero {
+  padding: 0 0 64px;
+  text-align: center;
+}
+
+.heroScene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4.2;
+  max-height: 90svh;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--sky2);
+}
+
+.heroPhoto {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  transition: transform 3.2s cubic-bezier(0.2, 0.6, 0.25, 1) 1.75s;
+}
+
+/* Warna golden hour di atas foto. */
+.heroGrade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--sky2) 0%, var(--sky3) 100%);
+  mix-blend-mode: soft-light;
+  opacity: 0.45;
+}
+
+.heroGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 50% at 50% -4%, color-mix(in srgb, var(--sun-core) 90%, transparent) 0%, transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--sky2) 45%, transparent) 0%, transparent 30%);
+  mix-blend-mode: screen;
+  transition: opacity 1.8s ease 2.1s;
+}
+
+.heroBirds {
+  top: 8%;
+  z-index: 1;
+  animation-delay: -4s;
+  animation-duration: 36s;
+}
+
+.heroSea {
+  z-index: 1;
+  height: 96px;
+}
+
+.heroSea .wave1 {
+  background: color-mix(in srgb, var(--bg) 30%, transparent);
+}
+
+.heroSea .wave2 {
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.heroSea .wave3 {
+  background: var(--bg);
+}
+
+/* Ombak yang tadi menutup layar surut ke bawah memperlihatkan foto. */
+.heroTide {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transition: transform 1.5s cubic-bezier(0.45, 0, 0.2, 1) 1.75s;
+  pointer-events: none;
+}
+
+.heroText {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin-top: 4px;
+  padding: 0 24px;
+}
+
+.step1,
+.step2,
+.step3 {
+  transition:
+    opacity 1s ease,
+    transform 1.1s var(--ease);
+}
+
+.step1 {
+  transition-delay: 2.7s;
+}
+
+.step2 {
+  transition-delay: 2.95s;
+}
+
+.step3 {
+  transition-delay: 3.2s;
+}
+
+.heroNames {
+  display: grid;
+  font-size: clamp(54px, 16vw, 80px) !important;
+  line-height: 0.98 !important;
+}
+
+.heroNames i {
+  font-size: 0.55em;
+  line-height: 1.35;
+}
+
+.dateRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 4px;
+}
+
+.dateRow span {
+  flex: 1 1 0;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.dateRow span:first-child {
+  text-align: right;
+}
+
+.dateRow span:last-child {
+  text-align: left;
+}
+
+.dateRow b {
+  margin: 0 16px;
+  padding: 2px 18px;
+  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  font-family: var(--sp-serif), serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: lining-nums;
+}
+
+.heroDate {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+.hero[data-opened="false"] .heroPhoto {
+  transform: scale(1.14);
+}
+
+.hero[data-opened="false"] .heroGlow {
+  opacity: 0;
+}
+
+.hero[data-opened="true"] .heroTide {
+  transform: translateY(calc(100% + 50px));
+}
+
+.hero[data-opened="false"] .step1,
+.hero[data-opened="false"] .step2,
+.hero[data-opened="false"] .step3 {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* ---------- Pembuka ---------- */
+.intro {
+  padding-top: 40px;
+}
+
+.intro .reveal {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.salam {
+  font-style: italic;
+  color: var(--soft);
+}
+
+.to {
+  font-family: var(--sp-serif), serif;
+  font-size: 27px;
+  line-height: 1.2;
+  color: var(--accent);
+}
+
+.quote {
+  padding-top: 0;
+  text-align: center;
+}
+
+.quote blockquote {
+  margin: 0;
+  padding: 28px 22px;
+  border-radius: 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-family: var(--sp-serif), serif;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+.quote p {
+  margin-top: 12px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+}
+
+/* ---------- Mempelai ---------- */
+.couple {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 18px;
+}
+
+.person {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.portrait {
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 16px;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--sky);
+  box-sizing: border-box;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+.personName {
+  font-size: 25px;
+}
+
+.parents {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--soft);
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  margin-top: 4px;
+  font-size: 13.5px;
+  text-decoration: none;
+  color: var(--soft) !important;
+  word-break: break-all;
+}
+
+.social svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+/* ---------- Cerita ---------- */
+.stories {
+  position: relative;
+  display: grid;
+  gap: 44px;
+  padding: 0 0 0 34px;
+  list-style: none;
+}
+
+.stories::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  border-left: 2px dashed var(--line);
+}
+
+.story {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+
+.storyMark {
+  position: absolute;
+  top: 4px;
+  left: -34px;
+  width: 22px;
+  height: 11px;
+  border-radius: 22px 22px 0 0;
+  background: var(--accent);
+  box-shadow: 0 3px 0 -1px var(--bg), 0 4px 0 0 var(--sea);
+}
+
+.storyPhoto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 10px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.story h3 {
+  font-size: 28px;
+}
+
+.story .kicker {
+  letter-spacing: 0.14em;
+}
+
+.storyBody {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--soft);
+}
+
+/* ---------- Hitung mundur ---------- */
+.band {
+  --band-top: color-mix(in srgb, var(--sky3) 78%, var(--sea-deep));
+  background: linear-gradient(180deg, var(--band-top) 0%, var(--sea-deep) 100%);
+  color: #fff;
+}
+
+.band .horizonSun {
+  stroke: var(--sun);
+}
+
+.band .horizonLine {
+  stroke: #fff;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.countItem {
+  text-align: center;
+}
+
+.countItem + .countItem {
+  border-left: 1px solid rgb(255 255 255 / 0.28);
+}
+
+.countItem span {
+  display: block;
+  font-family: var(--sp-serif), serif;
+  font-size: clamp(36px, 11vw, 50px);
+  line-height: 1.1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.countItem small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.8);
+}
+
+/* ---------- Acara ---------- */
+.events {
+  display: grid;
+  gap: 26px;
+}
+
+.event {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.eventSky {
+  position: relative;
+  height: 96px;
+  overflow: hidden;
+  background: var(--sky);
+}
+
+.eventSky span {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 92px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sun-core) 0%, var(--sun) 72%);
+  box-shadow: 0 0 40px 6px color-mix(in srgb, var(--sun) 70%, transparent);
+  transform: translate(-50%, 50%);
+}
+
+.eventSky::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 22px;
+  background: var(--surface);
+  -webkit-mask: var(--wave) 0 0 / 160px 100% repeat-x;
+  mask: var(--wave) 0 0 / 160px 100% repeat-x;
+}
+
+.eventBody {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 18px 24px 28px;
+}
+
+.event h3 {
+  margin-bottom: 6px !important;
+  font-size: 32px;
+  color: var(--accent);
+}
+
+.eventDate {
+  font-weight: 600;
+}
+
+.place {
+  margin-top: 10px !important;
+  font-family: var(--sp-serif), serif;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.address {
+  font-size: 15.5px;
+  color: var(--soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.actions a {
+  flex: 1 1 auto;
+}
+
+/* ---------- Galeri ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.shot {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--bg);
+}
+
+.shot:nth-child(3n + 1) {
+  grid-column: span 2;
+  aspect-ratio: 16 / 10;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+/* ---------- Tanda kasih ---------- */
+.gifts {
+  display: grid;
+  gap: 18px;
+}
+
+.gift {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 28px 20px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.bankLogo {
+  height: 30px;
+  width: auto;
+}
+
+.account {
+  font-family: var(--sp-serif), serif;
+  font-size: 30px;
+  letter-spacing: 0.04em;
+  font-variant-numeric: lining-nums;
+}
+
+.gift .ghost {
+  margin-top: 10px;
+}
+
+/* ---------- Konfirmasi ---------- */
+.formBox,
+.wish {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+}
+
+.formBox {
+  padding: 26px 22px;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.label {
+  padding: 0;
+  font-size: 15.5px;
+  color: var(--soft);
+}
+
+.input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+.input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 4px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.choice[data-checked="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.choice:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.error {
+  margin-top: 6px !important;
+  font-size: 15px;
+  color: #a3271f;
+}
+
+.notice {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.wishes {
+  display: grid;
+  gap: 12px;
+  max-height: 580px;
+  margin-top: 28px;
+  padding: 2px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.wish {
+  padding: 16px 20px;
+  border-radius: 20px;
+}
+
+.wishName {
+  font-family: var(--sp-serif), serif;
+  font-size: 21px;
+}
+
+.wishMessage {
+  overflow-wrap: anywhere;
+}
+
+.wishDate {
+  font-size: 13.5px;
+  color: var(--soft);
+}
+
+/* ---------- Penutup ---------- */
+.footer {
+  text-align: center;
+  background: var(--sea-deep);
+}
+
+.footerSky {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 100px 24px 0;
+  overflow: hidden;
+  background: var(--sky);
+}
+
+.footerSky > p:first-child {
+  color: var(--soft);
+}
+
+.footerNames {
+  margin: 4px 0 30px !important;
+  font-family: var(--sp-serif), serif;
+  font-size: 46px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.footerSun {
+  width: 170px;
+  aspect-ratio: 1;
+  margin-bottom: -85px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sun-core) 0%, var(--sun) 72%);
+  box-shadow: 0 0 60px 10px color-mix(in srgb, var(--sun) 70%, transparent);
+}
+
+.footerSea {
+  position: relative;
+  height: 96px;
+  margin-top: -14px;
+}
+
+.made {
+  display: grid;
+  gap: 4px;
+  padding: 18px 24px 150px;
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.made a {
+  color: #fff;
+}
+
+@media (min-width: 900px) {
+  .section {
+    padding-left: 44px;
+    padding-right: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root *,
+  .root *::before,
+  .root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cover[data-opened="true"] {
+    opacity: 0;
+  }
+}

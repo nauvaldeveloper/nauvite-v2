@@ -12,6 +12,7 @@ import SuratCinta from "./surat-cinta/Template";
 import Bioskop from "./bioskop/Template";
 import AlbumPolaroid from "./album-polaroid/Template";
 import LengkungBoho from "./lengkung-boho/Template";
+import SenjaPantai from "./senja-pantai/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
 import dustyRose from "./dusty-rose/manifest";
@@ -86,6 +87,8 @@ function Template(props: TemplateProps) {
       return <AlbumPolaroid {...props} />;
     case "lengkung-boho":
       return <LengkungBoho {...props} />;
+    case "senja-pantai":
+      return <SenjaPantai {...props} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

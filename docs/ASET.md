@@ -90,6 +90,9 @@ Tanpa file gambar baru: sampul album, polaroid, selotip, dan kertas bergaris dib
 ## Tema Lengkung Boho (`lengkung-boho`)
 Tanpa file gambar baru: lengkung, matahari, dan pelangi boho dibuat dengan CSS dan SVG di `src/templates/lengkung-boho/`. Demo `contoh-lengkung-boho` memakai foto demo Signature (`public/demo/signature/`). Font Cormorant dan Jost dari Google Fonts (OFL).
 
+## Tema Senja Pantai (`senja-pantai`)
+Tanpa file gambar baru: langit, matahari, dan ombak dibuat dengan CSS (gradien dan mask SVG) di `src/templates/senja-pantai/`. Demo `contoh-senja-pantai` memakai foto demo Signature (`public/demo/signature/`). Font DM Serif Display dan Figtree dari Google Fonts (OFL).
+
 ## Tema Herbarium (`herbarium`)
 Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/herbarium/art.tsx`. Font IM Fell English, Alegreya, Delicious Handrawn dari Google Fonts (OFL).
 

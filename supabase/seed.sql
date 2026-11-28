@@ -697,3 +697,23 @@ from public.invitations,
   (values ('Mbak Ayu', 'Cantik sekali undangannya, sehangat kalian berdua. Selamat ya!', 2),
           ('Keluarga Om Rudi', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.', 4)) as w(name, message, n)
 where slug in ('contoh-lengkung-boho', 'contoh-lengkung-boho-zaitun', 'contoh-lengkung-boho-mawar');
+
+-- Undangan demo tema Senja Pantai (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0a1', 'contoh-senja-pantai', 'senja-pantai', 'active', now() + interval '365 days',
+  content, '{"senja-pantai": {"palette": "jingga"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0a2', 'contoh-senja-pantai-lembayung', 'senja-pantai', 'active', now() + interval '365 days',
+  content, '{"senja-pantai": {"palette": "lembayung"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0a3', 'contoh-senja-pantai-toska', 'senja-pantai', 'active', now() + interval '365 days',
+  content, '{"senja-pantai": {"palette": "toska"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Kak Dimas', 'Undangannya bikin kangen pantai. Selamat menempuh hidup baru, semoga langgeng!', 2),
+          ('Keluarga Tante Wulan', 'Semoga rumah tangganya selalu hangat seperti senja. Kami pasti datang.', 3)) as w(name, message, n)
+where slug in ('contoh-senja-pantai', 'contoh-senja-pantai-lembayung', 'contoh-senja-pantai-toska');

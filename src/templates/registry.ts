@@ -18,6 +18,7 @@ import suratCinta from "./surat-cinta/manifest";
 import bioskop from "./bioskop/manifest";
 import albumPolaroid from "./album-polaroid/manifest";
 import lengkungBoho from "./lengkung-boho/manifest";
+import senjaPantai from "./senja-pantai/manifest";
 
 /**
  * Daftar semua template. Menambah template baru:
@@ -45,6 +46,7 @@ export const TEMPLATES = [
   bioskop,
   albumPolaroid,
   lengkungBoho,
+  senjaPantai,
 ] as const satisfies readonly TemplateManifest[];
 
 export type TemplateId = (typeof TEMPLATES)[number]["id"];

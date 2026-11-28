@@ -150,6 +150,7 @@ Tombol "Lihat demo" di katalog membuka undangan demo. Saat rilis, undangan berik
 | Bioskop (beludru, malam, sepia) | `contoh-bioskop`, `contoh-bioskop-malam`, `contoh-bioskop-sepia` |
 | Album Polaroid (krem, kraft, hitam) | `contoh-album-polaroid`, `contoh-album-polaroid-kraft`, `contoh-album-polaroid-hitam` |
 | Lengkung Boho (terakota, zaitun, mawar) | `contoh-lengkung-boho`, `contoh-lengkung-boho-zaitun`, `contoh-lengkung-boho-mawar` |
+| Senja Pantai (jingga, lembayung, toska) | `contoh-senja-pantai`, `contoh-senja-pantai-lembayung`, `contoh-senja-pantai-toska` |
 | Tiket Kereta (tiga warna) | `contoh-tiket-kereta`, `contoh-tiket-kereta-biru`, `contoh-tiket-kereta-jambu` |
 | Herbarium (tiga warna) | `contoh-herbarium`, `contoh-herbarium-bata`, `contoh-herbarium-nila` |
 | Piringan Hitam (tiga warna) | `contoh-piringan-hitam`, `contoh-piringan-hitam-laguna`, `contoh-piringan-hitam-anggrek` |
