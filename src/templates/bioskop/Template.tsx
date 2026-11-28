@@ -25,7 +25,7 @@ import {
 import { resolveOptions } from "../options";
 import type { TemplateProps } from "../types";
 import manifest from "./manifest";
-import { Cover } from "./parts";
+import { Cover, Laurel, PosterStage } from "./parts";
 import s from "./template.module.css";
 
 /** Tema Bioskop: pemutaran perdana dengan tirai, poster, roll film, dan kredit penutup. */
@@ -70,9 +70,15 @@ export default function Bioskop({ invitation, guestName }: TemplateProps) {
       >
         <Cover
           guest={
-            <div className={s.coverGuest}>
-              <p>Undangan khusus untuk</p>
-              <p className={s.coverGuestName}>{guestName ?? "Bapak/Ibu/Saudara/i"}</p>
+            <div className={s.ticket}>
+              <div className={s.ticketMain}>
+                <p>Tiket masuk untuk</p>
+                <p className={s.coverGuestName}>{guestName ?? "Bapak/Ibu/Saudara/i"}</p>
+              </div>
+              <div className={s.ticketStub}>
+                <span>Kursi</span>
+                <b>VIP</b>
+              </div>
             </div>
           }
         >
@@ -88,7 +94,7 @@ export default function Bioskop({ invitation, guestName }: TemplateProps) {
         </Cover>
 
         <main className={s.main}>
-          <section id="awal" className={s.poster}>
+          <PosterStage id="awal" className={s.poster}>
             <div className={s.posterFrame}>
               {cover ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -97,21 +103,22 @@ export default function Bioskop({ invitation, guestName }: TemplateProps) {
                 <div className={s.posterBlank} aria-hidden="true" />
               )}
               <span className={s.grain} aria-hidden="true" />
-              <div className={s.posterTop}>
+              <span className={s.flash} aria-hidden="true" />
+              <div className={`${s.posterTop} ${s.step1}`}>
                 <span className={s.rating} title="Semua umur">
                   SU
                 </span>
-                <p>Sebuah kisah cinta</p>
+                <Laurel className={s.laurel} />
               </div>
               <div className={s.posterBottom}>
-                <h2 className={s.posterNames}>
+                <h2 className={`${s.posterNames} ${s.step2}`}>
                   {groomName}
                   <i>&amp;</i>
                   {brideName}
                 </h2>
-                <p className={s.posterLine}>{o.posterLine}</p>
-                {shortDate ? <p className={s.posterDate}>{shortDate}</p> : null}
-                <p className={s.billing}>
+                <p className={`${s.posterLine} ${s.step3}`}>{o.posterLine}</p>
+                {shortDate ? <p className={`${s.posterDate} ${s.step4}`}>{shortDate}</p> : null}
+                <p className={`${s.billing} ${s.step5}`}>
                   {families.length ? (
                     <>
                       Keluarga besar {families.join(" bersama keluarga besar ")} mempersembahkan pernikahan{" "}
@@ -125,7 +132,7 @@ export default function Bioskop({ invitation, guestName }: TemplateProps) {
                 </p>
               </div>
             </div>
-          </section>
+          </PosterStage>
 
           <section className={`${s.section} ${s.synopsis}`}>
             <Reveal className={s.reveal}>
@@ -315,7 +322,7 @@ export default function Bioskop({ invitation, guestName }: TemplateProps) {
           </footer>
         </main>
 
-        <GuideDock items={items} autoStart={o.autoScroll} startDelay={2600} />
+        <GuideDock items={items} autoStart={o.autoScroll} startDelay={5200} />
       </div>
     </OpeningProvider>
   );
