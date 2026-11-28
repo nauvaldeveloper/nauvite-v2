@@ -75,6 +75,7 @@ export default function AlbumPolaroid({ invitation, guestName }: TemplateProps) 
         data-develop={o.develop}
       >
         <Cover
+          loose={backs.length ? backs : [cover, cover]}
           photo={
             cover ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -95,11 +96,17 @@ export default function AlbumPolaroid({ invitation, guestName }: TemplateProps) 
 
         <main className={s.main}>
           <HeroStage id="awal" className={s.hero}>
-            <p className={`${s.heroKicker} ${s.step1}`}>Kami akan menikah</p>
+            <p className={`${s.heroKicker} ${s.step1}`}>
+              Kami akan menikah
+              <svg className={s.heart} viewBox="0 0 40 36" aria-hidden="true">
+                <path d="M20 33C8 24 2 17 4 10c2-6 10-8 16 0c6-8 14-6 16 0c2 7-4 14-16 23" pathLength={1} />
+              </svg>
+            </p>
             <div className={s.heroStack}>
               {backs.map((src, i) => (
                 <div key={i} className={`${s.heroBack} ${i ? s.heroBackRight : s.heroBackLeft}`}>
                   <Polaroid src={src} alt="" />
+                  {i ? <span className={s.clip} aria-hidden="true" /> : null}
                 </div>
               ))}
               <div className={s.heroPhoto}>
@@ -111,7 +118,10 @@ export default function AlbumPolaroid({ invitation, guestName }: TemplateProps) 
               <h2 className={s.heroNames}>
                 {groomName} <span>&amp;</span> {brideName}
               </h2>
-              {shortDate ? <p className={s.heroDate}>{shortDate}</p> : null}
+              <svg className={s.swoosh} viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M4 10C40 3 80 13 118 8S186 2 216 7" pathLength={1} />
+              </svg>
+              {shortDate ? <p className={s.dymo}>{shortDate}</p> : null}
             </div>
           </HeroStage>
 

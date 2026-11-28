@@ -18,6 +18,9 @@
   --cloth: #7f9276;
   --cloth-2: #67795f;
   --desk: #d8cfbf;
+  --wood: #c9a77c;
+  --wood-2: #a8845a;
+  --dymo: #2f4a3f;
 }
 
 .kraft {
@@ -38,6 +41,9 @@
   --cloth: #5c3f2b;
   --cloth-2: #48301f;
   --desk: #b89e78;
+  --wood: #7b5436;
+  --wood-2: #5f3f27;
+  --dymo: #1f2b38;
 }
 
 .hitam {
@@ -58,6 +64,9 @@
   --cloth: #2f3a45;
   --cloth-2: #222a32;
   --desk: #121110;
+  --wood: #3a2f27;
+  --wood-2: #221b16;
+  --dymo: #8a2f22;
 }
 
 .root {
@@ -275,7 +284,11 @@
   padding: 24px;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--desk) 80%, white), var(--desk) 70%);
+    radial-gradient(ellipse 80% 60% at 38% 28%, rgb(255 226 180 / 0.38), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgb(0 0 0 / 0.38) 100%),
+    repeating-linear-gradient(91deg, rgb(0 0 0 / 0.05) 0 2px, transparent 2px 9px, rgb(255 255 255 / 0.05) 9px 11px, transparent 11px 23px),
+    repeating-linear-gradient(89deg, transparent 0 70px, rgb(0 0 0 / 0.08) 70px 72px, transparent 72px 150px),
+    linear-gradient(180deg, var(--wood), var(--wood-2));
   transition: opacity 0.9s ease 0.85s;
 }
 
@@ -422,9 +435,237 @@
   filter: blur(1.5px);
 }
 
-.cover[data-opened="true"] .coverButton {
-  opacity: 0;
+
+/* ---------- Meja, polaroid lepas, sudut logam, catatan tempel ---------- */
+.deskGrain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.loose {
+  position: absolute;
+  width: 52%;
+  padding: 8px 8px 26px;
+}
+
+.loose .photo {
+  aspect-ratio: 1;
+}
+
+.looseA {
+  top: -9%;
+  left: -16%;
+  transform: rotate(-16deg);
+}
+
+.looseB {
+  right: -18%;
+  bottom: 14%;
+  transform: rotate(13deg);
+}
+
+.metal {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #f1dfae 0%, #c9a65a 45%, #8e6c2c 100%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+}
+
+.metalTop {
+  top: 0;
+  border-top-right-radius: 12px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.metalBottom {
+  bottom: 0;
+  border-bottom-right-radius: 12px;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.coverActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
   transition: opacity 0.3s;
+}
+
+.sticky {
+  position: relative;
+  width: 116px;
+  padding: 10px 10px 12px;
+  background: #f6e7a6;
+  box-shadow:
+    0 1px 1px rgb(0 0 0 / 0.1),
+    0 8px 16px rgb(0 0 0 / 0.22);
+  transform: rotate(5deg);
+  animation: nudge 3.2s ease-in-out infinite;
+}
+
+.sticky p {
+  font-family: var(--ap-hand), cursive;
+  font-size: 15px;
+  line-height: 1.15;
+  color: #3a332b;
+}
+
+.sticky svg {
+  position: absolute;
+  top: 18%;
+  left: -40px;
+  width: 38px;
+  overflow: visible;
+}
+
+.sticky svg path {
+  fill: none;
+  stroke: var(--pen);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kraft .sticky svg path,
+.hitam .sticky svg path {
+  stroke: #f6e7a6;
+}
+
+@keyframes nudge {
+  0%,
+  70%,
+  100% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(2deg) translateX(-3px);
+  }
+  90% {
+    transform: rotate(6deg);
+  }
+}
+
+@media (max-width: 390px) {
+  .coverActions {
+    gap: 36px;
+  }
+
+  .coverActions .coverButton {
+    min-width: 0;
+    padding: 8px 18px;
+  }
+
+  .sticky {
+    width: 98px;
+  }
+
+  .sticky p {
+    font-size: 13.5px;
+  }
+}
+
+.cover[data-opened="true"] .coverActions {
+  opacity: 0;
+}
+
+/* ---------- Hiasan halaman pertama ---------- */
+.heroKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.heart {
+  width: 28px;
+  overflow: visible;
+}
+
+.heart path,
+.swoosh path {
+  fill: none;
+  stroke: var(--pen);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.heart path {
+  transition: stroke-dashoffset 1s ease 1.6s;
+}
+
+.hitam .heart path,
+.hitam .swoosh path {
+  stroke: var(--accent);
+}
+
+.swoosh {
+  justify-self: center;
+  width: min(78%, 280px);
+  height: 14px;
+  margin-top: -4px;
+  overflow: visible;
+}
+
+.swoosh path {
+  stroke-width: 3;
+  transition: stroke-dashoffset 1.1s ease 2.5s;
+}
+
+.hero[data-opened="false"] .heart path,
+.hero[data-opened="false"] .swoosh path {
+  stroke-dashoffset: 1;
+}
+
+.clip {
+  position: absolute;
+  top: -14px;
+  left: 34%;
+  z-index: 2;
+  width: 14px;
+  height: 40px;
+  border: 2.5px solid #a3a7ab;
+  border-radius: 8px;
+  transform: rotate(8deg);
+}
+
+.clip::after {
+  content: "";
+  position: absolute;
+  inset: 6px 1.5px 8px;
+  border: 2px solid #a3a7ab;
+  border-bottom: 0;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Tanggal dalam label cetak timbul. */
+.dymo {
+  justify-self: center;
+  margin-top: 14px !important;
+  padding: 6px 16px 5px;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.16), transparent 45%, rgb(0 0 0 / 0.12)),
+    var(--dymo);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.28);
+  font-family: var(--ap-typed), monospace;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 1px 0 rgb(0 0 0 / 0.35),
+    0 -1px 0 rgb(255 255 255 / 0.25);
+  transform: rotate(-2deg);
 }
 
 /* ---------- Halaman ---------- */
@@ -481,7 +722,24 @@
   justify-items: center;
   gap: 14px;
   padding: 60px 24px 64px;
+  position: relative;
+  isolation: isolate;
   overflow: clip;
+}
+
+/* Kertas berpetak ala halaman scrapbook. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: center top;
+  -webkit-mask: linear-gradient(180deg, #000 75%, transparent);
+  mask: linear-gradient(180deg, #000 75%, transparent);
 }
 
 .heroKicker {
