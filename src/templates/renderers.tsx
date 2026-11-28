@@ -14,6 +14,7 @@ import AlbumPolaroid from "./album-polaroid/Template";
 import LengkungBoho from "./lengkung-boho/Template";
 import SenjaPantai from "./senja-pantai/Template";
 import GaleriSeni from "./galeri-seni/Template";
+import PasporCinta from "./paspor-cinta/Template";
 import sageGarden from "./sage-garden/manifest";
 import sageGardenTheme from "./sage-garden/theme";
 import dustyRose from "./dusty-rose/manifest";
@@ -92,6 +93,8 @@ function Template(props: TemplateProps) {
       return <SenjaPantai {...props} />;
     case "galeri-seni":
       return <GaleriSeni {...props} />;
+    case "paspor-cinta":
+      return <PasporCinta {...props} />;
     case "royal-gold":
     case "floral-light":
     case "midnight-dark":

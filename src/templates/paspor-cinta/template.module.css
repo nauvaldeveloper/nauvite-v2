@@ -1,0 +1,1422 @@
+/* Tema Paspor Cinta. Palet: .biru / .merah / .hijau */
+
+.biru {
+  --paper: #efe8da;
+  --paper-2: #e5dccb;
+  --surface: #fbf8f1;
+  --ink: #22262e;
+  --soft: #626774;
+  --line: #d3c8b4;
+  --accent: #1f2f4f;
+  --on-accent: #f7f1e3;
+  --leather: #1f2f4f;
+  --leather-2: #131d33;
+  --page: #eef1ea;
+  --guilloche: rgb(64 112 150 / 0.13);
+  --stamp-1: #b3362f;
+  --stamp-2: #2a4f8f;
+  --stamp-3: #2f6b4f;
+}
+
+.merah {
+  --paper: #f1e7df;
+  --paper-2: #e7d9ce;
+  --surface: #fcf7f3;
+  --ink: #2b2224;
+  --soft: #6e5f60;
+  --line: #d9c6ba;
+  --accent: #6b1d2a;
+  --on-accent: #fbefe6;
+  --leather: #6b1d2a;
+  --leather-2: #451019;
+  --page: #f4ece6;
+  --guilloche: rgb(170 80 90 / 0.12);
+  --stamp-1: #2a4f8f;
+  --stamp-2: #9b2a2a;
+  --stamp-3: #2f6b4f;
+}
+
+.hijau {
+  --paper: #ebeadb;
+  --paper-2: #dfddc9;
+  --surface: #f9f8f0;
+  --ink: #1f2a25;
+  --soft: #5d6862;
+  --line: #cfcdb6;
+  --accent: #1f4a3d;
+  --on-accent: #f1efe0;
+  --leather: #1f4a3d;
+  --leather-2: #122e26;
+  --page: #eef0e6;
+  --guilloche: rgb(60 120 90 / 0.13);
+  --stamp-1: #b3362f;
+  --stamp-2: #2a4f8f;
+  --stamp-3: #8a5a17;
+}
+
+.root {
+  --ease: cubic-bezier(0.25, 0.6, 0.3, 1);
+  --gold: #d7b46a;
+  --gold-foil: linear-gradient(180deg, #f3dc9c, #c99c46 55%, #e8c97f);
+  --dock-bg: var(--surface);
+  --dock-ink: var(--ink);
+  --dock-line: var(--line);
+  --dock-accent: var(--accent);
+  --dock-radius: 8px;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--paper-2);
+  color: var(--ink);
+  font-family: var(--pc-sans), system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root ol,
+.root dl,
+.root dd {
+  margin: 0;
+}
+
+.root h1,
+.root h2,
+.root h3 {
+  font-family: var(--pc-serif), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.root h2 i,
+.root p i {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.root a {
+  color: inherit;
+}
+
+.reveal {
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+}
+
+.reveal[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(18px) rotate(var(--tilt, 0deg));
+}
+
+.kicker,
+.monoLabel {
+  font-family: var(--pc-mono), monospace;
+  font-weight: 500;
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.mono {
+  font-family: var(--pc-mono), monospace;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Tombol ---------- */
+.button,
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 8px 22px;
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.button {
+  background: var(--accent);
+  color: var(--on-accent) !important;
+}
+
+.button:hover {
+  background: color-mix(in srgb, var(--accent) 86%, black);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--accent) !important;
+}
+
+.ghost:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.button svg,
+.ghost svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Peta ---------- */
+.map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mapGrid path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 14%, transparent);
+  stroke-width: 1;
+}
+
+.flight {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 45%, transparent);
+  stroke-width: 1.6;
+  stroke-dasharray: 6 7;
+}
+
+.mapPlane {
+  fill: var(--accent);
+}
+
+/* ---------- Sampul ---------- */
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 26px;
+  padding: 40px 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 50%, rgb(0 0 0 / 0.12) 100%),
+    var(--paper);
+  transition: opacity 0.5s ease 1.3s;
+}
+
+.coverKicker {
+  position: relative;
+  font-family: var(--pc-mono), monospace;
+  font-weight: 500;
+  font-size: 12.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--soft);
+  transition: opacity 0.35s ease;
+}
+
+.desk {
+  position: relative;
+  left: -8%;
+  width: min(60vw, 250px, 36svh);
+  transition:
+    transform 0.95s cubic-bezier(0.4, 0, 0.2, 1) 0.85s,
+    filter 0.95s ease 0.85s;
+}
+
+.passport {
+  position: relative;
+  aspect-ratio: 0.7;
+  perspective: 1400px;
+}
+
+.ppPage {
+  position: absolute;
+  inset: 3px 0 3px 5px;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 4px 12px 12px 4px;
+  background:
+    repeating-radial-gradient(circle at 0 0, transparent 0 7px, var(--guilloche) 7px 8px),
+    var(--page);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.3);
+}
+
+.ppPage span {
+  height: 6px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.ppPage span:nth-child(2) {
+  width: 70%;
+}
+
+.ppPage span:nth-child(4) {
+  width: 50%;
+}
+
+.ppCover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.45, 0.05, 0.25, 1) 0.1s;
+}
+
+.ppFront,
+.ppBack {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 14px 14px 6px;
+  backface-visibility: hidden;
+}
+
+.ppFront {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  justify-items: center;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 16px 18px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgb(255 255 255 / 0.12), transparent 60%),
+    repeating-linear-gradient(45deg, rgb(255 255 255 / 0.025) 0 2px, transparent 2px 4px),
+    linear-gradient(160deg, var(--leather), var(--leather-2));
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    inset 8px 0 14px -6px rgb(0 0 0 / 0.5),
+    0 22px 46px rgb(0 0 0 / 0.38);
+  text-align: center;
+}
+
+.ppBack {
+  background: linear-gradient(160deg, var(--leather-2), var(--leather));
+  transform: rotateY(180deg);
+}
+
+.ppTitle {
+  font-family: var(--pc-mono), monospace;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.emblem {
+  width: 58%;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 0.4));
+}
+
+.emblemStar {
+  fill: var(--gold);
+  stroke: none;
+}
+
+.ppNames {
+  display: grid;
+  font-family: var(--pc-serif), serif;
+  font-size: clamp(22px, 7vw, 30px);
+  line-height: 1.05;
+  color: var(--gold);
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.4);
+  overflow-wrap: anywhere;
+}
+
+.ppNames i {
+  font-style: normal;
+  font-size: 0.7em;
+}
+
+.chip {
+  width: 30px;
+  height: 20px;
+  border: 1.6px solid var(--gold);
+  border-radius: 4px;
+  background:
+    linear-gradient(var(--gold), var(--gold)) 50% 0 / 1.4px 100% no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 50% / 100% 1.4px no-repeat;
+  opacity: 0.85;
+}
+
+/* Boarding pass yang menyembul di belakang paspor. */
+.boarding {
+  position: absolute;
+  top: 7%;
+  left: -28%;
+  display: grid;
+  gap: 10px;
+  width: 78%;
+  padding: 10px 12px 12px;
+  border-radius: 8px;
+  background: #fbf8f1;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.2);
+  transform: rotate(-14deg);
+  transition:
+    transform 0.6s var(--ease),
+    opacity 0.4s ease;
+}
+
+.boardingHead {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--accent);
+  font-family: var(--pc-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+}
+
+.boardingHead svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+  transform: rotate(90deg);
+}
+
+.barcode {
+  display: block;
+  height: 26px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 2px,
+    transparent 2px 4px,
+    var(--ink) 4px 5px,
+    transparent 5px 8px,
+    var(--ink) 8px 11px,
+    transparent 11px 12px
+  );
+  opacity: 0.8;
+}
+
+/* Label bagasi berisi nama tamu. */
+.tag {
+  position: absolute;
+  right: -38%;
+  bottom: 6%;
+  display: grid;
+  gap: 1px;
+  width: 60%;
+  min-width: 140px;
+  padding: 10px 10px 11px 28px;
+  background: #f6e3b0;
+  color: #2a2620;
+  clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+  filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.25));
+  transform: rotate(7deg);
+  transform-origin: 0 50%;
+  animation: tagSwing 4s ease-in-out infinite alternate;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes tagSwing {
+  from {
+    transform: rotate(5deg);
+  }
+  to {
+    transform: rotate(9deg);
+  }
+}
+
+.tagHole {
+  position: absolute;
+  top: calc(50% - 6px);
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #c9a24d;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.tagString {
+  display: none;
+}
+
+.tagLabel {
+  font-family: var(--pc-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6c6253;
+}
+
+.tagName {
+  font-family: var(--pc-serif), serif;
+  font-size: 16px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.coverButton {
+  position: relative;
+  margin-top: 26px;
+  transition: opacity 0.3s ease;
+}
+
+.cover[data-opened="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cover[data-opened="true"] .ppCover {
+  transform: rotateY(-165deg);
+}
+
+.cover[data-opened="true"] .desk {
+  transform: scale(1.9);
+  filter: blur(1.5px);
+}
+
+.cover[data-opened="true"] .tag {
+  opacity: 0;
+  animation: none;
+}
+
+.cover[data-opened="true"] .boarding {
+  opacity: 0;
+  transform: translate(-30px, -20px) rotate(-20deg);
+}
+
+.cover[data-opened="true"] .coverKicker,
+.cover[data-opened="true"] .coverButton {
+  opacity: 0;
+}
+
+/* ---------- Halaman ---------- */
+.main {
+  max-width: 540px;
+  margin: 0 auto;
+  background: var(--paper);
+  box-shadow: 0 0 60px rgb(0 0 0 / 0.12);
+}
+
+.section {
+  padding: 72px 22px;
+}
+
+.alt {
+  background: var(--paper-2);
+}
+
+.heading {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.heading h2 {
+  font-size: 34px;
+}
+
+.headingPlane {
+  width: 22px;
+  fill: var(--accent);
+  transform: rotate(90deg);
+}
+
+.lead {
+  margin-bottom: 28px !important;
+  text-align: center;
+  color: var(--soft);
+}
+
+/* ---------- Halaman pertama: halaman data paspor ---------- */
+.hero {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  padding: 54px 18px 70px;
+  overflow: clip;
+  text-align: center;
+}
+
+.heroMap {
+  opacity: 0.8;
+}
+
+.heroTitle {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  transition:
+    opacity 0.9s ease 1.85s,
+    transform 1s var(--ease) 1.85s;
+}
+
+.heroNames {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.26em;
+  font-size: clamp(40px, 11.5vw, 60px) !important;
+  line-height: 1.08 !important;
+}
+
+.heroNames i {
+  font-size: 0.7em;
+}
+
+.dataPage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 14px 14px 12px;
+  border-radius: 12px;
+  background:
+    repeating-radial-gradient(circle at 0 0, transparent 0 7px, var(--guilloche) 7px 8px),
+    repeating-radial-gradient(circle at 100% 100%, transparent 0 9px, var(--guilloche) 9px 10px),
+    var(--page);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.12),
+    0 20px 40px rgb(0 0 0 / 0.18);
+  color: #22262e;
+  text-align: left;
+  transform: rotate(-1deg);
+  transition:
+    opacity 0.9s ease 1.55s,
+    transform 1.1s var(--ease) 1.55s;
+}
+
+.pageHead {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  font-family: var(--pc-mono), monospace;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pageBody {
+  display: grid;
+  grid-template-columns: 50% minmax(0, 1fr);
+  gap: 14px;
+  padding: 12px 0;
+}
+
+.passPhoto {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 15%, white);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
+}
+
+.passPhoto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+}
+
+.fields {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.fields dt {
+  font-family: var(--pc-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b7080;
+}
+
+.fields dd {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.mrz {
+  display: grid;
+  gap: 1px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  overflow: hidden;
+  font-family: var(--pc-mono), monospace;
+  font-weight: 500;
+  font-size: clamp(9.5px, 2.9vw, 12.5px);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: #3a3f4a;
+}
+
+/* Stempel imigrasi. */
+.stamp {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  font-family: var(--pc-mono), monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.stampArrive {
+  top: 44%;
+  right: -22px;
+  width: 104px;
+  height: 104px;
+  border: 3px double var(--stamp-1);
+  border-radius: 50%;
+  color: var(--stamp-1);
+  line-height: 1.15;
+  text-align: center;
+  transform: rotate(14deg);
+}
+
+.stampArrive small {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+}
+
+.stampArrive b {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.stampOk {
+  bottom: 30px;
+  left: 8%;
+  padding: 4px 12px;
+  border: 3px solid var(--stamp-2);
+  border-radius: 4px;
+  font-size: 19px;
+  letter-spacing: 0.12em;
+  color: var(--stamp-2);
+  transform: rotate(-9deg);
+}
+
+.stampHappy {
+  right: 10px;
+  bottom: 14px;
+  display: inline-flex;
+  gap: 5px;
+  padding: 3px 12px;
+  border: 2.5px solid var(--stamp-3);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--stamp-3);
+  transform: rotate(-4deg);
+}
+
+.stampHappy svg {
+  width: 13px;
+  fill: currentColor;
+  transform: rotate(90deg);
+}
+
+.hero[data-opened="false"] .heroTitle {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.hero[data-opened="false"] .dataPage {
+  opacity: 0;
+  transform: translateY(46px) rotate(4deg);
+}
+
+.hero[data-opened="false"] .stamp {
+  opacity: 0;
+}
+
+.hero[data-opened="true"] .stampArrive {
+  animation: stampDown 0.42s cubic-bezier(0.3, 0, 0.2, 1) 2.45s both;
+  --rot: 14deg;
+}
+
+.hero[data-opened="true"] .stampOk {
+  animation: stampDown 0.42s cubic-bezier(0.3, 0, 0.2, 1) 2.9s both;
+  --rot: -9deg;
+}
+
+.hero[data-opened="true"] .stampHappy {
+  animation: stampDown 0.42s cubic-bezier(0.3, 0, 0.2, 1) 3.35s both;
+  --rot: -4deg;
+}
+
+/* Stempel turun dari atas lalu menempel, tanpa memantul. */
+@keyframes stampDown {
+  from {
+    opacity: 0;
+    transform: rotate(var(--rot)) scale(1.9);
+  }
+  60% {
+    opacity: 0.95;
+  }
+  to {
+    opacity: 0.92;
+    transform: rotate(var(--rot)) scale(1);
+  }
+}
+
+/* ---------- Pembuka ---------- */
+.intro .reveal {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.salam {
+  font-style: italic;
+  color: var(--soft);
+}
+
+.to {
+  font-family: var(--pc-serif), serif;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--accent);
+}
+
+.quote {
+  padding-top: 0;
+  text-align: center;
+}
+
+.quote blockquote {
+  margin: 0;
+  padding: 24px 20px;
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  font-family: var(--pc-serif), serif;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.quote p {
+  margin-top: 12px;
+  font-family: var(--pc-mono), monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  color: var(--soft);
+}
+
+/* ---------- Kartu umum ---------- */
+.card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.07);
+}
+
+/* ---------- Data penumpang ---------- */
+.couple {
+  display: grid;
+  gap: 30px;
+}
+
+.idCard {
+  display: grid;
+  gap: 14px;
+  padding: 14px 14px 18px;
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.idCard:nth-child(2) {
+  --tilt: 1.5deg !important;
+}
+
+.idCard:nth-child(1) {
+  --tilt: -1.5deg !important;
+}
+
+.idHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: var(--accent);
+  font-family: var(--pc-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+}
+
+.idPhoto {
+  aspect-ratio: 4 / 4.4;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--paper-2);
+}
+
+.idPhoto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+.idName {
+  font-family: var(--pc-serif), serif;
+  font-weight: 400 !important;
+  font-size: 23px !important;
+}
+
+.idCard .fields dd {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  max-width: 100%;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13.5px;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  color: var(--soft) !important;
+}
+
+.social svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+/* ---------- Jejak perjalanan ---------- */
+.stories {
+  position: relative;
+  display: grid;
+  gap: 46px;
+  padding: 0 0 0 36px;
+  list-style: none;
+}
+
+.stories::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 11px;
+  border-left: 2px dashed color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.story {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+
+.storyMark {
+  position: absolute;
+  top: 2px;
+  left: -36px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.storyMark svg {
+  width: 14px;
+  fill: var(--on-accent);
+  transform: rotate(180deg);
+}
+
+.postcard {
+  position: relative;
+  margin: 0 0 10px;
+  padding: 8px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 0.14);
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.postcard img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.postmark {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 4px 10px;
+  border: 2px solid rgb(255 255 255 / 0.9);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.25);
+  font-family: var(--pc-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  backdrop-filter: blur(2px);
+}
+
+.story h3 {
+  font-size: 25px;
+}
+
+.storyBody {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--soft);
+}
+
+/* ---------- Papan keberangkatan ---------- */
+.board {
+  background: #1b1d22;
+  color: #f2efe6;
+}
+
+.board .headingPlane {
+  fill: #f4d27a;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.countItem {
+  text-align: center;
+}
+
+.countItem span {
+  display: block;
+  padding: 10px 0 8px;
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, transparent calc(50% - 1px), rgb(0 0 0 / 0.55) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(180deg, #2e3139, #23252b);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  font-family: var(--pc-mono), monospace;
+  font-weight: 600;
+  font-size: clamp(28px, 8.5vw, 40px);
+  line-height: 1.1;
+  color: #f4d27a;
+  font-variant-numeric: tabular-nums;
+}
+
+.countItem small {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--pc-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(242 239 230 / 0.7);
+}
+
+/* ---------- Boarding pass acara ---------- */
+.events {
+  display: grid;
+  gap: 26px;
+}
+
+.pass {
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.1),
+    0 14px 28px rgb(0 0 0 / 0.1);
+}
+
+.passHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--accent);
+  font-family: var(--pc-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+}
+
+.passHead span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.passHead svg {
+  width: 14px;
+  fill: currentColor;
+  transform: rotate(90deg);
+}
+
+.passBody {
+  display: grid;
+  gap: 12px;
+  padding: 18px 18px 16px;
+}
+
+.passBody h3 {
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.passGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.passGrid dt {
+  font-family: var(--pc-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.passGrid dd {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.passWide {
+  grid-column: span 2;
+}
+
+.address {
+  font-size: 14.5px;
+  color: var(--soft);
+}
+
+/* Sobekan boarding pass: garis putus-putus dengan lekukan di kedua sisi. */
+.passStub {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: 18px 18px 16px;
+  border-top: 2px dashed var(--line);
+}
+
+.passStub::before,
+.passStub::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.passStub::before {
+  left: -10px;
+}
+
+.passStub::after {
+  right: -10px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.actions a {
+  flex: 1 1 auto;
+}
+
+/* ---------- Album perjalanan ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 14px;
+}
+
+.shot {
+  padding: 7px 7px 22px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 0.14);
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.shot:nth-child(3n + 1) {
+  grid-column: span 2;
+}
+
+.shot:nth-child(3n + 1) img {
+  aspect-ratio: 16 / 10;
+}
+
+.video {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* ---------- Tanda kasih ---------- */
+.gifts {
+  display: grid;
+  gap: 18px;
+}
+
+.gift {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 26px 20px;
+  text-align: center;
+}
+
+.bankLogo {
+  height: 30px;
+  width: auto;
+}
+
+.account {
+  font-family: var(--pc-mono), monospace;
+  font-weight: 600;
+  font-size: 25px;
+  letter-spacing: 0.06em;
+}
+
+.gift .ghost {
+  margin-top: 10px;
+}
+
+/* ---------- Check-in ---------- */
+.formBox {
+  padding: 24px 20px;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.formLabel {
+  padding: 0;
+  font-size: 15px;
+  color: var(--soft);
+}
+
+.input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 4px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.choice[data-checked="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.choice:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.error {
+  margin-top: 6px !important;
+  font-size: 15px;
+  color: #b3362f;
+}
+
+.notice {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.wishes {
+  display: grid;
+  gap: 12px;
+  max-height: 580px;
+  margin-top: 28px;
+  padding: 2px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.wish {
+  padding: 16px 18px;
+}
+
+.wishName {
+  font-family: var(--pc-serif), serif;
+  font-size: 19px;
+}
+
+.wishMessage {
+  overflow-wrap: anywhere;
+}
+
+.wishDate {
+  font-family: var(--pc-mono), monospace;
+  font-size: 12px;
+  color: var(--soft);
+}
+
+/* ---------- Penutup ---------- */
+.footer {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 86px 24px 150px;
+  text-align: center;
+  color: var(--soft);
+}
+
+.footerPlane {
+  width: 30px;
+  fill: var(--accent);
+  animation: takeoff 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes takeoff {
+  from {
+    transform: translateY(4px);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+.footerNames {
+  margin: 6px 0 30px !important;
+  font-family: var(--pc-serif), serif;
+  font-size: 40px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+
+.made {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+
+@media (min-width: 900px) {
+  .section {
+    padding-left: 44px;
+    padding-right: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root *,
+  .root *::before,
+  .root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cover[data-opened="true"] {
+    opacity: 0;
+  }
+
+  .hero .stamp {
+    opacity: 0.92 !important;
+  }
+}

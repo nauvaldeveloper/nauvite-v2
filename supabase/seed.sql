@@ -737,3 +737,23 @@ from public.invitations,
   (values ('Mas Bayu', 'Konsepnya keren banget, berasa diundang ke pameran. Selamat ya kalian!', 2),
           ('Keluarga Pak Harun', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Kami akan hadir.', 4)) as w(name, message, n)
 where slug in ('contoh-galeri-seni', 'contoh-galeri-seni-zamrud', 'contoh-galeri-seni-anggur');
+
+-- Undangan demo tema Paspor Cinta (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0c1', 'contoh-paspor-cinta', 'paspor-cinta', 'active', now() + interval '365 days',
+  content, '{"paspor-cinta": {"palette": "biru"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0c2', 'contoh-paspor-cinta-merah', 'paspor-cinta', 'active', now() + interval '365 days',
+  content, '{"paspor-cinta": {"palette": "merah"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0c3', 'contoh-paspor-cinta-hijau', 'paspor-cinta', 'active', now() + interval '365 days',
+  content, '{"paspor-cinta": {"palette": "hijau"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Kak Sinta', 'Selamat berangkat ke perjalanan paling indah! Semoga selalu bahagia di setiap tujuan.', 2),
+          ('Keluarga Om Herman', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Kami ikut check-in!', 4)) as w(name, message, n)
+where slug in ('contoh-paspor-cinta', 'contoh-paspor-cinta-merah', 'contoh-paspor-cinta-hijau');

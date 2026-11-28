@@ -20,6 +20,7 @@ import albumPolaroid from "./album-polaroid/manifest";
 import lengkungBoho from "./lengkung-boho/manifest";
 import senjaPantai from "./senja-pantai/manifest";
 import galeriSeni from "./galeri-seni/manifest";
+import pasporCinta from "./paspor-cinta/manifest";
 
 /**
  * Daftar semua template. Menambah template baru:
@@ -49,6 +50,7 @@ export const TEMPLATES = [
   lengkungBoho,
   senjaPantai,
   galeriSeni,
+  pasporCinta,
 ] as const satisfies readonly TemplateManifest[];
 
 export type TemplateId = (typeof TEMPLATES)[number]["id"];

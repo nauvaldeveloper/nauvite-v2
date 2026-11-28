@@ -96,6 +96,9 @@ Tanpa file gambar baru: langit, matahari, dan ombak dibuat dengan CSS (gradien d
 ## Tema Galeri Seni (`galeri-seni`)
 Tanpa file gambar baru: dinding, lampu sorot, bingkai, tiang dan tali beludru dibuat dengan CSS dan SVG di `src/templates/galeri-seni/`. Demo `contoh-galeri-seni` memakai foto demo Signature (`public/demo/signature/`). Font Libre Caslon Text dan Manrope dari Google Fonts (OFL).
 
+## Tema Paspor Cinta (`paspor-cinta`)
+Tanpa file gambar baru: paspor, peta, stempel, label bagasi, dan boarding pass dibuat dengan CSS dan SVG di `src/templates/paspor-cinta/`. Ikon pesawat mengikuti bentuk ikon "flight" Material Icons (Apache 2.0). Demo `contoh-paspor-cinta` memakai foto demo Signature (`public/demo/signature/`). Font Young Serif, Work Sans, IBM Plex Mono dari Google Fonts (OFL).
+
 ## Tema Herbarium (`herbarium`)
 Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/herbarium/art.tsx`. Font IM Fell English, Alegreya, Delicious Handrawn dari Google Fonts (OFL).
 
