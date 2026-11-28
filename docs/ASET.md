@@ -99,6 +99,9 @@ Tanpa file gambar baru: dinding, lampu sorot, bingkai, tiang dan tali beludru di
 ## Tema Paspor Cinta (`paspor-cinta`)
 Tanpa file gambar baru: paspor, peta, stempel, label bagasi, dan boarding pass dibuat dengan CSS dan SVG di `src/templates/paspor-cinta/`. Ikon pesawat mengikuti bentuk ikon "flight" Material Icons (Apache 2.0). Demo `contoh-paspor-cinta` memakai foto demo Signature (`public/demo/signature/`). Font Young Serif, Work Sans, IBM Plex Mono dari Google Fonts (OFL).
 
+## Tema Sampul Majalah (`sampul-majalah`)
+Tanpa file gambar baru: meja marmer, cangkir kopi, majalah, lencana, dan barcode dibuat dengan CSS dan SVG di `src/templates/sampul-majalah/`. Demo `contoh-sampul-majalah` memakai foto demo Signature (`public/demo/signature/`). Font Playfair Display, Archivo, Archivo Narrow dari Google Fonts (OFL).
+
 ## Tema Herbarium (`herbarium`)
 Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/herbarium/art.tsx`. Font IM Fell English, Alegreya, Delicious Handrawn dari Google Fonts (OFL).
 

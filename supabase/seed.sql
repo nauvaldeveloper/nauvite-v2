@@ -757,3 +757,23 @@ from public.invitations,
   (values ('Kak Sinta', 'Selamat berangkat ke perjalanan paling indah! Semoga selalu bahagia di setiap tujuan.', 2),
           ('Keluarga Om Herman', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Kami ikut check-in!', 4)) as w(name, message, n)
 where slug in ('contoh-paspor-cinta', 'contoh-paspor-cinta-merah', 'contoh-paspor-cinta-hijau');
+
+-- Undangan demo tema Sampul Majalah (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0d1', 'contoh-sampul-majalah', 'sampul-majalah', 'active', now() + interval '365 days',
+  content, '{"sampul-majalah": {"palette": "merah"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0d2', 'contoh-sampul-majalah-monokrom', 'sampul-majalah', 'active', now() + interval '365 days',
+  content, '{"sampul-majalah": {"palette": "monokrom"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0d3', 'contoh-sampul-majalah-merah-muda', 'sampul-majalah', 'active', now() + interval '365 days',
+  content, '{"sampul-majalah": {"palette": "merah-muda"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Mbak Rara', 'Sampulnya keren banget, berasa kalian artis! Selamat menempuh hidup baru.', 2),
+          ('Keluarga Pak Darmawan', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Kami akan hadir.', 4)) as w(name, message, n)
+where slug in ('contoh-sampul-majalah', 'contoh-sampul-majalah-monokrom', 'contoh-sampul-majalah-merah-muda');

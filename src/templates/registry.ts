@@ -21,6 +21,7 @@ import lengkungBoho from "./lengkung-boho/manifest";
 import senjaPantai from "./senja-pantai/manifest";
 import galeriSeni from "./galeri-seni/manifest";
 import pasporCinta from "./paspor-cinta/manifest";
+import sampulMajalah from "./sampul-majalah/manifest";
 
 /**
  * Daftar semua template. Menambah template baru:
@@ -51,6 +52,7 @@ export const TEMPLATES = [
   senjaPantai,
   galeriSeni,
   pasporCinta,
+  sampulMajalah,
 ] as const satisfies readonly TemplateManifest[];
 
 export type TemplateId = (typeof TEMPLATES)[number]["id"];
