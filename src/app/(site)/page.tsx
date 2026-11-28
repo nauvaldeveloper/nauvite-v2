@@ -191,6 +191,14 @@ export default async function LandingPage() {
               hematNormal={site.hematNormal ? rupiah(site.hematNormal) : null}
               whatsapp={site.whatsapp}
             />
+            <div className="mt-10 text-center">
+              <Link
+                href="/tema"
+                className="inline-block rounded-full border border-ink/25 bg-card px-6 py-3 text-[15px] font-semibold hover:border-ink/50"
+              >
+                Buka katalog lengkap ({ready} tema)
+              </Link>
+            </div>
           </div>
         </section>
 

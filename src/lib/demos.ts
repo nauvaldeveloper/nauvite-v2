@@ -47,6 +47,8 @@ export type CatalogDemo = {
   /** Nama dan warna bulatan, untuk tema yang punya beberapa warna. */
   label: string;
   color: string;
+  /** Warna aksen, untuk bulatan dua warna. */
+  accent: string;
   cover: string;
   inside: string;
   card: string;
@@ -74,19 +76,24 @@ export function getCatalog(): CatalogItem[] {
   const items = TEMPLATES.map((t: TemplateManifest) => {
     const slug = DEMO_SLUG[t.id];
     const useCover = t.id in CARD_COVER;
-    const makeDemo = (suffix: string, label: string, color: string): CatalogDemo => {
+    const makeDemo = (suffix: string, label: string, color: string, accent: string): CatalogDemo => {
       const cover = `/landing/${t.id}${suffix}-sampul.webp`;
       const inside = `/landing/${t.id}${suffix}-isi.webp`;
-      return { slug: slug + suffix, label, color, cover, inside, card: useCover ? cover : inside };
+      return { slug: slug + suffix, label, color, accent, cover, inside, card: useCover ? cover : inside };
     };
     const palette = t.fields.find((f) => f.key === "palette");
     let demos: CatalogDemo[] = [];
     if (slug && COLOR_DEMOS.has(t.id) && palette?.type === "select") {
       demos = palette.options.map((o, i) =>
-        makeDemo(i === 0 ? "" : `-${o.value}`, o.label, t.paletteSwatches?.[o.value]?.background ?? t.swatch.background),
+        makeDemo(
+          i === 0 ? "" : `-${o.value}`,
+          o.label,
+          t.paletteSwatches?.[o.value]?.background ?? t.swatch.background,
+          t.paletteSwatches?.[o.value]?.accent ?? t.swatch.accent,
+        ),
       );
     } else if (slug) {
-      demos = [makeDemo("", "", t.swatch.background)];
+      demos = [makeDemo("", "", t.swatch.background, t.swatch.accent)];
     }
     return {
       id: t.id,
@@ -101,7 +108,7 @@ export function getCatalog(): CatalogItem[] {
       withPhoto: t.withPhoto,
       swatch: t.swatch,
       demos,
-      cardPosition: CARD_COVER[t.id] ?? "50% 30%",
+      cardPosition: CARD_COVER[t.id] ?? "50% 0%",
     };
   });
   // Adat premium dulu, lalu tema tanpa foto (supaya ikut tampil di layar pertama HP), premium lain,

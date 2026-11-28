@@ -13,7 +13,7 @@ export function SiteFooter({ businessName, waHref }: { businessName: string; waH
             <p className="mt-2 text-[14px]">Undangan pernikahan digital dan cetak.</p>
           </div>
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[14px]">
-            <Link href="/#tema" className="hover:text-white">Tema</Link>
+            <Link href="/tema" className="hover:text-white">Katalog tema</Link>
             <Link href="/#harga" className="hover:text-white">Harga</Link>
             <Link href="/cetak" className="hover:text-white">Undangan cetak</Link>
             <Link href="/mitra" className="hover:text-white">Program mitra</Link>

@@ -171,7 +171,7 @@ function Colors({
         >
           <span
             className={`size-5 rounded-full ring-offset-2 ring-offset-paper ${i === value ? "ring-2 ring-ink" : "ring-1 ring-ink/15"}`}
-            style={{ background: d.color }}
+            style={{ background: `linear-gradient(135deg, ${d.color} 50%, ${d.accent} 50%)` }}
           />
         </button>
       ))}

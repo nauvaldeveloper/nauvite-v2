@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/logo";
 
 const LINKS = [
-  { href: "/#tema", label: "Tema" },
+  { href: "/tema", label: "Tema" },
   { href: "/#fitur", label: "Fitur" },
   { href: "/#harga", label: "Harga" },
   { href: "/cetak", label: "Cetak" },

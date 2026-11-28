@@ -122,7 +122,7 @@ export function TryNames({ items, whatsapp, siteUrl }: { items: CatalogItem[]; w
               >
                 <span
                   className={`size-6 rounded-full ring-offset-2 ring-offset-paper ${i === color ? "ring-2 ring-ink" : "ring-1 ring-ink/15"}`}
-                  style={{ background: d.color }}
+                  style={{ background: `linear-gradient(135deg, ${d.color} 50%, ${d.accent} 50%)` }}
                 />
               </button>
             ))}
