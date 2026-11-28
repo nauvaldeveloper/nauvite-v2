@@ -48,6 +48,7 @@
 .root {
   font-variant-numeric: lining-nums;
   --ease: cubic-bezier(0.25, 0.6, 0.3, 1);
+  --leaf: color-mix(in srgb, var(--accent) 72%, var(--ink));
   --dock-bg: var(--surface);
   --dock-ink: var(--ink);
   --dock-line: var(--line);
@@ -204,11 +205,60 @@
   object-position: 50% 30%;
 }
 
+/* ---------- Tangkai daun ---------- */
+.branchWrap {
+  display: block;
+  transform-origin: 50% 100%;
+}
+
+.branchFlip {
+  scale: -1 1;
+}
+
+.branch {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  animation: sway 6s ease-in-out infinite alternate;
+}
+
+.branch ellipse {
+  fill: var(--leaf);
+}
+
+.stem {
+  fill: none;
+  stroke: var(--leaf);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+@keyframes sway {
+  from {
+    transform: rotate(-3deg);
+  }
+  to {
+    transform: rotate(3deg);
+  }
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transition: opacity 0.4s ease;
+}
+
 /* ---------- Sampul ---------- */
 .cover {
-  --aw: min(64vw, 280px);
-  --ah: min(46svh, 400px);
-  --at: max(9svh, 48px);
+  --aw: min(62vw, 270px);
+  --ah: min(44svh, 390px);
+  --at: max(12svh, 76px);
   position: fixed;
   inset: 0;
   z-index: 60;
@@ -217,30 +267,91 @@
   transition: opacity 0.5s ease 1.25s;
 }
 
-.coverSun {
+.coverDecor,
+.coverBranches {
   position: absolute;
-  top: calc(var(--at) - var(--aw) * 0.22);
-  left: 50%;
-  width: calc(var(--aw) * 1.4);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--sun);
-  opacity: 0.55;
-  transform: translateX(-50%);
+  inset: 0;
+  pointer-events: none;
   transition: opacity 0.4s ease;
 }
 
-.coverOutline {
+.coverBranches {
+  z-index: 1;
+}
+
+.corner {
   position: absolute;
-  top: calc(var(--at) - 11px);
-  left: calc(50% - var(--aw) / 2 - 11px);
-  width: calc(var(--aw) + 22px);
-  height: calc(var(--ah) + 11px);
-  border: 1.5px solid var(--accent);
-  border-bottom: 0;
+  width: min(34vw, 180px);
+  overflow: visible;
+  opacity: 0.85;
+}
+
+.corner path {
+  fill: none;
+  stroke-width: 9;
+}
+
+.cornerTop {
+  top: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.cornerBottom {
+  bottom: 0;
+  left: 0;
+}
+
+@media (max-height: 720px) {
+  .cornerBottom {
+    display: none;
+  }
+}
+
+.coverSun {
+  position: absolute;
+  top: calc(var(--at) + var(--ah) * 0.12);
+  left: calc(50% + var(--aw) * 0.12);
+  width: calc(var(--aw) * 0.62);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--sun);
+  animation: float 7s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.coverBackArch {
+  position: absolute;
+  top: calc(var(--at) + 18px);
+  left: calc(50% - var(--aw) / 2 - 18px);
+  width: var(--aw);
+  height: var(--ah);
   border-radius: 999px 999px 0 0;
-  opacity: 0.55;
-  transition: opacity 0.4s ease;
+  background: var(--c3);
+  opacity: 0.6;
+}
+
+/* Tulisan melengkung di atas atap lengkung. */
+.curved {
+  position: absolute;
+  top: calc(var(--at) - var(--aw) * 0.15);
+  left: calc(50% - var(--aw) * 0.65);
+  width: calc(var(--aw) * 1.3);
+  overflow: visible;
+}
+
+.curved text {
+  font-family: var(--lb-sans), sans-serif;
+  font-weight: 500;
+  font-size: 6.4px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  fill: var(--accent);
 }
 
 .coverWindow {
@@ -276,11 +387,29 @@
   height: 100%;
 }
 
+.coverBranchL,
+.coverBranchR {
+  position: absolute;
+  top: calc(var(--at) + var(--ah) - var(--aw) * 0.34 * 2.73 + 6px);
+  width: calc(var(--aw) * 0.34);
+}
+
+.coverBranchL {
+  left: calc(50% - var(--aw) / 2 - var(--aw) * 0.2);
+  rotate: -16deg;
+}
+
+.coverBranchR {
+  left: calc(50% + var(--aw) / 2 - var(--aw) * 0.14);
+  rotate: 16deg;
+}
+
 .coverText {
   position: absolute;
-  top: calc(var(--at) + var(--ah) + 26px);
+  top: calc(var(--at) + var(--ah) + 28px);
   right: 0;
   left: 0;
+  z-index: 2;
   display: grid;
   justify-items: center;
   gap: 6px;
@@ -290,7 +419,7 @@
 }
 
 .coverNames {
-  font-size: clamp(36px, 10.5vw, 50px);
+  font-size: clamp(40px, 11.5vw, 56px);
 }
 
 .coverTo {
@@ -309,6 +438,7 @@
 
 .coverButton {
   margin-top: 14px;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .cover[data-opened="true"] {
@@ -317,8 +447,9 @@
 }
 
 .cover[data-opened="true"] .coverText,
-.cover[data-opened="true"] .coverOutline,
-.cover[data-opened="true"] .coverSun {
+.cover[data-opened="true"] .coverDecor,
+.cover[data-opened="true"] .coverBranches,
+.cover[data-opened="true"] .grain {
   opacity: 0;
 }
 
@@ -370,61 +501,182 @@
 .hero {
   display: grid;
   justify-items: center;
-  gap: 34px;
-  padding: 64px 24px 72px;
+  gap: 30px;
+  padding: 60px 24px 72px;
   overflow: clip;
   text-align: center;
 }
 
 .heroArt {
   position: relative;
-  width: min(76%, 330px);
-  margin-top: 26px;
+  width: min(84%, 360px);
+  aspect-ratio: 300 / 440;
+  margin-top: 8px;
 }
 
 .sun {
   position: absolute;
-  top: -12%;
-  left: 50%;
-  width: 128%;
+  top: -5%;
+  right: -12%;
+  width: 52%;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--sun);
-  opacity: 0.5;
-  transform: translateX(-50%);
   transition:
-    transform 1.8s var(--ease) 1.7s,
-    opacity 1.8s var(--ease) 1.7s;
+    transform 1.8s var(--ease) 2.25s,
+    opacity 1.8s var(--ease) 2.25s;
+}
+
+/* Pelangi boho yang tergambar mengelilingi foto. */
+.heroRainbow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.heroRainbow path {
+  fill: none;
+  stroke-width: 14;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.heroRainbow path:nth-child(3) {
+  transition-delay: 2.1s;
+}
+
+.heroRainbow path:nth-child(2) {
+  transition-delay: 2.25s;
+}
+
+.heroRainbow path:nth-child(1) {
+  transition-delay: 2.4s;
 }
 
 .heroArch {
-  aspect-ratio: 3 / 4.3;
-  clip-path: inset(-20px);
-  transition: clip-path 1.3s cubic-bezier(0.3, 0.7, 0.2, 1) 1.55s;
+  position: absolute;
+  top: 12.27%;
+  right: 18%;
+  bottom: 0;
+  left: 18%;
+  overflow: hidden;
+  border-radius: 999px 999px 0 0;
+  background: var(--bg-2);
+  clip-path: inset(-2px);
+  transition: clip-path 1.3s cubic-bezier(0.3, 0.7, 0.2, 1) 1.75s;
 }
 
 .heroArch img {
-  transition: transform 2.6s var(--ease) 1.55s;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  transition: transform 2.6s var(--ease) 1.75s;
+}
+
+.heroBranchL,
+.heroBranchR {
+  position: absolute;
+  bottom: -3%;
+  width: 25%;
+  transition: transform 1.3s var(--ease) 2.65s;
+}
+
+.heroBranchL {
+  left: -9%;
+  rotate: -14deg;
+}
+
+.heroBranchR {
+  right: -9%;
+  rotate: 14deg;
+  transition-delay: 2.8s;
 }
 
 .heroText {
   display: grid;
   justify-items: center;
-  gap: 12px;
+  gap: 14px;
+}
+
+.step1,
+.step2,
+.step3 {
   transition:
-    opacity 1s ease 2.4s,
-    transform 1s var(--ease) 2.4s;
+    opacity 1s ease,
+    transform 1.1s var(--ease);
+}
+
+.step1 {
+  transition-delay: 2.95s;
+}
+
+.step2 {
+  transition-delay: 3.15s;
+}
+
+.step3 {
+  transition-delay: 3.35s;
 }
 
 .heroNames {
   display: grid;
-  font-size: clamp(46px, 13.5vw, 66px);
+  font-size: clamp(50px, 14.5vw, 70px);
   line-height: 0.98;
 }
 
 .heroNames i {
-  font-size: 0.62em;
+  font-size: 0.6em;
   line-height: 1.3;
+}
+
+.dateRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 6px;
+}
+
+.dateRow span {
+  flex: 1 1 0;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.dateRow span:first-child {
+  text-align: right;
+}
+
+.dateRow span:last-child {
+  text-align: left;
+}
+
+/* Tanggal dalam lencana berbentuk lengkung. */
+.dateRow b {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 82px;
+  margin: 0 16px;
+  padding-top: 8px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px 999px 8px 8px;
+  box-sizing: border-box;
+  font-family: var(--lb-serif), serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--accent);
 }
 
 .heroDate {
@@ -432,23 +684,34 @@
   letter-spacing: 0.06em;
 }
 
-/* Sebelum dibuka: matahari di bawah, lengkung foto belum naik. */
+/* Sebelum dibuka: foto belum naik, pelangi belum tergambar, matahari di bawah. */
 .hero[data-opened="false"] .sun {
   opacity: 0;
-  transform: translate(-50%, 26%);
+  transform: translateY(30%);
 }
 
 .hero[data-opened="false"] .heroArch {
-  clip-path: inset(100% -20px -20px -20px);
+  clip-path: inset(100% -2px -2px -2px);
 }
 
 .hero[data-opened="false"] .heroArch img {
   transform: scale(1.12);
 }
 
-.hero[data-opened="false"] .heroText {
+.hero[data-opened="false"] .heroRainbow path {
+  stroke-dashoffset: 1;
+}
+
+.hero[data-opened="false"] .heroBranchL,
+.hero[data-opened="false"] .heroBranchR {
+  transform: scale(0);
+}
+
+.hero[data-opened="false"] .step1,
+.hero[data-opened="false"] .step2,
+.hero[data-opened="false"] .step3 {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(18px);
 }
 
 /* ---------- Pembuka ---------- */

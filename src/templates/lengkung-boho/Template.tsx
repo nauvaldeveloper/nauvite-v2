@@ -24,7 +24,7 @@ import {
 import { resolveOptions } from "../options";
 import type { TemplateProps } from "../types";
 import manifest from "./manifest";
-import { Cover, HeroStage } from "./parts";
+import { Branch, Cover, HeroStage } from "./parts";
 import s from "./template.module.css";
 
 /** Tema Lengkung Boho: warna tanah, foto berbingkai lengkung, matahari, dan pelangi boho. */
@@ -64,7 +64,6 @@ export default function LengkungBoho({ invitation, guestName }: TemplateProps) {
     <OpeningProvider music={mediaUrl(content.music)}>
       <div className={`${s.root} ${PALETTE[o.palette] ?? s.terakota} ${serif.variable} ${sans.variable}`}>
         <Cover photo={cover}>
-          <p className={s.kicker}>Undangan pernikahan</p>
           <h1 className={s.coverNames}>
             {groomName} <i>&amp;</i> {brideName}
           </h1>
@@ -76,21 +75,36 @@ export default function LengkungBoho({ invitation, guestName }: TemplateProps) {
           <HeroStage id="awal" className={s.hero}>
             <div className={s.heroArt}>
               <span className={s.sun} aria-hidden="true" />
-              <div className={`${s.arch} ${s.heroArch}`}>
+              <svg className={s.heroRainbow} viewBox="0 0 300 440" aria-hidden="true">
+                <path d="M7 440V150a143 143 0 0 1 286 0V440" pathLength={1} style={{ stroke: "var(--c1)" }} />
+                <path d="M25 440V150a125 125 0 0 1 250 0V440" pathLength={1} style={{ stroke: "var(--c2)" }} />
+                <path d="M43 440V150a107 107 0 0 1 214 0V440" pathLength={1} style={{ stroke: "var(--c3)" }} />
+              </svg>
+              <div className={s.heroArch}>
                 {cover ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={cover} alt={title} />
                 ) : null}
               </div>
+              <Branch className={s.heroBranchL} />
+              <Branch className={s.heroBranchR} flip />
             </div>
             <div className={s.heroText}>
-              <p className={s.kicker}>Pernikahan</p>
-              <h2 className={s.heroNames}>
+              <p className={`${s.kicker} ${s.step1}`}>Kami menikah</p>
+              <h2 className={`${s.heroNames} ${s.step2}`}>
                 {groomName}
                 <i>&amp;</i>
                 {brideName}
               </h2>
-              {longDate ? <p className={s.heroDate}>{longDate}</p> : null}
+              {main ? (
+                <div className={`${s.dateRow} ${s.step3}`}>
+                  <span>{part(main, { weekday: "long" })}</span>
+                  <b>{part(main, { day: "numeric" })}</b>
+                  <span>{part(main, { month: "long", year: "numeric" })}</span>
+                </div>
+              ) : longDate ? (
+                <p className={`${s.heroDate} ${s.step3}`}>{longDate}</p>
+              ) : null}
             </div>
           </HeroStage>
 
@@ -272,7 +286,7 @@ export default function LengkungBoho({ invitation, guestName }: TemplateProps) {
           </footer>
         </main>
 
-        <GuideDock items={items} autoStart={o.autoScroll} startDelay={4000} />
+        <GuideDock items={items} autoStart={o.autoScroll} startDelay={4500} />
       </div>
     </OpeningProvider>
   );

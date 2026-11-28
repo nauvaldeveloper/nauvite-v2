@@ -37,7 +37,7 @@ const DEMO_SLUG: Record<string, string> = {
 const COLOR_DEMOS = new Set(["surat-cinta", "koran-pagi", "piringan-hitam", "herbarium", "tiket-kereta", "bioskop", "album-polaroid", "lengkung-boho", "senja-pantai"]);
 
 /** Tema yang gambar kartunya memakai sampul (bukan isi), beserta titik potongnya. */
-const CARD_COVER: Record<string, string> = { "surat-cinta": "50% 50%", "koran-pagi": "50% 50%", "piringan-hitam": "50% 50%", herbarium: "50% 45%", "tiket-kereta": "50% 45%", bioskop: "50% 40%", "album-polaroid": "50% 40%", "lengkung-boho": "50% 35%" };
+const CARD_COVER: Record<string, string> = { "surat-cinta": "50% 50%", "koran-pagi": "50% 50%", "piringan-hitam": "50% 50%", herbarium: "50% 45%", "tiket-kereta": "50% 45%", bioskop: "50% 40%", "album-polaroid": "50% 40%" };
 
 export type CatalogDemo = {
   slug: string;
