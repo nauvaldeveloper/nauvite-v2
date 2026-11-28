@@ -19,6 +19,7 @@ import bioskop from "./bioskop/manifest";
 import albumPolaroid from "./album-polaroid/manifest";
 import lengkungBoho from "./lengkung-boho/manifest";
 import senjaPantai from "./senja-pantai/manifest";
+import galeriSeni from "./galeri-seni/manifest";
 
 /**
  * Daftar semua template. Menambah template baru:
@@ -47,6 +48,7 @@ export const TEMPLATES = [
   albumPolaroid,
   lengkungBoho,
   senjaPantai,
+  galeriSeni,
 ] as const satisfies readonly TemplateManifest[];
 
 export type TemplateId = (typeof TEMPLATES)[number]["id"];

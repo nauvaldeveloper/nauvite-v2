@@ -717,3 +717,23 @@ from public.invitations,
   (values ('Kak Dimas', 'Undangannya bikin kangen pantai. Selamat menempuh hidup baru, semoga langgeng!', 2),
           ('Keluarga Tante Wulan', 'Semoga rumah tangganya selalu hangat seperti senja. Kami pasti datang.', 3)) as w(name, message, n)
 where slug in ('contoh-senja-pantai', 'contoh-senja-pantai-lembayung', 'contoh-senja-pantai-toska');
+
+-- Undangan demo tema Galeri Seni (dengan foto), tiga warna. Isi disalin dari demo Signature.
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0b1', 'contoh-galeri-seni', 'galeri-seni', 'active', now() + interval '365 days',
+  content, '{"galeri-seni": {"palette": "putih"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0b2', 'contoh-galeri-seni-zamrud', 'galeri-seni', 'active', now() + interval '365 days',
+  content, '{"galeri-seni": {"palette": "zamrud"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.invitations (id, slug, template_id, status, active_until, content, template_options)
+select 'abababab-abab-abab-abab-ababababa0b3', 'contoh-galeri-seni-anggur', 'galeri-seni', 'active', now() + interval '365 days',
+  content, '{"galeri-seni": {"palette": "anggur"}}'::jsonb
+from public.invitations where slug = 'contoh-royal-gold';
+insert into public.wishes (invitation_id, name, message, attendance, guest_count)
+select id, w.name, w.message, 'hadir', w.n
+from public.invitations,
+  (values ('Mas Bayu', 'Konsepnya keren banget, berasa diundang ke pameran. Selamat ya kalian!', 2),
+          ('Keluarga Pak Harun', 'Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Kami akan hadir.', 4)) as w(name, message, n)
+where slug in ('contoh-galeri-seni', 'contoh-galeri-seni-zamrud', 'contoh-galeri-seni-anggur');

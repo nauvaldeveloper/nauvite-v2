@@ -93,6 +93,9 @@ Tanpa file gambar baru: lengkung, matahari, dan pelangi boho dibuat dengan CSS d
 ## Tema Senja Pantai (`senja-pantai`)
 Tanpa file gambar baru: langit, matahari, dan ombak dibuat dengan CSS (gradien dan mask SVG) di `src/templates/senja-pantai/`. Demo `contoh-senja-pantai` memakai foto demo Signature (`public/demo/signature/`). Font DM Serif Display dan Figtree dari Google Fonts (OFL).
 
+## Tema Galeri Seni (`galeri-seni`)
+Tanpa file gambar baru: dinding, lampu sorot, bingkai, tiang dan tali beludru dibuat dengan CSS dan SVG di `src/templates/galeri-seni/`. Demo `contoh-galeri-seni` memakai foto demo Signature (`public/demo/signature/`). Font Libre Caslon Text dan Manrope dari Google Fonts (OFL).
+
 ## Tema Herbarium (`herbarium`)
 Tanpa file gambar: ilustrasi SVG buatan sendiri di `src/templates/herbarium/art.tsx`. Font IM Fell English, Alegreya, Delicious Handrawn dari Google Fonts (OFL).
 
